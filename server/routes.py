@@ -1,4 +1,4 @@
-"""Route for Zest Quest app."""
+"""Routes for Zest Quest app."""
 
 from flask import (Flask, render_template, request, jsonify)
 from model import connect_to_db, db
