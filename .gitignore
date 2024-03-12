@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+client/node_modules
 
 # testing
 /coverage
@@ -24,5 +25,6 @@ yarn-error.log*
 
 __pycache__
 env
+env/
 *.pyc
 secrets.sh
