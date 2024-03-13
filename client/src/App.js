@@ -1,11 +1,12 @@
 import { Route, Routes, useNavigate } from 'react-router-dom';
+import Homepage from './pages/Homepage';
 // import NotFound from './Components/NotFound';
 
 function App() {
   return (
-    <div className="App">
-      <p>Zest Quest App</p>
-    </div>
+    <Routes>
+      <Route path='/' element={<Homepage/>}></Route>
+    </Routes>
   );
 }
 
