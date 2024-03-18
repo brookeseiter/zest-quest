@@ -1,9 +1,9 @@
 function Settings() {
     return (
         <>
-        <div>
-            <p>Settings Screen</p>
-        </div>
+            <div>
+                <p>Settings Screen</p>
+            </div>
         </>
     );
 }

@@ -1,9 +1,14 @@
+import { useNavigate } from "react-router-dom";
+
 function Home() {
+    const navigate = useNavigate();
+
     return (
         <>
-        <div>
-            <p>This is Zest Quest.</p>
-        </div>
+            <div>
+                <p>Zest Quest</p>
+                <button onClick={() => navigate('/settings')}>Play</button>
+            </div>
         </>
     );
 }
