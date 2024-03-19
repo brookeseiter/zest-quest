@@ -39,7 +39,7 @@ class Restaurant(db.Model):
     image_url = db.Column(db.String(100), nullable=False)
     total_points = db.Column(db.Integer, nullable=False)
 
-    round_results = db.relationship("round_results", back_populates="restaurants")
+    round_results = db.relationship("Round_Results", back_populates="restaurants")
 
     def __repr__(self):
         return f'<Restaurant restaurant_id={self.restaurant_id} name={self.name} category={self.category}>'
