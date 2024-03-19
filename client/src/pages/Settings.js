@@ -1,18 +1,36 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Settings() {
+    const navigate = useNavigate();
     const [numPlayers, setNumPlayers] = useState("");
     const [location, setLocation] = useState("");
     const [maxDist, setMaxDist] = useState("5 miles");
 
-    const submitSettings = e => {
+    const submitSettings = (e) => {
+        e.preventDefault();
         const settingsJSON = {
             'num_players': numPlayers,
             'location': location,
             'max_dist': maxDist
         };
-        console.log(settingsJSON);
-    }
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(settingsJSON)
+        };
+        
+        fetch(`/settings`, requestOptions)
+        .then((response) => response.ok ? response.json() : Promise.reject(response))
+        .then((settingsData) => {
+            console.log(settingsData);
+            navigate('/categories');
+        })
+        .catch((error) => {
+            console.log('error: ', error);
+        }, []); 
+    };
 
     console.log('numPlayers:', numPlayers);
     console.log('location:', location);
