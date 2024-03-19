@@ -24,7 +24,6 @@ function Settings() {
         console.log(requestOptions);
         
         fetch(`/settings`, requestOptions)
-        // .then((response) => response.ok ? response.json() : Promise.reject(response))
         .then((response) => response.json())
         .then((settingsData) => {
             console.log(settingsData);
