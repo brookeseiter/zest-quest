@@ -14,7 +14,7 @@ class Player(db.Model):
                         autoincrement=True,
                         primary_key=True)
     
-    round_results = db.relationship("round_results", back_populates="players")
+    round_results = db.relationship("Round_Results", back_populates="players")
 
     def __repr__(self):
         return f'<Player player_id={self.player_id}>'
@@ -95,8 +95,8 @@ class Round_Results(db.Model):
     player_id = db.Column(db.Integer, db.ForeignKey("players.player_id"))
     restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurants.restaurant_id"))
 
-    player = db.relationship("Player", back_populates="round_results")
-    restaurant = db.relationship("Restaurant", back_populates="round_results")
+    players = db.relationship("Player", back_populates="round_results")
+    restaurants = db.relationship("Restaurant", back_populates="round_results")
 
     def __repr__(self):
         return f'<Round Results round_results_id={self.round_results_id} round_number={self.round_number} player_id={self.player_id}>'
@@ -113,6 +113,7 @@ def connect_to_db(flask_app, db_uri="postgresql:///zest-quest-database", echo=Tr
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    # app.app_context().push()
 
     db.app = flask_app
     db.init_app(flask_app)
@@ -121,6 +122,6 @@ def connect_to_db(flask_app, db_uri="postgresql:///zest-quest-database", echo=Tr
 
 
 if __name__ == "__main__":
-    from server import app
+    from routes import app
 
     connect_to_db(app)

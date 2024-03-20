@@ -8,10 +8,12 @@ import os
 import crud
 
 # load_dotenv()
-
+# db.create_all()
 # Create the Flask application
 app = Flask(__name__)
 app.secret_key = os.environ['FLASK_SECRET_KEY']
+# app.app_context()
+# app.app_context().push()
 # CORS(app, supports_credentials=True)
 
 @app.route('/')
