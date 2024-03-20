@@ -15,11 +15,15 @@ def create_player_settings(num_players, location, max_dist):
     return settings
 
 def get_player_settings():
-    return Game_Settings.query.all()
+    settings = Game_Settings.query.all()
+    for setting in settings:
+        print(setting.player_location)
+    # return Game_Settings.query.all()
 
 
 if __name__ == "__main__":
     from routes import app
 
     connect_to_db(app)
+    # if app doesnt run, comment out this line
     app.app_context().push()

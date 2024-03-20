@@ -35,11 +35,12 @@ def save_settings():
     max_dist = request.json['max_dist']
 
     new_game_settings = crud.create_player_settings(num_players,location,max_dist)
-    print('NEW GAMEEEEEE SETTINGS', new_game_settings)
+
     db.session.add(new_game_settings)
     db.session.commit()
 
-    return render_template('index.html')
+    return jsonify(new_game_settings.to_dict()), 200
+
 
 
 if __name__ == "__main__":
