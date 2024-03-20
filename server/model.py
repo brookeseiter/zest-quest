@@ -113,10 +113,12 @@ def connect_to_db(flask_app, db_uri="postgresql:///zest-quest-database", echo=Tr
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-    # app.app_context().push()
 
     db.app = flask_app
     db.init_app(flask_app)
+
+    with flask_app.app_context():
+        db.create_all()
 
     print("Connected to the Zest Quest db!")
 

@@ -1,4 +1,4 @@
-"""Routes for Zest Quest app."""
+"""Routes for Zest Quest App."""
 
 from flask import (Flask, render_template, request, jsonify)
 from model import connect_to_db, db
@@ -8,12 +8,10 @@ import os
 import crud
 
 # load_dotenv()
-# db.create_all()
+
 # Create the Flask application
 app = Flask(__name__)
 app.secret_key = os.environ['FLASK_SECRET_KEY']
-# app.app_context()
-# app.app_context().push()
 # CORS(app, supports_credentials=True)
 
 @app.route('/')
@@ -37,11 +35,12 @@ def save_settings():
     max_dist = request.json['max_dist']
 
     new_game_settings = crud.create_player_settings(num_players,location,max_dist)
-    print(new_game_settings)
+    print('NEW GAMEEEEEE SETTINGS', new_game_settings)
     db.session.add(new_game_settings)
     db.session.commit()
 
     return render_template('index.html')
+
 
 if __name__ == "__main__":
     connect_to_db(app)
