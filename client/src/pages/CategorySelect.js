@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Checkbox from "../components/Checkbox";
 
 function CategorySelect() {
     const [checked, setChecked] = useState(false);
@@ -12,15 +13,11 @@ function CategorySelect() {
             <div>
             <h1>Choose restaurant categories:</h1>
                 <form className="categories-form">
-                    <label htmlFor="">
-                        Restaurant Category Choices:
-                        <input
-                            type="checkbox"
-                            onChange={handleChecked}
-                            required
-                        />
-                            Type of Restaurant
-                    </label>
+                    <Checkbox
+                        label="Type of Restaurant2"
+                        value={checked}
+                        onChange={handleChecked}
+                    />
                     <p>Data type of "checked"? {typeof(checked)}</p>
                     <p>Is "Type of Restaurant" checked? {checked.toString()}</p>
                     <button>Submit Categories</button>
