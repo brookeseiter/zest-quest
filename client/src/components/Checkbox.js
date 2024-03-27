@@ -1,8 +1,9 @@
-function Checkbox({label, value, onChange}) {
+function Checkbox({label, name, value, onChange}) {
     return ( 
         <label htmlFor="">
             <input
                 type="checkbox"
+                name={name}
                 checked={value}
                 onChange={onChange}
                 required
