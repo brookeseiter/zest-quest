@@ -24,42 +24,22 @@ const categories = ["American","BBQ","Fast Food","Chinese"];
 // const getFormattedPrice = (price) => `$${price.toFixed(2)}`;
 
 function CategorySelect() {
-    // const [american, setAmerican] = useState(false);
-    // const [bbq, setBbq] = useState(false);
-    // const [chinese, setChinese] = useState(false);
-    // const [fastFood, setFastFood] = useState(false);
-
-    // const handleAmerican = (e) => {
-    //     setAmerican(e.target.checked);
-    //     console.log(e.target.checked, e.target.name);
-    // };
-
-    // const handleBbq = (e) => {
-    //     setBbq(e.target.checked);
-    //     console.log(e.target.checked, e.target.name);
-    // };
-
-    // const handleChinese = (e) => {
-    //     setChinese(e.target.checked);
-    //     console.log(e.target.checked, e.target.name);
-    // };
-
-    // const handleFastFood = (e) => {
-    //     setFastFood(e.target.checked);
-    //     console.log(e.target.checked, e.target.name);
-    // };
-
     // const [total, setTotal] = useState(0);
-
     const [category1, setCategory1] = useState("");
     const [category2, setCategory2] = useState("");
     const [category3, setCategory3] = useState("");
-    const [chosen, setChosen] = useState([]);
+
+    // const { watch change } = useForm<{ toggles: boolean[] }>();
+    // const toggles = watch('toggles', []);
+    // const checkedCount = toggles.filter(Boolean).length;
+
+    console.log('c1:', category1);
+    console.log('c2:', category2);
+    console.log('c3:', category3);
 
     const [checkedState, setCheckedState] = useState(
         new Array(categories.length).fill(false)
     );
-    console.log('checkedState', checkedState);
 
     const handleOnChange = (position, e) => {
         if (checkedState.filter((i) => i).length >= 3 && e.target.checked) return;
@@ -67,9 +47,33 @@ function CategorySelect() {
         const updatedCheckedState = checkedState.map((item, index) =>
             index === position ? !item : item
         );
-    
+
         setCheckedState(updatedCheckedState);
-    
+
+         // Get the category value that is being checked or unchecked
+        const selectedCategory = e.target.value;
+
+        // Determine which category to update based on checked/unchecked state
+        if (e.target.checked) {
+            // If checkbox is checked, assign category value to the first available category slot
+            if (!category1) {
+                setCategory1(selectedCategory);
+            } else if (!category2) {
+                setCategory2(selectedCategory);
+            } else if (!category3) {
+                setCategory3(selectedCategory);
+            }
+        } else {
+            // If checkbox is unchecked, remove category value from corresponding category slot
+            if (category1 === selectedCategory) {
+                setCategory1("");
+            } else if (category2 === selectedCategory) {
+                setCategory2("");
+            } else if (category3 === selectedCategory) {
+                setCategory3("");
+            }
+        }
+
         // const totalPrice = updatedCheckedState.reduce((sum, currentState, index) => {
         //     if (currentState === true) {
         //         return sum + categories[index].price;
@@ -106,7 +110,8 @@ function CategorySelect() {
     //         console.log('error: ', error);
     //     }, []); 
     // };
-    console.log('chosen',chosen);
+
+    // console.log('chosen',chosen);
 
 
     return (
@@ -126,12 +131,10 @@ function CategorySelect() {
                                                 id={`custom-checkbox-${index}`}
                                                 name={name}
                                                 value={name}
+                                                // ref={change}
                                                 checked={checkedState[index]}
-                                                // onChange={(e) => handleOnChange(index, e)}
-                                                onChange={(e) => {
-                                                    handleOnChange(index, e);
-                                                    chosen.push(name);
-                                                }}
+                                                onChange={(e) => handleOnChange(index, e)}
+                                                // disabled={ !toggles[index] && checkedCount >= 3 }
                                             />
                                             <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
                                         </div>
@@ -147,101 +150,6 @@ function CategorySelect() {
                         </div>
                     </li> */}
                     </ul>
-                    {/* <label htmlFor="american">
-                        <input
-                            type="checkbox"
-                            name="american"
-                            id="american"
-                            checked={american}
-                            onChange={handleAmerican}
-                            required
-                        />
-                            American
-                    </label>
-                    <label htmlFor="">
-                        <input
-                            type="checkbox"
-                            name="bbq"
-                            checked={checked}
-                            onChange={handleChecked}
-                            required
-                        />
-                            BBQ
-                    </label>
-                    <Checkbox
-                        label="American"
-                        name="american"
-                        value={american}
-                        onChange={handleAmerican}
-                    />
-                    <Checkbox
-                        label="Barbeque"
-                        name="bbq"
-                        value={bbq}
-                        onChange={handleBbq}
-                    />
-                    <Checkbox
-                        label="Chinese"
-                        name="chinese"
-                        value={chinese}
-                        onChange={handleChinese}
-                    />
-                    <Checkbox
-                        label="Fast Food/Casual"
-                        name="fastFood"
-                        value={fastFood}
-                        onChange={handleFastFood}
-                    />
-                    <Checkbox
-                        label="Indian"
-                        value={checked}
-                        onChange={handleChecked}
-                    />
-                    <Checkbox
-                        label="Italian"
-                        value={checked}
-                        onChange={handleChecked}
-                    />
-                    <Checkbox
-                        label="Japanese"
-                        value={checked}
-                        onChange={handleChecked}
-                    />
-                    <Checkbox
-                        label="Mediterranean"
-                        value={checked}
-                        onChange={handleChecked}
-                    />
-                    <Checkbox
-                        label="Mexican"
-                        value={checked}
-                        onChange={handleChecked}
-                    />
-                    <Checkbox
-                        label="Middle Eastern"
-                        value={checked}
-                        onChange={handleChecked}
-                    />
-                    <Checkbox
-                        label="Pizza"
-                        value={checked}
-                        onChange={handleChecked}
-                    />
-                    <Checkbox
-                        label="Seafood"
-                        value={checked}
-                        onChange={handleChecked}
-                    />
-                    <Checkbox
-                        label="Thai"
-                        value={checked}
-                        onChange={handleChecked}
-                    />
-                    <Checkbox
-                        label="Vietnamese"
-                        value={checked}
-                        onChange={handleChecked}
-                    /> */}
                     <button>Submit Categories</button>
                 </form>
                 <p>This is checkedState: {checkedState}</p>
@@ -252,3 +160,68 @@ function CategorySelect() {
 }
 
 export default CategorySelect;
+
+
+
+
+
+
+
+// const categories = ["American","BBQ","Fast Food","Chinese"];
+
+// const [category1, setCategory1] = useState("");
+// const [category2, setCategory2] = useState("");
+// const [category3, setCategory3] = useState("");
+// const [chosen, setChosen] = useState([]);
+
+// const [checkedState, setCheckedState] = useState(
+//     new Array(categories.length).fill(false)
+// );
+
+// const handleOnChange = (position, e) => {
+//     if (checkedState.filter((i) => i).length >= 3 && e.target.checked) return;
+
+//     const updatedCheckedState = checkedState.map((item, index) =>
+//         index === position ? !item : item
+//     );
+
+//     setCheckedState(updatedCheckedState);
+
+//     setChosen(chosen => [...chosen, e.target.value]);
+// };
+
+//     return (
+//         <>
+//             <div>
+//                 <h1>Choose restaurant categories:</h1>
+//                 <form className="categories-form">
+//                     <ul className="toppings-list">
+//                         {categories.map((name, index) => {
+//                             return (
+//                                 <li key={index}>
+//                                     <div className="toppings-list-item">
+//                                         <div className="left-section">
+//                                             <input
+//                                                 type="checkbox"
+//                                                 id={`custom-checkbox-${index}`}
+//                                                 name={name}
+//                                                 value={name}
+//                                                 checked={checkedState[index]}
+//                                                 // onChange={(e) => handleOnChange(index, e)}
+//                                                 onChange={(e) => {
+//                                                     handleOnChange(index, e);
+//                                                     // chosen.push(name);
+//                                                 }}
+//                                             />
+//                                             <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+//                                         </div>
+//                                     </div>
+//                                 </li>
+//                             );
+//                         })}
+//                     </ul>
+//                     <button>Submit Categories</button>
+//                 </form>
+//             </div>
+//         </>
+//     );
