@@ -72,7 +72,10 @@ def get_restaurant_data():
     category_1 = session['category_1']
 
     url = crud.get_formatted_url(location,max_dist,category_1)
-   
+
+    # response = {"url": url}
+
+    # return jsonify(response), 200
     headers = {
         "accept": "application/json",
         "Authorization": f"bearer {os.environ['YELP_API_KEY']}"
