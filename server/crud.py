@@ -2,22 +2,27 @@
 
 from model import db, Player, Restaurant, Game_Settings, Round_Results, connect_to_db
 
-def create_player_settings(num_players, location, max_dist):
-    """Create and return player settings for new game."""
+
+def create_game_settings(num_players, location, max_dist, category_1, category_2, category_3):
+    """Create and return player-selected settings for new game."""
 
     settings = Game_Settings(
         num_players=num_players,
         player_location=location,
-        search_radius=max_dist
+        search_radius=max_dist,
+        category_1=category_1,
+        category_2=category_2,
+        category_3=category_3
     )
-    print(settings)
 
     return settings
 
 def get_player_settings():
     settings = Game_Settings.query.all()
+    # for setting in settings:
+    #     print(setting.player_location)
     for setting in settings:
-        print(setting.player_location)
+        print(setting)
     # return Game_Settings.query.all()
 
 

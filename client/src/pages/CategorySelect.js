@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import Checkbox from "../components/Checkbox";
 
 // const categories = [
@@ -24,6 +25,7 @@ const categories = ["American","BBQ","Fast Food","Chinese"];
 // const getFormattedPrice = (price) => `$${price.toFixed(2)}`;
 
 function CategorySelect() {
+    const navigate = useNavigate();
     // const [total, setTotal] = useState(0);
     const [category1, setCategory1] = useState("");
     const [category2, setCategory2] = useState("");
@@ -84,41 +86,38 @@ function CategorySelect() {
         // setTotal(totalPrice);
     };
 
-    // const submitSettings = (e) => {
-    //     e.preventDefault();
-    //     const categoriesJSON = {
-    //         'category_1': numPlayers,
-    //         'category_2': location,
-    //         'category_3': maxDist
-    //     };
+    const submitSettings = (e) => {
+        e.preventDefault();
+        const categoriesJSON = {
+            'category_1': category1,
+            'category_2': category2,
+            'category_3': category3
+        };
 
-    //     const requestOptions = {
-    //         method: 'POST',
-    //         headers: {'content-type': 'application/json'},
-    //         body: JSON.stringify(categoriesJSON)
-    //     };
+        const requestOptions = {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(categoriesJSON)
+        };
 
-    //     console.log('requestOptions', requestOptions);
+        console.log('requestOptions', requestOptions);
         
-    //     fetch(`/categories`, requestOptions)
-    //     .then((response) => response.json())
-    //     .then((categoriesData) => {
-    //         console.log('categoriesData', categoriesData);
-    //         navigate('/load');
-    //     })
-    //     .catch((error) => {
-    //         console.log('error: ', error);
-    //     }, []); 
-    // };
-
-    // console.log('chosen',chosen);
-
+        fetch(`/categories`, requestOptions)
+        .then((response) => response.json())
+        .then((categoriesData) => {
+            console.log('categoriesData', categoriesData);
+            navigate('/load');
+        })
+        .catch((error) => {
+            console.log('error: ', error);
+        }, []); 
+    };
 
     return (
         <>
             <div>
             <h1>Choose restaurant categories:</h1>
-                <form className="categories-form">
+                <form className="categories-form" onSubmit={submitSettings}>
                     <ul className="toppings-list">
                         {/* {categories.map(({ name, price }, index) => { */}
                         {categories.map((name, index) => {
@@ -152,8 +151,6 @@ function CategorySelect() {
                     </ul>
                     <button>Submit Categories</button>
                 </form>
-                <p>This is checkedState: {checkedState}</p>
-                <p>This is type of checkedState: typeof(checkedState)</p>
             </div>
         </>
     );
