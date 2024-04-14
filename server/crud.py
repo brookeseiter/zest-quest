@@ -2,6 +2,23 @@
 
 from model import db, Player, Restaurant, Game_Settings, Round_Results, connect_to_db
 
+restaurant_categories_dict = {
+    "American": "newamerican",
+    "BBQ": "bbq",
+    "Chinese": "Chinese",
+    "Fast Food": "hotdogs",
+    "Indian": "indpak",
+    "Italian": "italian",
+    "Japanese": "japanese",
+    "Mediterranean": "mediterranean",
+    "Mexican": "mexican",
+    "Middle Eastern": "mideastern",
+    "Pizza": "pizza",
+    "Seafood": "seafood",
+    "Thai": "thai",
+    "Vietnamese": "vietnamese"
+}
+
 
 def create_game_settings(num_players, location, max_dist, category_1, category_2, category_3):
     """Create and return player-selected settings for new game."""
@@ -24,6 +41,17 @@ def get_player_settings():
     for setting in settings:
         print(setting)
     # return Game_Settings.query.all()
+
+def get_formatted_setting_data(location,max_dist,category_1):
+    # print('TYPEEEEEEEEE:', type(max_dist))
+    location = '%20'.join(location.split())
+    max_dist = int(round(int(max_dist) * 1609.344, 0))
+    category_1 = restaurant_categories_dict[category_1].lower()
+
+    url = f"https://api.yelp.com/v3/businesses/search?location={location}&radius={max_dist}&categories={category_1}&open_now=true&sort_by=best_match&limit=4"
+    
+    return url
+
 
 
 if __name__ == "__main__":

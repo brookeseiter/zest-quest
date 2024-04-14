@@ -5,7 +5,7 @@ function Settings() {
     const navigate = useNavigate();
     const [numPlayers, setNumPlayers] = useState("");
     const [location, setLocation] = useState("");
-    const [maxDist, setMaxDist] = useState("5 miles");
+    const [maxDist, setMaxDist] = useState("5");
 
     const submitSettings = (e) => {
         e.preventDefault();
@@ -14,6 +14,10 @@ function Settings() {
             'location': location,
             'max_dist': maxDist
         };
+
+        console.log('type of num players', typeof(numPlayers));
+        console.log('type of max_dist', typeof(maxDist));
+
 
         const requestOptions = {
             method: 'POST',
@@ -73,8 +77,8 @@ function Settings() {
                         <label>
                             <input 
                                 type="radio" 
-                                value="5 miles" 
-                                checked={maxDist === "5 miles"}
+                                value="5" 
+                                checked={maxDist === "5"}
                                 onChange={(e) => setMaxDist(e.target.value)}
                             />
                             5 miles
@@ -84,8 +88,8 @@ function Settings() {
                         <label>
                             <input 
                                 type="radio" 
-                                value="10 miles" 
-                                checked={maxDist === "10 miles"}
+                                value="10" 
+                                checked={maxDist === "10"}
                                 onChange={(e) => setMaxDist(e.target.value)}
                             />
                             10 miles
@@ -95,8 +99,8 @@ function Settings() {
                         <label>
                             <input 
                                 type="radio" 
-                                value="15 miles" 
-                                checked={maxDist === "15 miles"}
+                                value="15" 
+                                checked={maxDist === "15"}
                                 onChange={(e) => setMaxDist(e.target.value)}
                                 // onChange={updateMaxDist}
                             />

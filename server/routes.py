@@ -6,12 +6,16 @@ from model import connect_to_db, db
 # from dotenv import load_dotenv
 import os 
 import crud
+import requests
+from crud import restaurant_categories_dict
+
 
 # load_dotenv()
 
 # Create the Flask application
 app = Flask(__name__)
 app.secret_key = os.environ['FLASK_SECRET_KEY']
+app.secret_key = os.environ['YELP_API_KEY']
 # CORS(app, supports_credentials=True)
 
 @app.route('/')
@@ -34,6 +38,9 @@ def save_settings_to_session():
     session['location'] = request.json['location']
     session['max_dist'] = request.json['max_dist']
 
+    # print("session['max_dist']:", session['max_dist'])
+    # print('TYPEEEEEEE:', type(session['max_dist']))
+
     return jsonify({'message': 'Player settings saved to session'}), 200
 
 @app.route('/categories', methods=['POST'])
@@ -44,9 +51,17 @@ def finalize_game_settings():
     category_2  = request.json['category_2']
     category_3  = request.json['category_3']
 
+    session['category_1'] = category_1
+    session['category_2'] = category_2
+    session['category_3'] = category_3
+
     num_players = session['num_players']
     location = session['location']
     max_dist = session['max_dist']
+
+    # print("session['max_dist']:", session['max_dist'])
+    # print('TYPEEEEEEE:', type(session['max_dist']))
+    # print('TYPEEEEEEE:', type(max_dist))
 
     game_settings = crud.create_game_settings(num_players,location,max_dist,category_1,category_2,category_3)
 
@@ -57,6 +72,29 @@ def finalize_game_settings():
     print("Session Data:", session_data)
 
     return jsonify(game_settings.to_dict()), 200
+
+@app.route('/yelp-api', methods=['GET'])
+def get_restaurants():
+    """Requests and returns restaurant data from Yelp Fusion API."""
+
+    location = session['location']
+    max_dist = session['max_dist']
+    category_1 = session['category_1']
+
+    url = crud.get_formatted_setting_data(location,max_dist,category_1)
+   
+    headers = {
+        "accept": "application/json",
+        "Authorization": f"bearer {os.environ['YELP_API_KEY']}"
+    }
+
+    response = requests.get(url, headers=headers)
+
+    if response:
+        response_json = response.json()
+        return jsonify(response_json), 200
+    else:
+        return jsonify({"error": "Failed to fetch restaurant data"}), 500
 
 
 if __name__ == "__main__":

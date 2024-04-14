@@ -66,7 +66,7 @@ class Game_Settings(db.Model):
     category_1 = db.Column(db.String(100))
     category_2 = db.Column(db.String(100))
     category_3 = db.Column(db.String(100))
-    search_radius = db.Column(db.String(10), nullable=False)
+    search_radius = db.Column(db.Integer, nullable=False)
     num_players = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
