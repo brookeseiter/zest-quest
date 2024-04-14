@@ -104,13 +104,8 @@ function CategorySelect() {
         
         fetch(`/categories`, requestOptions)
         .then((response) => response.json())
-        .then((categoriesData) => {
-            console.log('categoriesData', categoriesData);
-            navigate('/load');
-        })
-        .catch((error) => {
-            console.log('error: ', error);
-        }, []); 
+        .then((gameSettingsData) => navigate('/load', { state: { gameSettings: gameSettingsData } }))
+        .catch((error) => console.log('error: ', error), []); 
     };
 
     return (
