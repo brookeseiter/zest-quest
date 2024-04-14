@@ -38,9 +38,6 @@ def save_settings_to_session():
     session['location'] = request.json['location']
     session['max_dist'] = request.json['max_dist']
 
-    # print("session['max_dist']:", session['max_dist'])
-    # print('TYPEEEEEEE:', type(session['max_dist']))
-
     return jsonify({'message': 'Player settings saved to session'}), 200
 
 @app.route('/categories', methods=['POST'])
@@ -59,29 +56,22 @@ def finalize_game_settings():
     location = session['location']
     max_dist = session['max_dist']
 
-    # print("session['max_dist']:", session['max_dist'])
-    # print('TYPEEEEEEE:', type(session['max_dist']))
-    # print('TYPEEEEEEE:', type(max_dist))
-
     game_settings = crud.create_game_settings(num_players,location,max_dist,category_1,category_2,category_3)
 
     db.session.add(game_settings)
     db.session.commit()
 
-    session_data = dict(session)
-    print("Session Data:", session_data)
-
     return jsonify(game_settings.to_dict()), 200
 
 @app.route('/yelp-api', methods=['GET'])
-def get_restaurants():
+def get_restaurant_data():
     """Requests and returns restaurant data from Yelp Fusion API."""
 
     location = session['location']
     max_dist = session['max_dist']
     category_1 = session['category_1']
 
-    url = crud.get_formatted_setting_data(location,max_dist,category_1)
+    url = crud.get_formatted_url(location,max_dist,category_1)
    
     headers = {
         "accept": "application/json",

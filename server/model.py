@@ -62,11 +62,11 @@ class Game_Settings(db.Model):
     game_settings_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True)
-    player_location = db.Column(db.String(100), nullable=False)
-    category_1 = db.Column(db.String(100))
-    category_2 = db.Column(db.String(100))
-    category_3 = db.Column(db.String(100))
-    search_radius = db.Column(db.Integer, nullable=False)
+    location = db.Column(db.String(100), nullable=False)
+    category_1 = db.Column(db.String(100), nullable=False)
+    category_2 = db.Column(db.String(100), nullable=False)
+    category_3 = db.Column(db.String(100), nullable=False)
+    max_dist = db.Column(db.Integer, nullable=False)
     num_players = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
@@ -74,11 +74,11 @@ class Game_Settings(db.Model):
 
     def to_dict(self):
         return {'game_settings_id': self.game_settings_id,
-                'player_location': self.player_location,
+                'location': self.location,
                 'category_1': self.category_1,
                 'category_2': self.category_2,
                 'category_3': self.category_3,
-                'search_radius': self.search_radius,
+                'max_dist': self.max_dist,
                 'num_players': self.num_players}
     
 

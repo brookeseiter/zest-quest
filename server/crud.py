@@ -19,14 +19,13 @@ restaurant_categories_dict = {
     "Vietnamese": "vietnamese"
 }
 
-
 def create_game_settings(num_players, location, max_dist, category_1, category_2, category_3):
     """Create and return player-selected settings for new game."""
 
     settings = Game_Settings(
         num_players=num_players,
-        player_location=location,
-        search_radius=max_dist,
+        location=location,
+        max_dist=max_dist,
         category_1=category_1,
         category_2=category_2,
         category_3=category_3
@@ -42,10 +41,9 @@ def get_player_settings():
         print(setting)
     # return Game_Settings.query.all()
 
-def get_formatted_setting_data(location,max_dist,category_1):
-    # print('TYPEEEEEEEEE:', type(max_dist))
+def get_formatted_url(location,max_dist,category_1):
     location = '%20'.join(location.split())
-    max_dist = int(round(int(max_dist) * 1609.344, 0))
+    max_dist = str(int(round(int(max_dist) * 1609.344, 0)))
     category_1 = restaurant_categories_dict[category_1].lower()
 
     url = f"https://api.yelp.com/v3/businesses/search?location={location}&radius={max_dist}&categories={category_1}&open_now=true&sort_by=best_match&limit=4"
