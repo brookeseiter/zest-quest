@@ -2,10 +2,12 @@ function RestaurantCard({ restaurant })  {
     return (
         <>
             <div>
-                <img 
-                    src={restaurant.image_url}
-                    alt={`${restaurant.name}_logo`}
-                />
+                {restaurant.image_url && (
+                    <img 
+                        src={restaurant.image_url}
+                        alt={`${restaurant.name}`}
+                    />
+                )}
                 <h1>
                     {restaurant.name}
                 </h1>

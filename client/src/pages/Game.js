@@ -13,15 +13,14 @@ function Game() {
         <>
             <div>
                 <p>Game Screen</p>
-                <RestaurantCard
-                restaurant={restaurants[0]}
-                // onClick={removeFromBack}
-                />
-                <h1>VS</h1>
-                <RestaurantCard
-                restaurant={restaurants[1]}
-                // onClick={removeFromBack}
-                />
+                {restaurants.length > 0 && restaurants.map((restaurant,i) => (
+                    <div>
+                        <RestaurantCard
+                            key={i}
+                            restaurant={restaurant}
+                        />
+                    </div>
+                ))};
             </div>
         </>
     );
