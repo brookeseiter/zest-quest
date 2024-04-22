@@ -61,6 +61,8 @@ def finalize_game_settings():
     db.session.add(game_settings)
     db.session.commit()
 
+    print(db.session)
+    print(session)
     return jsonify(game_settings.to_dict()), 200
 
 @app.route('/yelp-api', methods=['GET'])

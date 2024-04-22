@@ -8,6 +8,33 @@ function Load() {
     const num_players = gameSettings.num_players;
     const [currentPlayer, setCurrentPlayer] = useState(1);
 
+    const [loading, setLoading] = useState(false);
+    const [restaurants, setRestaurants] = useState([]);
+
+    const fetchRestaurantData = async () => {
+        setLoading(true);
+    
+        try {
+            const response = await fetch(`/yelp-api`);
+            console.log(response);
+            if (!response.ok) {
+                throw new Error("Failed to fetch data");
+            }
+    
+            const yelpData = await response.json();
+            console.log(yelpData);
+            setRestaurants(yelpData.businesses);
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    
+    useEffect(() => {
+        fetchRestaurantData();
+    }, []); 
+
     const handlePlayGame = () => {
         // If there are more players remaining, navigate to the same page for the next player
         if (currentPlayer < num_players) {
@@ -17,11 +44,14 @@ function Load() {
             // If all players have played, navigate to another page
             console.log('last player in game');
         }
-        navigate('/game');
+        navigate('/game', { state: { restaurants: restaurants }});
     };
 
     console.log(gameSettings);
     console.log(num_players);
+
+    console.log('loading:', loading);
+    console.log('restaurants:', restaurants);
 
     return (
         <>

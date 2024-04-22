@@ -15,8 +15,7 @@ function Settings() {
             'max_dist': maxDist
         };
 
-        console.log('type of num players', typeof(numPlayers));
-        console.log('type of max_dist', typeof(maxDist));
+        console.log('settingsJSON:'. settingsJSON);
 
         const requestOptions = {
             method: 'POST',

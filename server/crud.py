@@ -51,7 +51,6 @@ def get_formatted_url(location,max_dist,category_1):
     return url
 
 
-
 if __name__ == "__main__":
     from routes import app
 
