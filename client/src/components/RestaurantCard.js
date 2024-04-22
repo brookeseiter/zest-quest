@@ -18,13 +18,9 @@ function RestaurantCard({ restaurant })  {
                 </h1>
                 <div>
                     {restaurant.categories.map((category, i) => (
-                        <>
-                            {i !== restaurant.categories.length - 1 ? <p>
-                                {category.title},
-                            </p> : <p>
-                                {category.title}
-                            </p>}
-                        </>
+                        <p key={i}>
+                            {i !== restaurant.categories.length - 1 ? category.title + ',' : category.title}
+                        </p>
                     ))}
                 </div>
                 <p>

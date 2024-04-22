@@ -36,15 +36,13 @@ function Load() {
     }, []); 
 
     const handlePlayGame = () => {
-        // If there are more players remaining, navigate to the same page for the next player
         if (currentPlayer < num_players) {
             setCurrentPlayer(currentPlayer + 1);
             console.log('not last player of game');
         } else {
-            // If all players have played, navigate to another page
             console.log('last player in game');
         }
-        navigate('/game', { state: { restaurants: restaurants }});
+        navigate('/game', { state: { restaurants: restaurants, gameSettings: gameSettings }});
     };
 
     console.log(gameSettings);

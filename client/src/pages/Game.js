@@ -5,20 +5,24 @@ import RestaurantCard from "../components/RestaurantCard";
 
 function Game() {
     const location = useLocation();
-    const { restaurants } = location.state;
+    const navigate = useNavigate();
+    const { restaurants, gameSettings } = location.state;
     const [startIndex, setStartIndex] = useState(0);
 
     console.log('restaurants:', restaurants);
 
     const handleRestaurantClick = () => {
-        // Increment startIndex to move to the next set of restaurants
         setStartIndex(startIndex + 2);
         console.log('clicked');
     };
 
-    // useEffect(() => {
-    //     handleRestaurantClick();
-    // }, []); 
+    useEffect(() => {
+        if (startIndex === 4) {
+            navigate('/load', { state: { gameSettings: gameSettings } });
+        }
+    }, [startIndex, gameSettings, navigate]);
+
+    console.log('start index:', startIndex);
 
     return (
         <>
