@@ -40,14 +40,21 @@ def save_settings_to_session():
 
     players = crud.create_players(session['num_players'])
 
+    players_return =[] 
+    
     for player in players:
         db.session.add(player)
         db.session.commit()
+        # player.to_dict()
+        players_return.append(player.to_dict())
 
     print(db.session)
     print(session)
 
-    return jsonify({'message': 'Player settings saved to session, players created.'}), 200
+    # return jsonify({'message': 'Player settings saved to session, players created.', 'players': players}), 200
+    # return jsonify(player.to_dict()), 200
+    return jsonify(players_return), 200
+
 
 @app.route('/categories', methods=['POST'])
 def finalize_game_settings():
