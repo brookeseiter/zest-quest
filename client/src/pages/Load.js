@@ -5,17 +5,17 @@ function Load() {
     const location = useLocation();
     const navigate = useNavigate();
     const { gameSettings } = location.state;
-    const num_players = gameSettings.num_players;
+    const numPlayers = gameSettings.num_players;
+    const categories = [gameSettings.category_1, gameSettings.category_2, gameSettings.category_3];
     const [currentPlayer, setCurrentPlayer] = useState(1);
-
     const [loading, setLoading] = useState(false);
     const [restaurants, setRestaurants] = useState([]);
 
-    const fetchRestaurantData = async () => {
+    const fetchRestaurantData = async (currCategory) => {
         setLoading(true);
     
         try {
-            const response = await fetch(`/yelp-api`);
+            const response = await fetch(`/yelp-api?category=${currCategory}`);
             console.log(response);
             if (!response.ok) {
                 throw new Error("Failed to fetch data");
@@ -36,7 +36,7 @@ function Load() {
     }, []); 
 
     const handlePlayGame = () => {
-        if (currentPlayer < num_players) {
+        if (currentPlayer < numPlayers) {
             setCurrentPlayer(currentPlayer + 1);
             console.log('not last player of game');
         } else {
@@ -45,11 +45,11 @@ function Load() {
         navigate('/game', { state: { restaurants: restaurants, gameSettings: gameSettings }});
     };
 
-    console.log(gameSettings);
-    console.log(num_players);
-
+    console.log('gameSettings:', gameSettings);
+    console.log('numPlayers:', numPlayers);
     console.log('loading:', loading);
     console.log('restaurants:', restaurants);
+    console.log('categories:', categories);
 
     return (
         <>

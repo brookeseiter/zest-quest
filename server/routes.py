@@ -71,9 +71,11 @@ def get_restaurant_data():
 
     location = session['location']
     max_dist = session['max_dist']
-    category_1 = session['category_1']
+    # category_1 = session['category_1']
+    category = request.args.get('category')
 
-    url = crud.get_formatted_url(location,max_dist,category_1)
+    # url = crud.get_formatted_url(location,max_dist,category_1)
+    url = crud.get_formatted_url(location,max_dist,category)
 
     # response = {"url": url}
 
