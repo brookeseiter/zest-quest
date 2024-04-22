@@ -1,11 +1,13 @@
 function RestaurantCard({ restaurant })  {
     return (
         <>
-            <div>
+            <div style={{display: 'flex', flexDirection: 'row'}}>
                 {restaurant.image_url && (
                     <img 
                         src={restaurant.image_url}
                         alt={`${restaurant.name}`}
+                        height={'100px'}
+                        width={'100px'}
                     />
                 )}
                 <h1>
