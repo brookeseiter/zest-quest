@@ -32,13 +32,22 @@ def nested_route(path, code):
 
 @app.route('/settings', methods=['POST'])
 def save_settings_to_session():
-    """Save game settings (number of players, location, max distance) to Flask session."""
+    """Save game settings (number of players, location, max distance) and players to Flask session."""
 
     session['num_players'] = request.json['num_players']
     session['location'] = request.json['location']
     session['max_dist'] = request.json['max_dist']
 
-    return jsonify({'message': 'Player settings saved to session'}), 200
+    players = crud.create_players(session['num_players'])
+
+    for player in players:
+        db.session.add(player)
+        db.session.commit()
+
+    print(db.session)
+    print(session)
+
+    return jsonify({'message': 'Player settings saved to session, players created.'}), 200
 
 @app.route('/categories', methods=['POST'])
 def finalize_game_settings():

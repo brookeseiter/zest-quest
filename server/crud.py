@@ -19,6 +19,23 @@ restaurant_categories_dict = {
     "Vietnamese": "vietnamese"
 }
 
+def create_players(num_players):
+    """Creates and returns an array of Player instances based on number of players."""
+
+    players = []
+
+    num_players = int(num_players)
+
+    while num_players != 0:
+        players.append(Player())
+        num_players -= 1
+    
+    return players
+
+# def get_all_players():
+#     return Player.query.all()
+
+
 def create_game_settings(num_players, location, max_dist, category_1, category_2, category_3):
     """Create and return player-selected settings for new game."""
 
@@ -33,13 +50,13 @@ def create_game_settings(num_players, location, max_dist, category_1, category_2
 
     return settings
 
-def get_player_settings():
-    settings = Game_Settings.query.all()
-    # for setting in settings:
-    #     print(setting.player_location)
-    for setting in settings:
-        print(setting)
-    # return Game_Settings.query.all()
+# def get_player_settings():
+#     settings = Game_Settings.query.all()
+#     # for setting in settings:
+#     #     print(setting.player_location)
+#     for setting in settings:
+#         print(setting)
+#     # return Game_Settings.query.all()
 
 def get_formatted_url(location,max_dist,category_1):
     location = '%20'.join(location.split())
