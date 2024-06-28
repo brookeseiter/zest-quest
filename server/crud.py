@@ -6,7 +6,7 @@ restaurant_categories_dict = {
     "American": "newamerican",
     "BBQ": "bbq",
     "Chinese": "Chinese",
-    "Fast Food": "hotdogs",
+    # "Fast Food": "hotdogs",
     "Indian": "indpak",
     "Italian": "italian",
     "Japanese": "japanese",
@@ -59,6 +59,10 @@ def create_game_settings(num_players, location, max_dist, category_1, category_2
 #     # return Game_Settings.query.all()
 
 def get_formatted_url(location,max_dist,category_1):
+    print('location:', location)
+    print('max_dist:', max_dist)
+    print('category_1:', category_1)
+
     location = '%20'.join(location.split())
     max_dist = str(int(round(int(max_dist) * 1609.344, 0)))
     category_1 = restaurant_categories_dict[category_1].lower()

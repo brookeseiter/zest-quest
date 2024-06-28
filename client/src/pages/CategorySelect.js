@@ -2,38 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import Checkbox from "../components/Checkbox";
 
-// const categories = [
-//     {
-//       name: "American",
-//       price: 1.2
-//     },
-//     {
-//       name: "BBQ",
-//       price: 2.0
-//     },
-//     {
-//       name: "Fast Food",
-//       price: 2.5
-//     },
-//     {
-//       name: "Chinese",
-//       price: 3.0
-//     }
-// ];
-const categories = ["American","BBQ","Fast Food","Chinese"];
-
-// const getFormattedPrice = (price) => `$${price.toFixed(2)}`;
+const categories = ["American","BBQ","Chinese"];
 
 function CategorySelect() {
     const navigate = useNavigate();
-    // const [total, setTotal] = useState(0);
     const [category1, setCategory1] = useState("");
     const [category2, setCategory2] = useState("");
     const [category3, setCategory3] = useState("");
-
-    // const { watch change } = useForm<{ toggles: boolean[] }>();
-    // const toggles = watch('toggles', []);
-    // const checkedCount = toggles.filter(Boolean).length;
 
     console.log('c1:', category1);
     console.log('c2:', category2);
@@ -75,15 +50,6 @@ function CategorySelect() {
                 setCategory3("");
             }
         }
-
-        // const totalPrice = updatedCheckedState.reduce((sum, currentState, index) => {
-        //     if (currentState === true) {
-        //         return sum + categories[index].price;
-        //     }
-        //     return sum;
-        // }, 0);
-    
-        // setTotal(totalPrice);
     };
 
     const submitSettings = (e) => {
@@ -103,10 +69,14 @@ function CategorySelect() {
         console.log('requestOptions', requestOptions);
         
         fetch(`/categories`, requestOptions)
-        .then((response) => response.json())
-        .then((gameSettingsData) => navigate('/load', { state: { gameSettings: gameSettingsData } }))
-        .catch((error) => console.log('error: ', error), []); 
+            .then((response) => response.json())
+            .then((gameSettingsData) => {
+                console.log('gameSettingsData:', gameSettingsData);
+                navigate('/load', { state: { gameSettings: gameSettingsData } });
+            })
+            .catch((error) => console.log('error: ', error), []); 
     };
+
 
     return (
         <>
@@ -114,7 +84,6 @@ function CategorySelect() {
             <h1>Choose restaurant categories:</h1>
                 <form className="categories-form" onSubmit={submitSettings}>
                     <ul className="toppings-list">
-                        {/* {categories.map(({ name, price }, index) => { */}
                         {categories.map((name, index) => {
                             return (
                                 <li key={index}>
@@ -132,17 +101,10 @@ function CategorySelect() {
                                             />
                                             <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
                                         </div>
-                                        {/* <div className="right-section">{getFormattedPrice(price)}</div> */}
                                     </div>
                                 </li>
                             );
                         })}
-                    {/* <li>
-                        <div className="toppings-list-item">
-                            <div className="left-section">Total:</div>
-                            <div className="right-section">{getFormattedPrice(total)}</div>
-                        </div>
-                    </li> */}
                     </ul>
                     <button>Submit Categories</button>
                 </form>
