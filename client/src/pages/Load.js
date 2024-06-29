@@ -40,18 +40,17 @@ function Load() {
     };
 
     useEffect(() => {
-        console.log('useffect current player:', currentPlayer);
         const currentCategory = categories[currentCategoryIndex];
         fetchRestaurantData(currentCategory);
         console.log('currCategory:', currentCategory);
-    }, [currentCategoryIndex, currentPlayer]); // Fetch data when currentCategoryIndex changes
+    }, [currentCategoryIndex, currentPlayer]); 
 
     const handlePlayGame = () => {
-        if (currentPlayer < numPlayers) {
+        setCurrentCategoryIndex(prev => (prev + 1) % 3); 
+        navigate('/game', { state: { gameSettings: gameSettings }});
+        if (currentCategoryIndex === 2 && currentPlayer < numPlayers) {
             setCurrentPlayer(prev => prev + 1);
         }
-        setCurrentCategoryIndex(prev => (prev + 1) % 3); // Assuming 3 categories
-        navigate('/game', { state: { gameSettings: gameSettings }});
     };
 
     // console.log('gameSettings:', gameSettings);
@@ -60,7 +59,7 @@ function Load() {
     // console.log('restaurants:', restaurants);
     // console.log('categories:', categories);
     console.log('currentPlayer:', currentPlayer);
-    console.log('currentCategoryIndex Load.js:', currentCategoryIndex);
+    console.log('currentCategoryIndex:', currentCategoryIndex);
 
     return (
         <>
