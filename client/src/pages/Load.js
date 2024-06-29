@@ -31,7 +31,15 @@ function Load() {
             const yelpData = await response.json();
             console.log('Fetched data for category:', currCategory); // Log the fetched category
             console.log('yelpData:', yelpData);
-            setRestaurants(yelpData.businesses);
+            if (!restaurants) {
+                setRestaurants(yelpData.businesses);
+            }
+            else {
+                setRestaurants((prevRestaurants) => [
+                    ...prevRestaurants,
+                    ...yelpData.businesses,
+                ]);
+            }
         } catch (error) {
             console.error('Error:', error);
         } finally {
@@ -56,7 +64,7 @@ function Load() {
     // console.log('gameSettings:', gameSettings);
     console.log('numPlayers:', numPlayers);
     // console.log('loading:', loading);
-    // console.log('restaurants:', restaurants);
+    console.log('restaurants:', restaurants);
     // console.log('categories:', categories);
     console.log('currentPlayer:', currentPlayer);
     console.log('currentCategoryIndex:', currentCategoryIndex);
