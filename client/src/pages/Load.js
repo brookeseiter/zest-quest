@@ -23,14 +23,14 @@ function Load() {
     
         try {
             const response = await fetch(`/yelp-api?category=${currCategory}`);
-            console.log(response);
+            // console.log(response);
             if (!response.ok) {
                 throw new Error("Failed to fetch data");
             }
     
             const yelpData = await response.json();
-            console.log('Fetched data for category:', currCategory); // Log the fetched category
-            console.log('yelpData:', yelpData);
+            // console.log('Fetched data for category:', currCategory); // Log the fetched category
+            // console.log('yelpData:', yelpData);
             if (!restaurants) {
                 setRestaurants(yelpData.businesses);
             }
@@ -49,25 +49,30 @@ function Load() {
 
     useEffect(() => {
         const currentCategory = categories[currentCategoryIndex];
-        fetchRestaurantData(currentCategory);
-        console.log('currCategory:', currentCategory);
+        if (restaurants.length < 6) {
+            fetchRestaurantData(currentCategory);
+        }
+        // console.log('currCategory:', currentCategory);
     }, [currentCategoryIndex, currentPlayer]); 
 
+    // right now this logic below allows access to the 3 categories but keeps currentPlayer at 3
     const handlePlayGame = () => {
-        setCurrentCategoryIndex(prev => (prev + 1) % 3); 
-        navigate('/game', { state: { gameSettings: gameSettings }});
         if (currentCategoryIndex === 2 && currentPlayer < numPlayers) {
             setCurrentPlayer(prev => prev + 1);
+            console.log('here')
         }
+        console.log('there');
+        setCurrentCategoryIndex(prev => (prev + 1) % 3); 
+        navigate('/game', { state: { gameSettings: gameSettings }});
     };
 
     // console.log('gameSettings:', gameSettings);
-    console.log('numPlayers:', numPlayers);
+    // console.log('numPlayers:', numPlayers);
     // console.log('loading:', loading);
-    console.log('restaurants:', restaurants);
+    // console.log('restaurants:', restaurants);
     // console.log('categories:', categories);
     console.log('currentPlayer:', currentPlayer);
-    console.log('currentCategoryIndex:', currentCategoryIndex);
+    // console.log('currentCategoryIndex:', currentCategoryIndex);
 
     return (
         <>

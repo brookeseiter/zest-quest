@@ -6,6 +6,7 @@ export const GameProvider = ({ children }) => {
   const [currentPlayer, setCurrentPlayer] = useState(1);
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
   const [restaurants, setRestaurants] = useState([]);
+  const [startIndex, setStartIndex] = useState(0);
 
   return (
     <GameContext.Provider value={{
@@ -15,6 +16,8 @@ export const GameProvider = ({ children }) => {
       setCurrentCategoryIndex,
       restaurants,
       setRestaurants,
+      startIndex,
+      setStartIndex
     }}>
       {children}
     </GameContext.Provider>
