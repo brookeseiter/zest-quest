@@ -58,16 +58,30 @@ def create_game_settings(num_players, location, max_dist, category_1, category_2
 #         print(setting)
 #     # return Game_Settings.query.all()
 
-def get_formatted_url(location,max_dist,category_1):
+# WORKS with 1 CAT
+# def get_formatted_url(location,max_dist,category_1):
+#     print('location:', location)
+#     print('max_dist:', max_dist)
+#     print('category_1:', category_1)
+
+#     location = '%20'.join(location.split())
+#     max_dist = str(int(round(int(max_dist) * 1609.344, 0)))
+#     category_1 = restaurant_categories_dict[category_1].lower()
+
+#     url = f"https://api.yelp.com/v3/businesses/search?location={location}&radius={max_dist}&categories={category_1}&open_now=true&sort_by=best_match&limit=2"
+    
+#     return url
+
+def get_formatted_url(location,max_dist,category):
     print('location:', location)
     print('max_dist:', max_dist)
-    print('category_1:', category_1)
+    print('category:', category)
 
     location = '%20'.join(location.split())
     max_dist = str(int(round(int(max_dist) * 1609.344, 0)))
-    category_1 = restaurant_categories_dict[category_1].lower()
+    category = restaurant_categories_dict[category].lower()
 
-    url = f"https://api.yelp.com/v3/businesses/search?location={location}&radius={max_dist}&categories={category_1}&open_now=true&sort_by=best_match&limit=4"
+    url = f"https://api.yelp.com/v3/businesses/search?location={location}&radius={max_dist}&categories={category}&open_now=true&sort_by=best_match&limit=2"
     
     return url
 

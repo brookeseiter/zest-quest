@@ -1,28 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import RestaurantCard from "../components/RestaurantCard";
+import { GameContext } from './GameContext';
 
 
 function Game() {
+    const {
+        currentPlayer,
+        setCurrentPlayer,
+        currentCategoryIndex,
+        setCurrentCategoryIndex,
+        restaurants,
+        setRestaurants,
+    } = useContext(GameContext);
     const location = useLocation();
     const navigate = useNavigate();
-    const { restaurants, gameSettings } = location.state;
+    const { gameSettings } = location.state;
     const [startIndex, setStartIndex] = useState(0);
 
-    console.log('restaurants:', restaurants);
-
     const handleRestaurantClick = () => {
-        setStartIndex(startIndex + 2);
-        console.log('clicked');
+        setStartIndex(startIndex + 1);
     };
 
     useEffect(() => {
-        if (startIndex === 4) {
+        if (startIndex === 1) {
             navigate('/load', { state: { gameSettings: gameSettings } });
         }
-    }, [startIndex, gameSettings, navigate]);
+    }, [startIndex, navigate]);
 
-    console.log('start index:', startIndex);
+    // console.log('start index:', startIndex);
 
     return (
         <>

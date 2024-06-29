@@ -81,22 +81,22 @@ def finalize_game_settings():
     print(session)
     return jsonify(game_settings.to_dict()), 200
 
-@app.route('/yelp-api', methods=['GET'])
+@app.route('/yelp-api')
 def get_restaurant_data():
     """Requests and returns restaurant data from Yelp Fusion API."""
 
+    print('request.args:', request.args)
+    print('request.args.get:', request.args.get('category'))
     location = session['location']
     max_dist = session['max_dist']
-    category_1 = session['category_1']
-    # category = request.args.get('category')
+    # category_1 = session['category_1'] WORKS FOR 1st CAT
+    category = request.args.get('category', session.get('category_1'))
+    print('category in routes.py:', category)
+    print('SESSION:', session)
 
-    url = crud.get_formatted_url(location,max_dist,category_1)
-    # url = crud.get_formatted_url(location,max_dist,category)
-    print('URLLLLLLLLL:', url)
+    # url = crud.get_formatted_url(location,max_dist,category_1) WORKS FOR 1st CAT
+    url = crud.get_formatted_url(location,max_dist,category)
 
-    # response = {"url": url}
-
-    # return jsonify(response), 200
     headers = {
         "accept": "application/json",
         "Authorization": f"bearer {os.environ['YELP_API_KEY']}"
