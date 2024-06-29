@@ -10,13 +10,13 @@ function Game() {
         setCurrentPlayer,
         restaurants,
         setRestaurants,
+        currentCategoryIndex,
         startIndex,
         setStartIndex
     } = useContext(GameContext);
     const location = useLocation();
     const navigate = useNavigate();
-    const { gameSettings } = location.state;
-    // const [startIndex, setStartIndex] = useState(0);
+    const { gameSettings, finalRound } = location.state;
 
     useEffect(() => {
         if (startIndex === restaurants.length) {
@@ -24,14 +24,15 @@ function Game() {
         }
     }, [startIndex, restaurants.length]);
 
-    const handleRestaurantClick = () => {
-        setStartIndex(startIndex + 2);
-        navigate('/load', { state: { gameSettings: gameSettings } });
-    };
 
-    // if (startIndex === restaurants.length) {
-    //     setStartIndex(0)
-    // }
+    const handleRestaurantClick = () => {
+        if (finalRound) {
+            navigate('/results', { state: { gameSettings: gameSettings } });
+        } else {
+            setStartIndex(startIndex + 2);
+            navigate('/load', { state: { gameSettings: gameSettings } });
+        }
+    };
 
     // console.log('start index:', startIndex);
 

@@ -52,19 +52,20 @@ function Load() {
         if (restaurants.length < 6) {
             fetchRestaurantData(currentCategory);
         }
-        // console.log('currCategory:', currentCategory);
     }, [currentCategoryIndex, currentPlayer]); 
 
-    // right now this logic below allows access to the 3 categories but keeps currentPlayer at 3
     const handlePlayGame = () => {
+        if (currentCategoryIndex === 2 && currentPlayer === numPlayers) {
+            navigate('/game', { state: { gameSettings: gameSettings, finalRound: true } });
+            return;
+        }
         if (currentCategoryIndex === 2 && currentPlayer < numPlayers) {
             setCurrentPlayer(prev => prev + 1);
-            console.log('here')
         }
-        console.log('there');
-        setCurrentCategoryIndex(prev => (prev + 1) % 3); 
-        navigate('/game', { state: { gameSettings: gameSettings }});
+        setCurrentCategoryIndex(prev => (prev + 1) % 3);
+        navigate('/game', { state: { gameSettings: gameSettings } });
     };
+    
 
     // console.log('gameSettings:', gameSettings);
     // console.log('numPlayers:', numPlayers);
@@ -72,17 +73,17 @@ function Load() {
     // console.log('restaurants:', restaurants);
     // console.log('categories:', categories);
     console.log('currentPlayer:', currentPlayer);
-    // console.log('currentCategoryIndex:', currentCategoryIndex);
+    console.log('currentCategoryIndex:', currentCategoryIndex);
 
     return (
         <>
-        <div>
-            <h1>{gameSettings.category_1}</h1>
-            <h1>{gameSettings.category_2}</h1>
-            <h1>{gameSettings.category_3}</h1>
-            <h2>Player {currentPlayer}, You're Up!</h2>
-            <button onClick={handlePlayGame}>Play</button>
-        </div>
+            <div>
+                <h1>{gameSettings.category_1}</h1>
+                <h1>{gameSettings.category_2}</h1>
+                <h1>{gameSettings.category_3}</h1>
+                <h2>Player {currentPlayer}, You're Up!</h2>
+                <button onClick={handlePlayGame}>Play</button>
+            </div>
         </>
     );
 }
