@@ -13,14 +13,19 @@ class Player(db.Model):
     player_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True)
-    
-    round_results = db.relationship("Round_Results", back_populates="players")
+    player_number = db.Column(db.Integer, nullable=False)
+    game_settings_id = db.Column(db.Integer, db.ForeignKey("game_settings.game_settings_id"), nullable=False)
+
+    game_settings = db.relationship("Game_Settings", back_populates="players")
+    round_results = db.relationship("Round_Results", back_populates="player")
 
     def __repr__(self):
-        return f'<Player player_id={self.player_id}>'
+        return f'<Player player_id={self.player_id} player_number={self.player_number}>'
 
     def to_dict(self):
-        return {'player_id': self.player_id}
+        return {'player_id': self.player_id,
+                'player_number': self.player_number,
+                'game_settings_id': self.game_settings_id}
     
 
 class Restaurant(db.Model):
@@ -31,26 +36,17 @@ class Restaurant(db.Model):
     restaurant_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    rating = db.Column(db.Float, nullable=False)
-    price = db.Column(db.String(10), nullable=False)
-    category = db.Column(db.String(100), nullable=False)
-    address = db.Column(db.String(100), nullable=False)
-    image_url = db.Column(db.String(100), nullable=False)
-    total_points = db.Column(db.Integer, nullable=False)
+    yelp_business_id = db.Column(db.String(100), nullable=False)
+    total_points = db.Column(db.Integer, nullable=False, default=0)
 
-    round_results = db.relationship("Round_Results", back_populates="restaurants")
+    round_results = db.relationship("Round_Results", back_populates="restaurant")
 
     def __repr__(self):
-        return f'<Restaurant restaurant_id={self.restaurant_id} name={self.name} category={self.category}>'
+        return f'<Restaurant restaurant_id={self.restaurant_id} yelp_business_id={self.yelp_business_id} total_points={self.total_points}>'
 
     def to_dict(self):
         return {'restaurant_id': self.restaurant_id,
-                'name': self.name,
-                'rating': self.rating,
-                'category': self.category,
-                'address': self.address,
-                'image_url': self.image_url,
+                'yelp_business_id': self.yelp_business_id,
                 'total_points': self.total_points}
     
 
@@ -69,8 +65,11 @@ class Game_Settings(db.Model):
     max_dist = db.Column(db.Integer, nullable=False)
     num_players = db.Column(db.Integer, nullable=False)
 
+    players = db.relationship("Player", back_populates="game_settings")
+    round_results = db.relationship("Round_Results", back_populates="game_settings")
+
     def __repr__(self):
-        return f'<Game Settings game_settings_id={self.game_settings_id}>'
+        return f'<Game Settings game_settings_id={self.game_settings_id} location={self.location} num_players={self.num_players}>'
 
     def to_dict(self):
         return {'game_settings_id': self.game_settings_id,
@@ -90,23 +89,24 @@ class Round_Results(db.Model):
     round_results_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True)
-    round_number = db.Column(db.Integer, nullable=False)
-    rank = db.Column(db.Integer, nullable=False)
-    player_id = db.Column(db.Integer, db.ForeignKey("players.player_id"))
-    restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurants.restaurant_id"))
+    round = db.Column(db.Integer, nullable=False)
+    player_id = db.Column(db.Integer, db.ForeignKey("players.player_id"), nullable=False)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurants.restaurant_id"), nullable=False)
+    game_settings_id = db.Column(db.Integer, db.ForeignKey("game_settings.game_settings_id"), nullable=False)
 
-    players = db.relationship("Player", back_populates="round_results")
-    restaurants = db.relationship("Restaurant", back_populates="round_results")
+    player = db.relationship("Player", back_populates="round_results")
+    restaurant = db.relationship("Restaurant", back_populates="round_results")
+    game_settings = db.relationship("Game_Settings", back_populates="round_results")
 
     def __repr__(self):
-        return f'<Round Results round_results_id={self.round_results_id} round_number={self.round_number} player_id={self.player_id}>'
+        return f'<Round Results round_results_id={self.round_results_id} round={self.round} player_id={self.player_id}>'
 
     def to_dict(self):
         return {'round_results_id': self.round_results_id,
-                'round_number': self.round_number,
-                'rank': self.rank,
-                'player_id': self.player.player_id,
-                'restaurant_id': self.restaurant.restaurant_id}
+                'round': self.round,
+                'player_id': self.player_id,
+                'restaurant_id': self.restaurant_id,
+                'game_settings_id': self.game_settings_id}
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///zest-quest-database", echo=True):
