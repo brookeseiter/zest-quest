@@ -11,7 +11,11 @@ function Load() {
         restaurants,
         setRestaurants,
         clickedRestaurants,
-        startIndex
+        setClickedRestaurants,
+        startIndex,
+        setStartIndex,
+        fourthRoundWinner,
+        setFourthRoundWinner
     } = useContext(GameContext);
     const location = useLocation();
     const navigate = useNavigate();
@@ -25,14 +29,11 @@ function Load() {
     
         try {
             const response = await fetch(`/yelp-api?category=${currCategory}`);
-            // console.log(response);
             if (!response.ok) {
                 throw new Error("Failed to fetch data");
             }
     
             const yelpData = await response.json();
-            // console.log('Fetched data for category:', currCategory); // Log the fetched category
-            // console.log('yelpData:', yelpData);
             if (!restaurants) {
                 setRestaurants(yelpData.businesses);
             }
@@ -56,20 +57,26 @@ function Load() {
         }
     }, [currentCategoryIndex, currentPlayer]); 
 
-    const handlePlayGame = () => {
-        if (currentCategoryIndex === 2 && currentPlayer === numPlayers) {
-            navigate('/game', { state: { gameSettings: gameSettings, finalRound: true } });
-            return;
+    useEffect(() => {
+        if (clickedRestaurants.length === 5 && currentPlayer < numPlayers) {
+            setCurrentPlayer(prev => prev + 1);
+            setClickedRestaurants([]);
+            setStartIndex(0);
+            setCurrentCategoryIndex(0);
+            setFourthRoundWinner(null);
         }
-        // if (currentCategoryIndex === 2 && currentPlayer < numPlayers) {
-        //     setCurrentPlayer(prev => prev + 1);
-        // }
+        if (clickedRestaurants.length === 5 && currentPlayer === numPlayers) {
+            navigate('/results', { state: { gameSettings: gameSettings } });
+        }
+    }, [currentCategoryIndex, currentPlayer]);     
+
+    const handlePlayGame = () => {
         setCurrentCategoryIndex(prev => (prev + 1) % 3);
         navigate('/game', { state: { gameSettings: gameSettings } });
     };
     
-    console.log('startIndex Load:', startIndex);
-    console.log('clickedRestaurants:', clickedRestaurants);
+    // console.log('startIndex Load:', startIndex);
+    // console.log('clickedRestaurants:', clickedRestaurants);
     // console.log('gameSettings:', gameSettings);
     // console.log('numPlayers:', numPlayers);
     // console.log('loading:', loading);
@@ -97,4 +104,3 @@ export default Load;
 
 
 
-// Remember to handle cases where the gameSettings data may not be available in the location state, such as when the /load route is accessed directly without going through the CategorySelect component.
