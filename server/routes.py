@@ -38,23 +38,29 @@ def save_settings_to_session():
     session['location'] = request.json['location']
     session['max_dist'] = request.json['max_dist']
 
-    players = crud.create_players(session['num_players'])
+    game_settings = crud.create_game_settings(
+        location=session['location'],
+        num_players=session['num_players'],
+        max_dist=session['max_dist'],
+        category_1="Category1",  # Placeholder value
+        category_2="Category2",  # Placeholder value
+        category_3="Category3"   # Placeholder value
+    )
 
-    players_return =[] 
-    
+    db.session.add(game_settings)
+    db.session.commit()
+
+    players = crud.create_players(session['num_players'], game_settings.game_settings_id)
+
+    players_return =[]
+
     for player in players:
         db.session.add(player)
         db.session.commit()
-        # player.to_dict()
         players_return.append(player.to_dict())
 
-    print(db.session)
-    print(session)
-
     # return jsonify({'message': 'Player settings saved to session, players created.', 'players': players}), 200
-    # return jsonify(player.to_dict()), 200
     return jsonify(players_return), 200
-
 
 @app.route('/categories', methods=['POST'])
 def finalize_game_settings():

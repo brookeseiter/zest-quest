@@ -19,16 +19,14 @@ restaurant_categories_dict = {
     "Vietnamese": "vietnamese"
 }
 
-def create_players(num_players):
+def create_players(num_players, game_settings_id):
     """Creates and returns an array of Player instances based on number of players."""
 
     players = []
-
     num_players = int(num_players)
 
-    while num_players != 0:
-        players.append(Player())
-        num_players -= 1
+    for i in range(1, num_players + 1):
+        players.append(Player(player_number=i, game_settings_id=game_settings_id))
     
     return players
 
@@ -47,6 +45,8 @@ def create_game_settings(num_players, location, max_dist, category_1, category_2
         category_2=category_2,
         category_3=category_3
     )
+
+    print('settings:',settings)
 
     return settings
 
