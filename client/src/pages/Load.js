@@ -10,6 +10,8 @@ function Load() {
         setCurrentCategoryIndex,
         restaurants,
         setRestaurants,
+        clickedRestaurants,
+        startIndex
     } = useContext(GameContext);
     const location = useLocation();
     const navigate = useNavigate();
@@ -59,21 +61,22 @@ function Load() {
             navigate('/game', { state: { gameSettings: gameSettings, finalRound: true } });
             return;
         }
-        if (currentCategoryIndex === 2 && currentPlayer < numPlayers) {
-            setCurrentPlayer(prev => prev + 1);
-        }
+        // if (currentCategoryIndex === 2 && currentPlayer < numPlayers) {
+        //     setCurrentPlayer(prev => prev + 1);
+        // }
         setCurrentCategoryIndex(prev => (prev + 1) % 3);
         navigate('/game', { state: { gameSettings: gameSettings } });
     };
     
-
+    console.log('startIndex Load:', startIndex);
+    console.log('clickedRestaurants:', clickedRestaurants);
     // console.log('gameSettings:', gameSettings);
     // console.log('numPlayers:', numPlayers);
     // console.log('loading:', loading);
     // console.log('restaurants:', restaurants);
     // console.log('categories:', categories);
-    console.log('currentPlayer:', currentPlayer);
-    console.log('currentCategoryIndex:', currentCategoryIndex);
+    // console.log('currentPlayer:', currentPlayer);
+    // console.log('currentCategoryIndex:', currentCategoryIndex);
 
     return (
         <>
