@@ -1,6 +1,6 @@
 """CRUD Operations."""
 
-from model import db, Player, Restaurant, Game_Settings, Round_Results, connect_to_db
+from model import db, Player, Restaurant, Game_Settings, Round_Results, Game_Restaurant, connect_to_db
 
 restaurant_categories_dict = {
     "American": "newamerican",
@@ -33,6 +33,13 @@ def create_players(num_players, game_settings_id):
 # def get_all_players():
 #     return Player.query.all()
 
+def get_all_restaurants():
+    restaurants = Restaurant.query.all()
+    return [restaurant.to_dict() for restaurant in restaurants]
+
+def get_all_game_restaurants():
+    game_restaurants = Game_Restaurant.query.all()
+    return [gr.to_dict() for gr in game_restaurants]
 
 def create_game_settings(num_players, location, max_dist, category_1, category_2, category_3):
     """Create and return player-selected settings for new game."""
@@ -50,28 +57,6 @@ def create_game_settings(num_players, location, max_dist, category_1, category_2
 
     return settings
 
-# def get_player_settings():
-#     settings = Game_Settings.query.all()
-#     # for setting in settings:
-#     #     print(setting.player_location)
-#     for setting in settings:
-#         print(setting)
-#     # return Game_Settings.query.all()
-
-# WORKS with 1 CAT
-# def get_formatted_url(location,max_dist,category_1):
-#     print('location:', location)
-#     print('max_dist:', max_dist)
-#     print('category_1:', category_1)
-
-#     location = '%20'.join(location.split())
-#     max_dist = str(int(round(int(max_dist) * 1609.344, 0)))
-#     category_1 = restaurant_categories_dict[category_1].lower()
-
-#     url = f"https://api.yelp.com/v3/businesses/search?location={location}&radius={max_dist}&categories={category_1}&open_now=true&sort_by=best_match&limit=2"
-    
-#     return url
-
 def get_formatted_url(location,max_dist,category):
     print('location:', location)
     print('max_dist:', max_dist)
@@ -85,12 +70,28 @@ def get_formatted_url(location,max_dist,category):
     
     return url
 
-def create_restaurant(yelp_data_response):
+def create_restaurant(yelp_data_response, game_settings_id):
     for business in yelp_data_response['businesses']:
-        print(business['id'])
-        restaurant = Restaurant(yelp_business_id=business['id'])
-        print('restaurant:', restaurant)
+        # Check if the restaurant already exists
+        restaurant = Restaurant.query.filter_by(yelp_business_id=business['id']).first()
+        if not restaurant:
+            restaurant = Restaurant(yelp_business_id=business['id'])
+            db.session.add(restaurant)
+            db.session.commit()
+            print('session after restaurant:', db.session)
+
+        # Check if the Game_Restaurant link already exists
+        game_restaurant = Game_Restaurant.query.filter_by(game_settings_id=game_settings_id, restaurant_id=restaurant.restaurant_id).first()
+        if not game_restaurant:
+            game_restaurant = Game_Restaurant(
+                game_settings_id=game_settings_id,
+                restaurant_id=restaurant.restaurant_id
+            )
+            db.session.add(game_restaurant)
+            db.session.commit()
+            print('session after game_restaurant:', db.session)
     return print('done')
+
 
 
 if __name__ == "__main__":

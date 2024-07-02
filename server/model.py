@@ -59,7 +59,7 @@ class Player(db.Model):
                 'player_number': self.player_number,
                 'game_settings_id': self.game_settings_id}
     
-    
+
 class Restaurant(db.Model):
     """A Restaurant."""
 
@@ -74,12 +74,11 @@ class Restaurant(db.Model):
     round_results = db.relationship("Round_Results", back_populates="restaurant")
 
     def __repr__(self):
-        return f'<Restaurant restaurant_id={self.restaurant_id} yelp_business_id={self.yelp_business_id} total_points={self.total_points}>'
+        return f'<Restaurant restaurant_id={self.restaurant_id} yelp_business_id={self.yelp_business_id}>'
 
     def to_dict(self):
         return {'restaurant_id': self.restaurant_id,
-                'yelp_business_id': self.yelp_business_id,
-                'total_points': self.total_points}
+                'yelp_business_id': self.yelp_business_id}
     
 
 class Game_Restaurant(db.Model):
@@ -95,6 +94,16 @@ class Game_Restaurant(db.Model):
     game_settings = db.relationship("Game_Settings", back_populates="game_restaurants")
     restaurant = db.relationship("Restaurant", back_populates="game_restaurants")
 
+    def __repr__(self):
+        return f'<Game_Restaurant game_restaurant_id={self.game_restaurant_id} game_settings_id={self.game_settings_id} restaurant_id={self.restaurant_id} total_points={self.total_points}>'
+
+    def to_dict(self):
+        return {
+            'game_restaurant_id': self.game_restaurant_id,
+            'game_settings_id': self.game_settings_id,
+            'restaurant_id': self.restaurant_id,
+            'total_points': self.total_points
+        }
 
 class Round_Results(db.Model):
     """Results of each round for a given player."""

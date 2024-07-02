@@ -50,6 +50,9 @@ def save_settings_to_session():
     db.session.add(game_settings)
     db.session.commit()
 
+    session['game_settings_id'] = game_settings.game_settings_id
+    print('SESSION:', session)
+
     players = crud.create_players(session['num_players'], game_settings.game_settings_id)
 
     players_return =[]
@@ -94,6 +97,7 @@ def get_restaurant_data():
     location = session['location']
     max_dist = session['max_dist']
     category = request.args.get('category', session.get('category_1'))
+    game_settings_id = session.get('game_settings_id') 
 
     url = crud.get_formatted_url(location,max_dist,category)
 
@@ -106,7 +110,7 @@ def get_restaurant_data():
 
     if response:
         response_json = response.json()
-        crud.create_restaurant(response_json)        
+        crud.create_restaurant(response_json, game_settings_id)        
         return jsonify(response_json), 200
     else:
         return jsonify({"error": "Failed to fetch restaurant data"}), 500
