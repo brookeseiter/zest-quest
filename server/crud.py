@@ -85,6 +85,13 @@ def get_formatted_url(location,max_dist,category):
     
     return url
 
+def create_restaurant(yelp_data_response):
+    for business in yelp_data_response['businesses']:
+        print(business['id'])
+        restaurant = Restaurant(yelp_business_id=business['id'])
+        print('restaurant:', restaurant)
+    return print('done')
+
 
 if __name__ == "__main__":
     from routes import app

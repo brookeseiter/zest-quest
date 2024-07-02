@@ -3,7 +3,39 @@
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
+    
 
+class Game_Settings(db.Model):
+    """Game settings selected by players."""
+
+    __tablename__ = "game_settings"
+
+    game_settings_id = db.Column(db.Integer,
+                        autoincrement=True,
+                        primary_key=True)
+    location = db.Column(db.String(100), nullable=False)
+    category_1 = db.Column(db.String(100), nullable=False)
+    category_2 = db.Column(db.String(100), nullable=False)
+    category_3 = db.Column(db.String(100), nullable=False)
+    max_dist = db.Column(db.Integer, nullable=False)
+    num_players = db.Column(db.Integer, nullable=False)
+
+    players = db.relationship("Player", back_populates="game_settings")
+    game_restaurants = db.relationship("Game_Restaurant", back_populates="game_settings")
+    round_results = db.relationship("Round_Results", back_populates="game_settings")
+
+    def __repr__(self):
+        return f'<Game Settings game_settings_id={self.game_settings_id} location={self.location} num_players={self.num_players}>'
+
+    def to_dict(self):
+        return {'game_settings_id': self.game_settings_id,
+                'location': self.location,
+                'category_1': self.category_1,
+                'category_2': self.category_2,
+                'category_3': self.category_3,
+                'max_dist': self.max_dist,
+                'num_players': self.num_players}
+    
 
 class Player(db.Model):
     """A Player."""
@@ -27,7 +59,7 @@ class Player(db.Model):
                 'player_number': self.player_number,
                 'game_settings_id': self.game_settings_id}
     
-
+    
 class Restaurant(db.Model):
     """A Restaurant."""
 
@@ -37,8 +69,8 @@ class Restaurant(db.Model):
                         autoincrement=True,
                         primary_key=True)
     yelp_business_id = db.Column(db.String(100), nullable=False)
-    total_points = db.Column(db.Integer, nullable=False, default=0)
 
+    game_restaurants = db.relationship("Game_Restaurant", back_populates="restaurant")
     round_results = db.relationship("Round_Results", back_populates="restaurant")
 
     def __repr__(self):
@@ -50,36 +82,19 @@ class Restaurant(db.Model):
                 'total_points': self.total_points}
     
 
-class Game_Settings(db.Model):
-    """Game settings selected by players."""
+class Game_Restaurant(db.Model):
+    """Association table between games and restaurants with points tracking."""
 
-    __tablename__ = "game_settings"
+    __tablename__ = "game_restaurants"
 
-    game_settings_id = db.Column(db.Integer,
-                        autoincrement=True,
-                        primary_key=True)
-    location = db.Column(db.String(100), nullable=False)
-    category_1 = db.Column(db.String(100), nullable=False)
-    category_2 = db.Column(db.String(100), nullable=False)
-    category_3 = db.Column(db.String(100), nullable=False)
-    max_dist = db.Column(db.Integer, nullable=False)
-    num_players = db.Column(db.Integer, nullable=False)
+    game_restaurant_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    game_settings_id = db.Column(db.Integer, db.ForeignKey("game_settings.game_settings_id"), nullable=False)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurants.restaurant_id"), nullable=False)
+    total_points = db.Column(db.Integer, nullable=False, default=0)
 
-    players = db.relationship("Player", back_populates="game_settings")
-    round_results = db.relationship("Round_Results", back_populates="game_settings")
+    game_settings = db.relationship("Game_Settings", back_populates="game_restaurants")
+    restaurant = db.relationship("Restaurant", back_populates="game_restaurants")
 
-    def __repr__(self):
-        return f'<Game Settings game_settings_id={self.game_settings_id} location={self.location} num_players={self.num_players}>'
-
-    def to_dict(self):
-        return {'game_settings_id': self.game_settings_id,
-                'location': self.location,
-                'category_1': self.category_1,
-                'category_2': self.category_2,
-                'category_3': self.category_3,
-                'max_dist': self.max_dist,
-                'num_players': self.num_players}
-    
 
 class Round_Results(db.Model):
     """Results of each round for a given player."""

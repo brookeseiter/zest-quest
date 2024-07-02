@@ -91,16 +91,10 @@ def finalize_game_settings():
 def get_restaurant_data():
     """Requests and returns restaurant data from Yelp Fusion API."""
 
-    print('request.args:', request.args)
-    print('request.args.get:', request.args.get('category'))
     location = session['location']
     max_dist = session['max_dist']
-    # category_1 = session['category_1'] WORKS FOR 1st CAT
     category = request.args.get('category', session.get('category_1'))
-    print('category in routes.py:', category)
-    print('SESSION:', session)
 
-    # url = crud.get_formatted_url(location,max_dist,category_1) WORKS FOR 1st CAT
     url = crud.get_formatted_url(location,max_dist,category)
 
     headers = {
@@ -112,6 +106,7 @@ def get_restaurant_data():
 
     if response:
         response_json = response.json()
+        crud.create_restaurant(response_json)        
         return jsonify(response_json), 200
     else:
         return jsonify({"error": "Failed to fetch restaurant data"}), 500
