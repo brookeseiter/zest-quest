@@ -16,13 +16,23 @@ function Game() {
         clickedRestaurants,
         setClickedRestaurants,
         fourthRoundWinner,
-        setFourthRoundWinner
+        setFourthRoundWinner,
+        round,
+        setRound
     } = useContext(GameContext);
     const location = useLocation();
     const navigate = useNavigate();
     const { gameSettings, finalRound } = location.state;
 
     const handleRestaurantClick = (restaurant) => {
+        console.log('restaurant:', restaurant);
+        if (round === 5) {
+            setRound(1);
+        }
+        else {
+            setRound(round + 1);
+        }
+
         if (clickedRestaurants.length === 3) {
             setFourthRoundWinner(restaurant);
         }
@@ -30,6 +40,25 @@ function Game() {
         setStartIndex(startIndex + 2);
         navigate('/load', { state: { gameSettings: gameSettings } });
     };
+
+    const saveRoundResults = async (restaurant) => {
+        // const roundResultsJSON = {
+        //     'round': round,
+        //     'currentPlayer': currentPlayer,
+        //     'restaurantId': restaurant.id,
+        //     'gameSettingsId': gameSettings.game_settings_id
+        // };
+        try {
+            const response = await fetch(`/round-results?winner=${restaurant}`);
+            if (!response.ok) {
+                throw new Error("Failed to post data");
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            // setLoading(false);
+        }
+    }
 
     const isFourthRound = clickedRestaurants.length === 3 && fourthRoundWinner === null;
     const isFifthRound = clickedRestaurants.length === 4 && fourthRoundWinner !== null;
@@ -54,7 +83,9 @@ function Game() {
             <div>
                 <p>Game Screen</p>
                 {restaurantsToDisplay.map((restaurant, i) => (
-                    <button key={i} onClick={() => handleRestaurantClick(restaurant)}>
+                    <button 
+                        key={i} 
+                        onClick={() => {handleRestaurantClick(restaurant)}}>
                         <RestaurantCard restaurant={restaurant} />
                     </button>
                 ))}

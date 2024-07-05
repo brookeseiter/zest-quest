@@ -114,6 +114,10 @@ def get_restaurant_data():
         return jsonify(response_json), 200
     else:
         return jsonify({"error": "Failed to fetch restaurant data"}), 500
+    
+# @app.route('/round-results', methods=['POST'])
+# def save_round_results():
+#     "Saves results of a round to database."
 
 
 if __name__ == "__main__":

@@ -15,7 +15,9 @@ function Load() {
         startIndex,
         setStartIndex,
         fourthRoundWinner,
-        setFourthRoundWinner
+        setFourthRoundWinner,
+        round,
+        setRound
     } = useContext(GameContext);
     const location = useLocation();
     const navigate = useNavigate();
@@ -78,7 +80,7 @@ function Load() {
     
     // console.log('startIndex Load:', startIndex);
     // console.log('clickedRestaurants:', clickedRestaurants);
-    // console.log('gameSettings:', gameSettings);
+    console.log('gameSettings:', gameSettings);
     // console.log('numPlayers:', numPlayers);
     // console.log('loading:', loading);
     console.log('restaurants:', restaurants);
@@ -93,6 +95,7 @@ function Load() {
                 <h1>{gameSettings.category_2}</h1>
                 <h1>{gameSettings.category_3}</h1>
                 <h2>Player {currentPlayer}, You're Up!</h2>
+                <h3>Round {round}</h3>
                 <button onClick={handlePlayGame}>Play</button>
             </div>
         </>

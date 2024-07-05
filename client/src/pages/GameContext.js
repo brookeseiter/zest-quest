@@ -8,7 +8,8 @@ export const GameProvider = ({ children }) => {
   const [restaurants, setRestaurants] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
   const [clickedRestaurants, setClickedRestaurants] = useState([]);
-  const [fourthRoundWinner, setFourthRoundWinner] = useState(null); // Add fourthRoundWinner state
+  const [fourthRoundWinner, setFourthRoundWinner] = useState(null);
+  const [round, setRound] = useState(1);
 
 
   return (
@@ -24,7 +25,9 @@ export const GameProvider = ({ children }) => {
       clickedRestaurants,
       setClickedRestaurants,
       fourthRoundWinner,
-      setFourthRoundWinner
+      setFourthRoundWinner,
+      round,
+      setRound
     }}>
       {children}
     </GameContext.Provider>
