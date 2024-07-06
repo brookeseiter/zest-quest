@@ -130,16 +130,26 @@ def create_round_results(round_number, current_player, yelp_business_id, game_se
         print(f"Player not found in db for current_player: {current_player}")
         return None
 
-def get_winning_game_restaurants(game_settings_id):
-    """Returns a list of game restaurants ordered by total_points, descending."""  
+def rank_restaurants_by_points(game_settings_id):
+    """Returns a list of game restaurants ordered by total_points, descending with yelp_business_id."""  
     
-    game_restaurants = Game_Restaurant.query.filter_by(game_settings_id=game_settings_id).order_by(Game_Restaurant.total_points.desc()).all()
+    game_restaurants = (Game_Restaurant.query
+                        .filter_by(game_settings_id=game_settings_id)
+                        .order_by(Game_Restaurant.total_points.desc())
+                        .all())
 
-    # for restaurant in game_restaurants:
-    #     print(restaurant.query.join(Game_Restaurant.restaurant_id=Restaurant.restaurant_id).filter_by(yelp_business_id=yelp_business_id).first())
-
-    return [game_restaurant.to_dict() for game_restaurant in game_restaurants]
-
+    results = []
+    for game_restaurant in game_restaurants:
+        restaurant = (Restaurant.query
+                      .filter_by(restaurant_id=game_restaurant.restaurant_id)
+                      .first())
+        
+        if restaurant:
+            result = game_restaurant.to_dict()
+            result['yelp_business_id'] = restaurant.yelp_business_id
+            results.append(result)
+    
+    return results
 
 if __name__ == "__main__":
     from routes import app

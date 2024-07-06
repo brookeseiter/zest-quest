@@ -137,12 +137,12 @@ def save_round_results():
         return jsonify({'error': 'Failed to save round results.'}), 500
     
 @app.route('/final-results', methods=['GET'])
-def get_final_results():
-    """Fetches the final results."""
+def get_ranked_restaurants():
+    """Fetches the list of restaurants ranked by total points for a given game instance."""
 
     game_settings_id = request.args.get('gameSettingsId', type=int)
 
-    final_results = crud.get_winning_game_restaurants(game_settings_id)
+    final_results = crud.rank_restaurants_by_points(game_settings_id)
 
     if final_results:
         return jsonify(final_results), 200
