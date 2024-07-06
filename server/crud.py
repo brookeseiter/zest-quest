@@ -109,6 +109,14 @@ def create_round_results(round_number, current_player, yelp_business_id, game_se
             db.session.add(round_result)
             db.session.commit()
 
+            round_winner_restaurant = Game_Restaurant.query.filter_by(restaurant_id=restaurant.restaurant_id).first()
+            
+            if round_winner_restaurant:
+                round_winner_restaurant.total_points += 1  
+                db.session.commit()
+            else:
+                print(f"Game_Restaurant not found for Restaurant ID: {restaurant.restaurant_id}")
+
             return round_result  
         else:
             print(f"Restaurant not found for Yelp business ID: {yelp_business_id}")
@@ -116,6 +124,7 @@ def create_round_results(round_number, current_player, yelp_business_id, game_se
     else:
         print(f"Player not found in db for current_player: {current_player}")
         return None  
+
     
 def get_all_round_results():
     round_results = Round_Results.query.all()
