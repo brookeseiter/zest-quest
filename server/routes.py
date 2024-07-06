@@ -135,6 +135,19 @@ def save_round_results():
         return jsonify(round_results.to_dict()), 201
     else:
         return jsonify({'error': 'Failed to save round results.'}), 500
+    
+@app.route('/final-results', methods=['GET'])
+def get_final_results():
+    """Fetches the final results."""
+
+    game_settings_id = request.args.get('gameSettingsId', type=int)
+
+    final_results = crud.get_winning_game_restaurants(game_settings_id)
+
+    if final_results:
+        return jsonify(final_results), 200
+    else:
+        return jsonify({'error': 'Failed to fetch final results.'}), 500
 
 
 if __name__ == "__main__":

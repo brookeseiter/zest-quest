@@ -42,6 +42,10 @@ def get_all_game_restaurants():
     game_restaurants = Game_Restaurant.query.all()
     return [gr.to_dict() for gr in game_restaurants]
 
+def get_all_round_results():
+    round_results = Round_Results.query.all()
+    return [rr.to_dict() for rr in round_results]
+
 def create_game_settings(num_players, location, max_dist, category_1, category_2, category_3):
     """Create and return player-selected settings for new game."""
 
@@ -113,6 +117,7 @@ def create_round_results(round_number, current_player, yelp_business_id, game_se
             
             if round_winner_restaurant:
                 round_winner_restaurant.total_points += 1  
+                print('round winner:', round_winner_restaurant)
                 db.session.commit()
             else:
                 print(f"Game_Restaurant not found for Restaurant ID: {restaurant.restaurant_id}")
@@ -123,14 +128,17 @@ def create_round_results(round_number, current_player, yelp_business_id, game_se
             return None  
     else:
         print(f"Player not found in db for current_player: {current_player}")
-        return None  
+        return None
 
+def get_winning_game_restaurants(game_settings_id):
+    """Returns a list of game restaurants ordered by total_points, descending."""  
     
-def get_all_round_results():
-    round_results = Round_Results.query.all()
-    return [rr.to_dict() for rr in round_results]
+    game_restaurants = Game_Restaurant.query.filter_by(game_settings_id=game_settings_id).order_by(Game_Restaurant.total_points.desc()).all()
 
+    # for restaurant in game_restaurants:
+    #     print(restaurant.query.join(Game_Restaurant.restaurant_id=Restaurant.restaurant_id).filter_by(yelp_business_id=yelp_business_id).first())
 
+    return [game_restaurant.to_dict() for game_restaurant in game_restaurants]
 
 
 if __name__ == "__main__":
