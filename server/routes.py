@@ -51,7 +51,7 @@ def save_settings_to_session():
     db.session.commit()
 
     session['game_settings_id'] = game_settings.game_settings_id
-    print('SESSION:', session)
+    print('SESSION: line 54, /settings', session)
 
     players = crud.create_players(session['num_players'], game_settings.game_settings_id)
 
@@ -77,18 +77,23 @@ def finalize_game_settings():
     session['category_2'] = category_2
     session['category_3'] = category_3
 
-    num_players = session['num_players']
-    location = session['location']
-    max_dist = session['max_dist']
+    game_settings_id = session.get('game_settings_id')
 
-    game_settings = crud.create_game_settings(num_players,location,max_dist,category_1,category_2,category_3)
+    if game_settings_id:
+        game_settings = crud.get_game_settings(game_settings_id)
+        if game_settings:
+            game_settings.category_1 = category_1
+            game_settings.category_2 = category_2
+            game_settings.category_3 = category_3
 
-    db.session.add(game_settings)
-    db.session.commit()
+            db.session.commit()
 
-    print(db.session)
-    print(session)
-    return jsonify(game_settings.to_dict()), 200
+            print('SESSION line 90 /categories:', session)
+            return jsonify(game_settings.to_dict()), 200
+        else:
+            return jsonify({'error': 'Game settings not found.'}), 404
+    else:
+        return jsonify({'error': 'Game settings ID not found in session.'}), 400
 
 @app.route('/yelp-api')
 def get_restaurant_data():
@@ -115,9 +120,21 @@ def get_restaurant_data():
     else:
         return jsonify({"error": "Failed to fetch restaurant data"}), 500
     
-# @app.route('/round-results', methods=['POST'])
-# def save_round_results():
-#     "Saves results of a round to database."
+@app.route('/round-results', methods=['POST'])
+def save_round_results():
+    """Saves the results of a round to database."""
+
+    round_number = request.json['round']
+    current_player = request.json['currentPlayer']
+    yelp_business_id = request.json['yelpBusinessId']
+    game_settings_id = request.json.get('gameSettingsId', session.get('game_settings_id'))
+
+    round_results = crud.create_round_results(round_number,current_player,yelp_business_id,game_settings_id)
+
+    if round_results:
+        return jsonify(round_results.to_dict()), 201
+    else:
+        return jsonify({'error': 'Failed to save round results.'}), 500
 
 
 if __name__ == "__main__":

@@ -30,8 +30,9 @@ def create_players(num_players, game_settings_id):
     
     return players
 
-# def get_all_players():
-#     return Player.query.all()
+def get_all_players():
+    players = Player.query.all()
+    return [player.to_dict() for player in players]
 
 def get_all_restaurants():
     restaurants = Restaurant.query.all()
@@ -53,15 +54,13 @@ def create_game_settings(num_players, location, max_dist, category_1, category_2
         category_3=category_3
     )
 
-    print('settings:',settings)
-
     return settings
 
-def get_formatted_url(location,max_dist,category):
-    print('location:', location)
-    print('max_dist:', max_dist)
-    print('category:', category)
+def get_game_settings(game_settings_id):
+    """Retrieve a Game_Settings instance by its ID."""
+    return Game_Settings.query.get(game_settings_id)
 
+def get_formatted_url(location,max_dist,category):
     location = '%20'.join(location.split())
     max_dist = str(int(round(int(max_dist) * 1609.344, 0)))
     category = restaurant_categories_dict[category].lower()
@@ -91,6 +90,37 @@ def create_restaurant(yelp_data_response, game_settings_id):
             db.session.commit()
             print('session after game_restaurant:', db.session)
     return print('done')
+
+def create_round_results(round_number, current_player, yelp_business_id, game_settings_id):
+    """Creates a round result entry for a given round, player, and game instance."""
+
+    player = Player.query.filter_by(player_number=current_player, game_settings_id=game_settings_id).first()
+
+    if player:
+        restaurant = Restaurant.query.filter_by(yelp_business_id=yelp_business_id).first()
+        if restaurant:
+            round_result = Round_Results(
+                round_number=round_number,
+                player_id=player.player_id,
+                restaurant_id=restaurant.restaurant_id,
+                game_settings_id=game_settings_id
+            )
+
+            db.session.add(round_result)
+            db.session.commit()
+
+            return round_result  
+        else:
+            print(f"Restaurant not found for Yelp business ID: {yelp_business_id}")
+            return None  
+    else:
+        print(f"Player not found in db for current_player: {current_player}")
+        return None  
+    
+def get_all_round_results():
+    round_results = Round_Results.query.all()
+    return [rr.to_dict() for rr in round_results]
+
 
 
 

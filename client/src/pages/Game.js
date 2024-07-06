@@ -24,41 +24,50 @@ function Game() {
     const navigate = useNavigate();
     const { gameSettings, finalRound } = location.state;
 
-    const handleRestaurantClick = (restaurant) => {
-        console.log('restaurant:', restaurant);
-        if (round === 5) {
-            setRound(1);
+    const handleRestaurantClick = async (restaurant) => {
+        try {
+            await saveRoundResults(restaurant); 
+    
+            if (round === 5) {
+                setRound(1);
+            } else {
+                setRound(round + 1);
+            }
+    
+            if (clickedRestaurants.length === 3) {
+                setFourthRoundWinner(restaurant);
+            }
+            setClickedRestaurants((prevClicked) => [...prevClicked, restaurant]);
+            setStartIndex(startIndex + 2);
+    
+            navigate('/load', { state: { gameSettings: gameSettings } });
+        } catch (error) {
+            console.error('Error saving round results:', error);
         }
-        else {
-            setRound(round + 1);
-        }
-
-        if (clickedRestaurants.length === 3) {
-            setFourthRoundWinner(restaurant);
-        }
-        setClickedRestaurants((prevClicked) => [...prevClicked, restaurant]);
-        setStartIndex(startIndex + 2);
-        navigate('/load', { state: { gameSettings: gameSettings } });
     };
 
     const saveRoundResults = async (restaurant) => {
-        // const roundResultsJSON = {
-        //     'round': round,
-        //     'currentPlayer': currentPlayer,
-        //     'restaurantId': restaurant.id,
-        //     'gameSettingsId': gameSettings.game_settings_id
-        // };
-        try {
-            const response = await fetch(`/round-results?winner=${restaurant}`);
-            if (!response.ok) {
-                throw new Error("Failed to post data");
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        } finally {
-            // setLoading(false);
+        const roundResultsJSON = {
+            'round': round,
+            'currentPlayer': currentPlayer,
+            'yelpBusinessId': restaurant.id,
+            'gameSettingsId': gameSettings.game_settings_id
+        };
+    
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(roundResultsJSON)
+        };
+    
+        const response = await fetch(`/round-results`, requestOptions);
+        if (!response.ok) {
+            throw new Error("Failed to save round results");
         }
-    }
+
+        const roundResultsData = await response.json();
+        console.log('Round results saved:', roundResultsData);
+    };
 
     const isFourthRound = clickedRestaurants.length === 3 && fourthRoundWinner === null;
     const isFifthRound = clickedRestaurants.length === 4 && fourthRoundWinner !== null;

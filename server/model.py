@@ -52,7 +52,7 @@ class Player(db.Model):
     round_results = db.relationship("Round_Results", back_populates="player")
 
     def __repr__(self):
-        return f'<Player player_id={self.player_id} player_number={self.player_number}>'
+        return f'<Player player_id={self.player_id} player_number={self.player_number} game_settings_id={self.game_settings_id}>'
 
     def to_dict(self):
         return {'player_id': self.player_id,
@@ -113,7 +113,7 @@ class Round_Results(db.Model):
     round_results_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True)
-    round = db.Column(db.Integer, nullable=False)
+    round_number = db.Column(db.Integer, nullable=False)
     player_id = db.Column(db.Integer, db.ForeignKey("players.player_id"), nullable=False)
     restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurants.restaurant_id"), nullable=False)
     game_settings_id = db.Column(db.Integer, db.ForeignKey("game_settings.game_settings_id"), nullable=False)
@@ -123,11 +123,11 @@ class Round_Results(db.Model):
     game_settings = db.relationship("Game_Settings", back_populates="round_results")
 
     def __repr__(self):
-        return f'<Round Results round_results_id={self.round_results_id} round={self.round} player_id={self.player_id}>'
+        return f'<Round Results round_results_id={self.round_results_id} round_number={self.round_number} player_id={self.player_id}>'
 
     def to_dict(self):
         return {'round_results_id': self.round_results_id,
-                'round': self.round,
+                'round_number': self.round_number,
                 'player_id': self.player_id,
                 'restaurant_id': self.restaurant_id,
                 'game_settings_id': self.game_settings_id}
