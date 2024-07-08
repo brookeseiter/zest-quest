@@ -2,7 +2,21 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import Checkbox from "../components/Checkbox";
 
-const categories = ["American","BBQ","Chinese"];
+const categories = [
+    "American",
+    "BBQ",
+    "Chinese",
+    "Indian",
+    "Italian",
+    "Japanese",
+    "Mediterranean",
+    "Mexican",
+    "Middle Eastern",
+    "Pizza",
+    "Seafood",
+    "Thai",
+    "Vietnamese"
+];
 
 function CategorySelect() {
     const navigate = useNavigate();

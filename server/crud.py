@@ -6,7 +6,6 @@ restaurant_categories_dict = {
     "American": "newamerican",
     "BBQ": "bbq",
     "Chinese": "Chinese",
-    # "Fast Food": "hotdogs",
     "Indian": "indpak",
     "Italian": "italian",
     "Japanese": "japanese",
@@ -29,6 +28,9 @@ def create_players(num_players, game_settings_id):
         players.append(Player(player_number=i, game_settings_id=game_settings_id))
     
     return players
+
+def get_all_players():
+    return Player.query.all()
 
 def get_all_players():
     players = Player.query.all()
