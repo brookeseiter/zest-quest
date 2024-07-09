@@ -19,9 +19,6 @@ code {
 h1 {
   font-family: 'Varela Round';
 }
-img {
-  max-width: 15%;
-}
 
 @layer base {
   div.base {

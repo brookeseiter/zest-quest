@@ -5,18 +5,18 @@ function Home() {
 
     return (
         <>
-            <div className="base h-screen bg-cover bg-[#D9EDBF] content-center">
-                <div className="flex justify-center items-center font-extrabold">
-                    <img src="../images/retry.svg" alt="" />
-                    <h1 className="text-[#eb9e78] text-7xl homepage-title text-">Zest Quest</h1>
-                </div>
-                <div className="flex justify-center">
-                    <button 
-                        className="button px-24 py-3 bg-[#eb9e78] rounded-full shadow-md transition-shadow"
-                        onClick={() => navigate('/settings')}
-                    >
-                        <h1 className="text-[#D9EDBF] text-base font-extrabold">Play</h1>
-                    </button>
+            <div className="base flex items-center justify-center">
+                <div className="flex flex-row items-center font-extrabold">
+                    <img className="w-36 h-36" src="../images/retry.svg" alt="" />
+                    <div className="mt-4 ml-2 flex flex-col items-center">
+                        <h1 className="homepage-title text-7xl font-extrabold text-[#eb986f]">Zest Quest</h1>
+                        <button
+                            className="mt-4 w-4/6 h-full py-2 rounded-full shadow-sm transition-shadow duration-300 hover:shadow-lg bg-[#eb986f]"
+                            onClick={() => navigate('/settings')}
+                        >
+                            <span className="text-lg uppercase font-extrabold text-[#D9EDBF]">Play</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </>
