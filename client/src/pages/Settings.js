@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@material-tailwind/react";
+
 
 function Settings() {
     const navigate = useNavigate();
@@ -40,10 +42,11 @@ function Settings() {
     console.log('location:', location);
     console.log('maxDist:', maxDist);
 
+
     return (
         <>
-            <div className="base">
-                <h1>Enter your preferences:</h1>
+            <div className="">
+                <h1>Step 1: Enter your preferences</h1>
                 <form className="settings-form" onSubmit={submitSettings}>
                     <label htmlFor="">
                         Number of Players:
@@ -54,8 +57,8 @@ function Settings() {
                             value={numPlayers} 
                             onChange={(e) => setNumPlayers(e.target.value)}
                             required
-                        >
-                            <option className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" disabled={true} value="">Choose a number between 1-5</option>
+                        >                            
+                            <option className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" disabled={true} value="">Choose a number</option>
                             <option className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -125,7 +128,7 @@ function Settings() {
                             15 miles
                         </label>
                     </div>
-                    <button>Submit Preferences</button>
+                    <Button className="rounded-full" size="md" variant="filled">Submit Preferences</Button>
                 </form>
             </div>
         </>
@@ -133,3 +136,4 @@ function Settings() {
 }
 
 export default Settings;
+
