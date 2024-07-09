@@ -111,12 +111,12 @@ function Results() {
                     </div>
                 )}
                 <h3>Ranked Restaurants:</h3>
-                <table>
+                <table className='table-auto border'>
                     <thead>
                         <tr>
-                            <th>Rank</th>
-                            <th>Name</th>
-                            <th>Points</th>
+                            <th className='border'>Rank</th>
+                            <th className='border'>Name</th>
+                            <th className='border'>Points</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -124,12 +124,12 @@ function Results() {
                             const rankedRestaurant = rankedRestaurants.find(ranked => ranked.yelp_business_id === restaurant.id);
                             return restaurant ? (
                                 <tr key={restaurant.id}>
-                                    <td>{index + 1}</td>
-                                    <td>
+                                    <td className='border'>{index + 1}</td>
+                                    <td className='border'>
                                         <img src={restaurant.image_url} alt={restaurant.name} width="100" />
                                         {restaurant.name}
                                     </td>
-                                    <td>{rankedRestaurant ? rankedRestaurant.total_points : 'N/A'}</td>
+                                    <td className='border'>{rankedRestaurant ? rankedRestaurant.total_points : 'N/A'}</td>
                                 </tr>
                             ) : null;
                         })}

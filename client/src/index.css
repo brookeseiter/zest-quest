@@ -15,3 +15,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+h1 {
+  font-family: 'Varela Round';
+}
+img {
+  max-width: 15%;
+}
+
+@layer base {
+  div.base {
+    @apply h-screen bg-cover bg-[#D9EDBF] content-center;
+  }
+}
+
+/* @layer base {
+  button.button {
+    @apply text-[#D9EDBF] text-base font-extrabold;
+  }
+} */
