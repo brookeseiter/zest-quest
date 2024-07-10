@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GameContext } from './GameContext';
+import { Button } from "@material-tailwind/react";
 
 function Load() {
     const {
@@ -90,13 +91,15 @@ function Load() {
 
     return (
         <>
-            <div>
-                <h1>{gameSettings.category_1}</h1>
-                <h1>{gameSettings.category_2}</h1>
-                <h1>{gameSettings.category_3}</h1>
-                <h2>Player {currentPlayer}, You're Up!</h2>
+            <div className="base">
+                <div className="flex row justify-center space-x-4">
+                    <h1>{gameSettings.category_1}</h1>
+                    <h1>{gameSettings.category_2}</h1>
+                    <h1>{gameSettings.category_3}</h1>
+                </div>
+                <h2 className="flex row justify-center">Player {currentPlayer}, You're Up!</h2>
+                <Button className="flex row justify-center" onClick={handlePlayGame}>Play</Button>
                 <h3>Round {round}</h3>
-                <button onClick={handlePlayGame}>Play</button>
             </div>
         </>
     );

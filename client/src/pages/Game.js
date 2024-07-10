@@ -2,6 +2,18 @@ import { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import RestaurantCard from "../components/RestaurantCard";
 import { GameContext } from './GameContext';
+import { 
+    CardHeader, 
+    CardFooter, 
+    CardBody, 
+    Typography, 
+    Card, 
+    Input,
+    Select, 
+    Option, 
+    Radio,
+    Button 
+} from "@material-tailwind/react";
 
 
 function Game() {
@@ -89,8 +101,8 @@ function Game() {
 
     return (
         <>
-            <div>
-                <p>Game Screen</p>
+            <div className="base flex justify-center">
+                <p>Round</p>
                 {restaurantsToDisplay.map((restaurant, i) => (
                     <button 
                         key={i} 

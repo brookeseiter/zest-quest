@@ -1,6 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import Checkbox from "../components/Checkbox";
+import {
+    Checkbox,
+    Card,
+    CardHeader,
+    CardBody,
+    CardFooter,
+    List,
+    ListItem,
+    ListItemPrefix,
+    Typography,
+    Button
+} from "@material-tailwind/react";
+
 
 const categories = [
     "American",
@@ -94,37 +106,93 @@ function CategorySelect() {
 
     return (
         <>
-            <div>
-            <h1>Choose restaurant categories:</h1>
-                <form className="categories-form" onSubmit={submitSettings}>
-                    <ul className="toppings-list">
-                        {categories.map((name, index) => {
-                            return (
-                                <li key={index}>
-                                    <div className="toppings-list-item">
-                                        <div className="left-section">
-                                            <input
-                                                type="checkbox"
-                                                id={`custom-checkbox-${index}`}
-                                                name={name}
-                                                value={name}
-                                                // ref={change}
-                                                checked={checkedState[index]}
-                                                onChange={(e) => handleOnChange(index, e)}
-                                                // disabled={ !toggles[index] && checkedCount >= 3 }
-                                            />
-                                            <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
-                                        </div>
-                                    </div>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                    <button>Submit Categories</button>
-                </form>
+            <div className="base flex justify-center items-center w-full h-full">
+                <Card className="overflow-y-scroll w-2/3">
+                    <CardHeader
+                        variant="solid"
+                        className="bg-[#eb986f] text-white mb-4 grid h-28 place-items-center"
+                    >
+                        <Typography className="uppercase font-bold"> Step 2: Choose restaurant categories</Typography>
+                    </CardHeader>
+                        <form className="categories-form" onSubmit={submitSettings}>
+                        <CardBody>
+                                <List className="toppings-list">
+                                    {categories.map((name, index) => {
+                                        return (
+                                            <ListItem key={index} className="p-0">
+                                                <label
+                                                    htmlFor={`custom-checkbox-${index}`}
+                                                    className="flex w-full cursor-pointer items-center px-3 py-2"
+                                                >
+                                                    <ListItemPrefix className="mr-3">
+                                                        <Checkbox
+                                                            id={`custom-checkbox-${index}`}
+                                                            ripple={false}
+                                                            className="hover:before:opacity-0"
+                                                            containerProps={{
+                                                            className: "p-0",
+                                                            }}
+                                                            name={name}
+                                                            value={name}
+                                                            // ref={change}
+                                                            checked={checkedState[index]}
+                                                            onChange={(e) => handleOnChange(index, e)}
+                                                            // disabled={ !toggles[index] && checkedCount >= 3 }
+                                                        />
+                                                    </ListItemPrefix>
+                                                    <Typography color="blue-gray" className="font-medium">
+                                                        {name}
+                                                    </Typography>
+                                                </label>
+                                            </ListItem>
+                                        );
+                                    })}
+                                </List>
+                            </CardBody>
+                            <CardFooter>
+                                <Button type="submit">Submit Categories</Button>
+                            </CardFooter>
+                    </form>
+                  
+                </Card>
             </div>
         </>
     );
+    // return (
+    //     <>
+    //         <div className="base">
+    //             <Card>
+    //             <h1>Choose restaurant categories:</h1>
+    //                 <form className="categories-form" onSubmit={submitSettings}>
+    //                     <ul className="toppings-list">
+    //                         {categories.map((name, index) => {
+    //                             return (
+    //                                 <li key={index}>
+    //                                     <div className="toppings-list-item">
+    //                                         <div className="left-section">
+    //                                             <input
+    //                                                 type="checkbox"
+    //                                                 id={`custom-checkbox-${index}`}
+    //                                                 name={name}
+    //                                                 value={name}
+    //                                                 // ref={change}
+    //                                                 checked={checkedState[index]}
+    //                                                 onChange={(e) => handleOnChange(index, e)}
+    //                                                 // disabled={ !toggles[index] && checkedCount >= 3 }
+    //                                             />
+    //                                             <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+    //                                         </div>
+    //                                     </div>
+    //                                 </li>
+    //                             );
+    //                         })}
+    //                     </ul>
+    //                     <button>Submit Categories</button>
+    //                 </form>
+    //             </Card>
+    //         </div>
+    //     </>
+    // );
 }
 
 export default CategorySelect;

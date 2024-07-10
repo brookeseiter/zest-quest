@@ -20,6 +20,14 @@ h1 {
   font-family: 'Varela Round';
 }
 
+/* for /categories  */
+/* @layer base {
+  div.base {
+    @apply bg-[#D9EDBF] content-center;
+  }
+} */
+
+/* OG  */
 @layer base {
   div.base {
     @apply h-screen bg-cover bg-[#D9EDBF] content-center;
