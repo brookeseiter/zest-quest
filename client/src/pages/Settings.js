@@ -1,6 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CardHeader, Card, Select, Option, Button } from "@material-tailwind/react";
+import { 
+    CardHeader, 
+    CardFooter, 
+    CardBody, 
+    Typography, 
+    Card, 
+    Input,
+    Select, 
+    Option, 
+    Radio,
+    Button 
+} from "@material-tailwind/react";
 
 
 function Settings() {
@@ -8,6 +19,10 @@ function Settings() {
     const [numPlayers, setNumPlayers] = useState("");
     const [location, setLocation] = useState("");
     const [maxDist, setMaxDist] = useState("5");
+
+    const handleSelectChange = (value) => {
+        setNumPlayers(value);
+    };
 
     const submitSettings = (e) => {
         e.preventDefault();
@@ -41,106 +56,107 @@ function Settings() {
     console.log('numPlayers:', numPlayers);
     console.log('location:', location);
     console.log('maxDist:', maxDist);
-    // Roboto, sans-serif 
 
     return (
         <>
             <div className="base flex justify-center items-center">
                 <Card className="w-2/3 h-3/4">
-                <CardHeader
-                    variant="solid"
-                    className="bg-[#eb986f] text-white mb-4 grid h-28 place-items-center"
-                >
-                    <h1 className="uppercase font-bold"> Step 1: Enter your preferences</h1>
-                </CardHeader>
-                    <form className="settings-form flex w-72 flex-col gap-6" onSubmit={submitSettings}>
-                        <Select 
-                            className="shadow-inner focus:outline-none bg-white"
-                            variant="outlined" 
-                            label="Number of Players:"
-                            name="numPlayers" 
-                            value={numPlayers} 
-                            onChange={(e) => setNumPlayers(e.target.value)}
-                            required
-                        >
-                            <Option className="" disabled={true} value="">Choose a number</Option>
-                            <Option className="" value="1">1</Option>
-                            <Option value="2">2</Option>
-                            <Option value="3">3</Option>
-                            <Option value="4">4</Option>
-                            <Option value="5">5</Option>
-                        </Select>
-                        <label htmlFor="">
-                            Number of Players:
-                            <select 
-                                className="flex flex-row justify-between w-48 px-2 py-2 text-gray-700 bg-white border-2 border-white rounded-md shadow focus:outline-none focus:border-blue-600"
-                                // className="@click="show = ! show" class="mt-4 border-0 block bg-blue-600 text-gray-200 rounded-lg px-6 text-sm py-3 overflow-hidden focus:outline-none focus:border-white"
+                    <CardHeader
+                        variant="solid"
+                        className="bg-[#eb986f] text-white mb-4 grid h-28 place-items-center"
+                    >
+                        <Typography className="uppercase font-bold"> Step 1: Enter your preferences</Typography>
+                    </CardHeader>
+                    <CardBody>
+                        <form className="settings-form flex w-72 flex-col gap-6" onSubmit={submitSettings}>
+                            <Select 
+                                className="shadow-inner focus:outline-none bg-white"
+                                variant="outlined" 
+                                label="Number of Players:"
                                 name="numPlayers" 
                                 value={numPlayers} 
-                                onChange={(e) => setNumPlayers(e.target.value)}
+                                // onChange={(e) => setNumPlayers(e.target.value)}
+                                onChange={handleSelectChange}
                                 required
-                            >                            
-                                <option className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" disabled={true} value="">Choose a number</option>
-                                <option className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </label>
-                        <label className="flex items-center" htmlFor="">
-                            Address of your current location:
-                            <input 
-                                className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            >
+                                <Option className="" disabled={true} value="">Choose a number</Option>
+                                <Option className="" value="1">1</Option>
+                                <Option value="2">2</Option>
+                                <Option value="3">3</Option>
+                                <Option value="4">4</Option>
+                                <Option value="5">5</Option>
+                            </Select>
+
+                            {/* <Input 
+                                className="block w-full rounded-md border-0 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                variant="outlined" 
                                 type="text" 
                                 value={location}
                                 onChange={(e) => setLocation(e.target.value)}
                                 required 
+                                label="Address of your current location:" 
+                                size="lg" 
+                            /> */}
+                            <div className="relative">
+                                <Input 
+                                    // className="location-input peer w-full h-full text-blue-gray-700 font-sans font-normal text-left outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 disabled:cursor-not-allowed transition-all border text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 border-t-transparent shadow-inner focus:outline-none bg-white" 
+                                    className="location-input"
+                                    variant="outlined" 
+                                    type="text" 
+                                    value={location}
+                                    onChange={(e) => setLocation(e.target.value)}
+                                    required 
+                                    id="location" 
+                                    size="lg" 
+                                />
+                                <label 
+                                    htmlFor="location-input" 
+                                    className="flex w-full h-full absolute -top-1.5 before:w-2.5 before:mt-[6.5px] before:mr-1 before:rounded-tl-md after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 after:rounded-tr-md after:pointer-events-none after:transition-all text-[11px] before:border-t before:border-l after:border-t after:border-r leading-tight  text-blue-gray-400 before:border-blue-gray-200 after:border-blue-gray-200"
+                                    // in the middle of the input, below 
+                                    // className="absolute top-1/2 transform -translate-y-1/2 left-3 text-blue-gray-400 pointer-events-none text-[11px] transition-all peer-placeholder-shown:top-2/4 peer-placeholder-shown:-translate-y-2/4 peer-placeholder-shown:left-3 peer-placeholder-shown:text-base peer-focus:top-1/2 peer-focus:-translate-y-1/2 peer-focus:left-3 peer-focus:text-[11px]"
+                                >
+                                    Address of your current location:
+                                </label>
+                            </div>
+                        
+
+                            <Typography>How far are you willing to go?</Typography>
+                            <Radio 
+                                value="5" 
+                                checked={maxDist === "5"}
+                                onChange={(e) => setMaxDist(e.target.value)}
+                                name="type"
+                                label="5 miles" 
+                                defaultChecked 
                             />
-                        </label>
-                        <p>How far are you willing to go?</p>
-                        <div className="radio">
-                            <label>
-                                <input 
-                                    type="radio" 
-                                    value="5" 
-                                    checked={maxDist === "5"}
-                                    onChange={(e) => setMaxDist(e.target.value)}
-                                />
-                                5 miles
-                            </label>
-                        </div>
-                        <div className="radio">
-                            <label>
-                                <input 
-                                    type="radio" 
-                                    value="10" 
-                                    checked={maxDist === "10"}
-                                    onChange={(e) => setMaxDist(e.target.value)}
-                                />
-                                10 miles
-                            </label>
-                        </div>
-                        <div className="radio">
-                            <label>
-                                <input 
-                                    type="radio" 
-                                    value="15" 
-                                    checked={maxDist === "15"}
-                                    onChange={(e) => setMaxDist(e.target.value)}
-                                    // onChange={updateMaxDist}
-                                />
-                                15 miles
-                            </label>
-                        </div>
-                        <Button 
-                            className="rounded-full hover:scale-[1.02] focus:scale-[1.02] active:scale-100 bg-[#eb986f]" 
-                            size="md" 
-                            variant="filled"
-                        >
-                            Submit Preferences
-                        </Button>
-                    </form>
+                            <Radio 
+                                value="10" 
+                                checked={maxDist === "10"}
+                                onChange={(e) => setMaxDist(e.target.value)}
+                                name="type" 
+                                label="10 miles" 
+                                defaultChecked 
+                            />
+                            <Radio 
+                                value="15" 
+                                checked={maxDist === "15"}
+                                onChange={(e) => setMaxDist(e.target.value)}
+                                name="type" 
+                                label="15 miles" 
+                                defaultChecked 
+                            />
+                            <CardFooter className="">
+                                <Button 
+                                    className="rounded-full hover:scale-[1.02] focus:scale-[1.02] active:scale-100 bg-[#eb986f]" 
+                                    size="md" 
+                                    type="submit"
+                                    variant="filled"
+                                >
+                                    Submit Preferences
+                                </Button>
+                            </CardFooter>
+                        </form>
+                    </CardBody>
                 </Card>
             </div>
         </>

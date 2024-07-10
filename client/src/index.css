@@ -26,6 +26,22 @@ h1 {
   }
 }
 
+/* .border-t-transparent {
+  border-top-color: transparent;
+} */
+
+.location-input {
+  border-top-color: transparent !important;
+}
+
+.location-input:required::after {
+  content: ''; /* Remove the asterisk */
+}
+
+.location-input:focus::after {
+  content: ''; /* Ensure it stays removed on focus */
+}
+
 /* @layer base {
   button.button {
     @apply text-[#D9EDBF] text-base font-extrabold;
