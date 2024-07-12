@@ -12,10 +12,10 @@ import {
 } from "@material-tailwind/react";
 
 
-function RestaurantCard({ restaurant })  {
+function RestaurantCard({ classStyles, restaurant })  {
     return (
         <>
-            <Card className="h-2/5 flex flex-col justify-start items-center w-96 bg-white rounded-2xl gap-5 cursor-pointer transition-all duration-300 hover:scale-110 hover:rotate-12">
+            <Card className={`h-2/5 flex flex-col justify-start items-center w-96 bg-white rounded-2xl gap-5 cursor-pointer transition ease-in-out duration-300 hover:scale-105 hover:-translate-y-1 ${classStyles}`}>
                 <CardHeader className="h-3/5 w-3/5 flex justify-center items-center flex-grow-0 flex-shrink-0">
                     {restaurant.image_url && (
                         <img 
@@ -31,6 +31,12 @@ function RestaurantCard({ restaurant })  {
                     </h1>
                     <h1>
                         {restaurant.rating}
+                    </h1>
+                    <h1>
+                        {restaurant.price}
+                    </h1>
+                    <h1>
+                        {restaurant.address}
                     </h1>
                     <div> 
                         {restaurant.categories.map((category, i) => (

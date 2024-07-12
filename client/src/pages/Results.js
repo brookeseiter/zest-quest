@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { GameContext } from './GameContext';
+import RestaurantCard from "../components/RestaurantCard";
 import { 
     CardHeader, 
     CardFooter, 
@@ -68,88 +69,18 @@ function Results() {
 
     return (
         <>
-            {/* <div className='base'>
-                <Card className="flex flex-row rounded-full h-full w-full overflow-scroll justify-center items-center">
-                    {winnerRestaurant && (
-                        <div className='w-1/2'>
-                            <h2>{winnerRestaurant.name}</h2>
-                            <img className="" src={winnerRestaurant.image_url} alt={winnerRestaurant.name} />
-                        </div>
-                    )}
-                    <table className='rounded-2xl w-1/2 min-w-max table-auto text-left'>
-                        <thead className='rounded-2xl'>
-                            <tr>
-                                {TABLE_HEAD.map((head) => (
-                                    <th 
-                                        key={head}
-                                        className='border-b border-blue-gray-100 bg-blue-gray-50 p-4'
-                                    >
-                                        <Typography
-                                            variant="small"
-                                            color="blue-gray"
-                                            className="font-normal leading-none opacity-70"
-                                        >
-                                            {head}
-                                        </Typography>
-                                    </th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {orderedRestaurants.map((restaurant, index) => {
-                                const rankedRestaurant = rankedRestaurants.find(ranked => ranked.yelp_business_id === restaurant.id);
-                                const isLast = index === orderedRestaurants.length - 1;
-                                const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
-
-                                return restaurant ? (
-                                    <tr key={restaurant.id}>
-                                        <td className={classes}>
-                                            <Typography
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="font-normal"
-                                            >
-                                                {index + 1}
-                                            </Typography>
-                                        </td>
-                                        <td className={classes}>
-                                            <div className="flex items-center space-x-2">
-                                                <img src={restaurant.image_url} alt={restaurant.name} className="w-20 h-20 object-cover" />
-                                                <Typography
-                                                    variant="small"
-                                                    color="blue-gray"
-                                                    className="font-normal"
-                                                >
-                                                    {restaurant.name}
-                                                </Typography>
-                                            </div>
-                                        </td>
-                                        <td className={classes}>
-                                            <Typography
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="font-normal"
-                                            >
-                                                {rankedRestaurant ? rankedRestaurant.total_points : 'N/A'}
-                                            </Typography>
-                                        </td>
-                                    </tr>
-                                ) : null;
-                            })}
-                        </tbody>
-                    </table>
-                </Card>
-            </div> */}
             <div className='base'>
                 <Card className="flex flex-row rounded-full h-full w-full justify-center items-center">
                     <div className="scale-75 flex w-full h-full justify-center items-center"> 
                         {winnerRestaurant && (
-                            <div className='flex flex-col w-1/2 h-full'>
-                                <img className="w-full h-auto max-h-full object-cover" src={winnerRestaurant.image_url} alt={winnerRestaurant.name} />
-                                <Typography>{winnerRestaurant.name}</Typography>
+                            <div className='flex flex-col w-1/2 h-full justify-center scale-90'>
+                                <RestaurantCard 
+                                    classStyles="w-full h-auto max-h-full object-cover" 
+                                    restaurant={winnerRestaurant} 
+                                />
                             </div>
                         )}
-                        <div className='flex flex-col w-1/2 h-full overflow-auto rounded-2xl'>
+                        <div className='flex flex-col w-1/2 h-full overflow-auto rounded-2xl scale-100'>
                             <table className='w-full h-full table-auto text-left max-h-full overflow-scroll'>
                                 <thead className='w-full rounded-2xl'>
                                     <tr>
