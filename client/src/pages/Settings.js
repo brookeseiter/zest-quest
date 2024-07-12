@@ -94,41 +94,22 @@ function Settings() {
                                         <Option value="4">4</Option>
                                         <Option value="5">5</Option>
                                     </Select>
-                                    <Input 
-                                        className="peer block w-full rounded-md border-0 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                        variant="static" 
-                                        label="Address of your current location:" 
-                                        size="lg" 
-                                        value={location}
-                                        onChange={(e) => setLocation(e.target.value)}
-                                        required 
-                                        containerProps={{
-                                            className: 'label-hidden-required-span'
-                                        }}
-                                    />
-                                    
+                                    {/* desired label classes: className="flex w-full h-full absolute -top-1.5 before:w-2.5 before:mt-[6.5px] before:mr-1 before:rounded-tl-md after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 after:rounded-tr-md after:pointer-events-none after:transition-all text-[11px] before:border-t before:border-l after:border-t after:border-r leading-tight  text-blue-gray-400 before:border-blue-gray-200 after:border-blue-gray-200" */}
                                     <div className="relative mt-4">
                                         <Input 
-                                            // className="location-input peer w-full h-full text-blue-gray-700 font-sans font-normal text-left outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 disabled:cursor-not-allowed transition-all border text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 border-t-transparent shadow-inner focus:outline-none bg-white" 
-                                            className="location-input peer"
-                                            variant="outlined" 
+                                            className="location-input peer w-full h-full text-blue-gray-700 font-sans font-normal text-left outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 transition-all border text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 border-t-transparent shadow-inner focus:outline-none bg-white" 
+                                            variant="static" 
                                             value={location}
+                                            label="Address of your current location:" 
                                             onChange={(e) => setLocation(e.target.value)}
-                                            required 
                                             id="location" 
                                             size="lg" 
+                                            required 
                                             containerProps={{
-                                                className: 'label-hidden-required-span'
+                                                className: 'label-hidden-required-span'    
                                             }}
+                                            labelProps={{ className: "custom-label" }} 
                                         />
-                                        <label 
-                                            htmlFor="location-input" 
-                                            className="flex w-full h-full absolute -top-1.5 before:w-2.5 before:mt-[6.5px] before:mr-1 before:rounded-tl-md after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 after:rounded-tr-md after:pointer-events-none after:transition-all text-[11px] before:border-t before:border-l after:border-t after:border-r leading-tight  text-blue-gray-400 before:border-blue-gray-200 after:border-blue-gray-200"
-                                            // in the middle of the input, below 
-                                            // className="absolute top-1/2 transform -translate-y-1/2 left-3 text-blue-gray-400 pointer-events-none text-[11px] transition-all peer-placeholder-shown:top-2/4 peer-placeholder-shown:-translate-y-2/4 peer-placeholder-shown:left-3 peer-placeholder-shown:text-base peer-focus:top-1/2 peer-focus:-translate-y-1/2 peer-focus:left-3 peer-focus:text-[11px]"
-                                        >
-                                            Address of your current location:
-                                        </label>
                                     </div>
                                 </div>
                                 <div className="flex flex-col h-full w-1/2">

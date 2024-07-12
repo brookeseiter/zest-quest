@@ -38,6 +38,40 @@ h1 {
   display: none;
 }
 
+/* .custom-label {
+  font-size: 0.7rem;
+  transition: none;
+} */
+
+.custom-label {
+  font-size: 11px; /* Set desired font size */
+  transition: none !important; /* Prevent any transition effects */
+  position: absolute; /* Keep the position absolute */
+  top: -0.375rem; /* Adjust for -top-1.5, which is equivalent to -0.375rem */
+  left: 0; /* Keep the label on the left */
+  font-weight: normal; /* Set font weight */
+  pointer-events: none; /* Prevent interactions with the label */
+  user-select: none; /* Prevent text selection */
+  /* this got rid of weird underlining in label from peer-focus:after:scale-x-100  */
+  &::after {
+    transform: scaleX(0) !important; /* Adjust as needed */
+  }
+}
+
+.custom-label::before {
+  content: ''; /* Ensure the pseudo-element is created */
+  display: block; /* Necessary for margin to take effect */
+  margin-top: 20px; /* Equivalent to before:mt-[6.5px] */
+  margin-right: 0.25rem; /* Equivalent to before:mr-1 (0.25rem) */
+} 
+
+/* Adjust the colors and other properties for the pseudo-elements if necessary */
+.custom-label::before,
+.custom-label::after {
+  /* Add any specific styles for the pseudo-elements if needed */
+  border-color: #b0bec5; /* Example border color */
+}
+
 /* .border-t-transparent {
   border-top-color: transparent;
 } */
