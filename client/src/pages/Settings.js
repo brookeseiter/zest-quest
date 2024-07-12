@@ -24,6 +24,10 @@ function Settings() {
         setNumPlayers(value);
     };
 
+    const handleInputChange = (value) => {
+        setLocation(value);
+    };
+
     const submitSettings = (e) => {
         e.preventDefault();
         const settingsJSON = {
@@ -60,21 +64,20 @@ function Settings() {
     return (
         <>
             <div className="base flex justify-center items-center">
-                {/* <Card className="w-2/3 h-3/4 items-center"> */}
                 <Card className="w-2/3 h-3/4">
                     <CardHeader
-                        variant="solid"
+                        variant="gradient"
                         className="mb-4 grid place-items-center self-center overflow-visible w-4/5 h-1/5 bg-[#eb986f] text-white"
                     >
                         <Typography className="uppercase font-bold"> Step 1: Enter your preferences</Typography>
                     </CardHeader>
                     <CardBody className="h-4/5 p-6">
                         <form 
-                            className="settings-form flex flex-col gap-6 w-full h-full" 
+                            className="settings-form flex flex-col w-full h-full" 
                             onSubmit={submitSettings}
                         >
-                            <div className="flex flex-row gap-6 w-full h-auto">
-                                <div className="flex flex-col h-full w-1/2">
+                            <div className="flex flex-row gap-8 w-full h-full">
+                                <div className="flex flex-col h-full w-1/2 justify-around">
                                     <Select 
                                         className="shadow-inner focus:outline-none bg-white"
                                         variant="outlined" 
@@ -91,28 +94,32 @@ function Settings() {
                                         <Option value="4">4</Option>
                                         <Option value="5">5</Option>
                                     </Select>
-
-                                    {/* <Input 
-                                        className="block w-full rounded-md border-0 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                        variant="outlined" 
-                                        type="text" 
+                                    <Input 
+                                        className="peer block w-full rounded-md border-0 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        variant="static" 
+                                        label="Address of your current location:" 
+                                        size="lg" 
                                         value={location}
                                         onChange={(e) => setLocation(e.target.value)}
                                         required 
-                                        label="Address of your current location:" 
-                                        size="lg" 
-                                    /> */}
+                                        containerProps={{
+                                            className: 'label-hidden-required-span'
+                                        }}
+                                    />
+                                    
                                     <div className="relative mt-4">
                                         <Input 
                                             // className="location-input peer w-full h-full text-blue-gray-700 font-sans font-normal text-left outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 disabled:cursor-not-allowed transition-all border text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 border-t-transparent shadow-inner focus:outline-none bg-white" 
-                                            className="location-input"
+                                            className="location-input peer"
                                             variant="outlined" 
-                                            type="text" 
                                             value={location}
                                             onChange={(e) => setLocation(e.target.value)}
                                             required 
                                             id="location" 
                                             size="lg" 
+                                            containerProps={{
+                                                className: 'label-hidden-required-span'
+                                            }}
                                         />
                                         <label 
                                             htmlFor="location-input" 
@@ -152,7 +159,7 @@ function Settings() {
                                     />
                                 </div>
                             </div>
-                            <CardFooter className="flex justify-center mt-6">
+                            <CardFooter className="object-contain flex justify-center mt-6">
                                 <Button 
                                     className="rounded-full hover:scale-[1.02] focus:scale-[1.02] active:scale-100 bg-[#eb986f]" 
                                     size="md" 
