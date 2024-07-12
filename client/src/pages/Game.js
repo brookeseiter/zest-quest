@@ -101,8 +101,7 @@ function Game() {
 
     return (
         <>
-            <div className="base flex justify-center">
-                <p>Round</p>
+            <div className="base flex justify-center space-x-5">
                 {restaurantsToDisplay.map((restaurant, i) => (
                     <button 
                         key={i} 
