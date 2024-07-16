@@ -63,7 +63,7 @@ function Settings() {
 
     return (
         <>
-            <div className="base flex justify-center items-center">
+            <div className="base flex justify-center items-center h-screen">
                 <Card className="w-2/3 h-3/4">
                     <CardHeader
                         variant="gradient"
@@ -140,7 +140,7 @@ function Settings() {
                                     />
                                 </div>
                             </div>
-                            <CardFooter className="object-contain flex justify-center mt-6">
+                            <CardFooter className="object-contain flex justify-center">
                                 <Button 
                                     className="rounded-full hover:scale-[1.02] focus:scale-[1.02] active:scale-100 bg-[#eb986f]" 
                                     size="md" 

@@ -30,7 +30,7 @@ h1 {
 /* OG  */
 @layer base {
   div.base {
-    @apply h-screen bg-cover bg-[#D9EDBF] content-center;
+    @apply bg-cover bg-[#D9EDBF] content-center;
   }
 }
 
