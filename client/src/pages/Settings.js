@@ -75,7 +75,7 @@ function Settings() {
                             Step 1: Enter your game preferences
                         </Typography>
                     </CardHeader>
-                    <CardBody className="h-4/5 p-6">
+                    <CardBody className="flex w-full h-4/5 p-6">
                         <form 
                             className="settings-form flex flex-col w-full h-full" 
                             onSubmit={submitSettings}
@@ -116,7 +116,7 @@ function Settings() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="flex flex-col h-full w-1/2">
+                                <div className="flex flex-col h-full w-1/2 justify-evenly">
                                     <Typography>How far are you willing to go?</Typography>
                                     <Radio 
                                         value="5" 

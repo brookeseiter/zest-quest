@@ -1,7 +1,18 @@
 import { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GameContext } from './GameContext';
-import { Button } from "@material-tailwind/react";
+import { 
+    CardHeader, 
+    CardFooter, 
+    CardBody, 
+    Typography, 
+    Card, 
+    Input,
+    Select, 
+    Option, 
+    Radio,
+    Button 
+} from "@material-tailwind/react";
 
 function Load() {
     const {
@@ -91,15 +102,42 @@ function Load() {
 
     return (
         <>
-            <div className="base">
-                <div className="flex row justify-center space-x-4">
-                    <h1>{gameSettings.category_1}</h1>
-                    <h1>{gameSettings.category_2}</h1>
-                    <h1>{gameSettings.category_3}</h1>
-                </div>
-                <h2 className="flex row justify-center">Player {currentPlayer}, You're Up!</h2>
-                <Button className="flex row justify-center" onClick={handlePlayGame}>Play</Button>
-                <h3>Round {round}</h3>
+            <div className="base h-screen flex items-center justify-center">
+                <Card className="w-2/3 h-3/4">
+                    <CardHeader
+                        variant="gradient"
+                        className="mb-4 grid place-items-center self-center overflow-visible w-4/5 h-1/5 bg-[#eb986f] text-white"
+                    >
+                        <Typography className="text-center uppercase font-bold"> 
+                            Player {currentPlayer}, You're Up!
+                        </Typography>
+                    </CardHeader>
+                    <CardBody className="flex flex-col w-full h-4/5 p-6 justify-between">
+                        <div className="flex flex-row justify-center space-x-4">
+                            <h1>{gameSettings.category_1}</h1>
+                            <h1>{gameSettings.category_2}</h1>
+                            <h1>{gameSettings.category_3}</h1>
+                        </div>
+                        <div className="flex justify-center">
+                            <Typography 
+                                className="text-center uppercase font-bold"
+                            > 
+                                Round {round}
+                            </Typography>
+                        </div>
+                    </CardBody>
+                    <CardFooter className="object-contain flex justify-center">
+                        <Button 
+                            className="rounded-full hover:scale-[1.02] focus:scale-[1.02] active:scale-100 bg-[#eb986f]" 
+                            size="lg" 
+                            type="submit"
+                            variant="filled"
+                            onClick={handlePlayGame}
+                        >
+                            Play 
+                        </Button>
+                    </CardFooter>                    
+                </Card>
             </div>
         </>
     );
