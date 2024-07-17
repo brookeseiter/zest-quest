@@ -63,13 +63,17 @@ function Settings() {
 
     return (
         <>
-            <div className="base flex justify-center items-center h-screen">
+            <div className="base h-screen flex justify-center items-center">
                 <Card className="w-2/3 h-3/4">
                     <CardHeader
                         variant="gradient"
                         className="mb-4 grid place-items-center self-center overflow-visible w-4/5 h-1/5 bg-[#eb986f] text-white"
                     >
-                        <Typography className="uppercase font-bold"> Step 1: Enter your preferences</Typography>
+                        <Typography 
+                            className="text-center uppercase font-bold"
+                        > 
+                            Step 1: Enter your game preferences
+                        </Typography>
                     </CardHeader>
                     <CardBody className="h-4/5 p-6">
                         <form 
@@ -143,7 +147,7 @@ function Settings() {
                             <CardFooter className="object-contain flex justify-center">
                                 <Button 
                                     className="rounded-full hover:scale-[1.02] focus:scale-[1.02] active:scale-100 bg-[#eb986f]" 
-                                    size="md" 
+                                    size="lg" 
                                     type="submit"
                                     variant="filled"
                                 >

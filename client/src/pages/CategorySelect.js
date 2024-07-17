@@ -106,15 +106,19 @@ function CategorySelect() {
 
     return (
         <>
-            <div className="base flex justify-center items-center h-screen">
+            <div className="base h-screen flex justify-center items-center">
                 <Card className="w-2/3 h-3/4">
                     <CardHeader
                         className="mb-4 grid place-items-center self-center overflow-visible w-4/5 h-1/5 bg-[#eb986f] text-white"
                     >
-                        <Typography className="uppercase font-bold"> Step 2: Choose restaurant categories</Typography>
+                        <Typography 
+                            className="m-4 text-balance text-center text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl uppercase font-bold"
+                        >
+                            Step 2: Collectively select 3 restaurant <p className="break-normal"></p>categories with all players
+                        </Typography>
                     </CardHeader>
                     <form 
-                        className="categories-form overflow-scroll" 
+                        className="categories-form overflow-x-hidden overflow-scroll" 
                         onSubmit={submitSettings}
                     >
                     <CardBody>
@@ -154,7 +158,7 @@ function CategorySelect() {
                     <CardFooter className="object-contain flex justify-center mb-8 p-1">
                         <Button 
                             className="rounded-full hover:scale-[1.02] focus:scale-[1.02] active:scale-100 bg-[#eb986f]" 
-                            size="md" 
+                            size="lg" 
                             type="submit"
                             variant="filled"
                         >
