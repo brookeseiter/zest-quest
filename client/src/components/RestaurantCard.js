@@ -13,6 +13,7 @@ import {
 
 
 function RestaurantCard({ classStyles, restaurant })  {
+    console.log(restaurant);
     return (
         <>
             {/* <Card className={`h-2/5 flex flex-col justify-start items-center w-96 bg-white rounded-2xl gap-5 cursor-pointer transition ease-in-out duration-300 hover:scale-105 hover:-translate-y-1 ${classStyles}`}>
@@ -51,15 +52,16 @@ function RestaurantCard({ classStyles, restaurant })  {
                     </p>
                 </CardBody>
             </Card> */}
-            {/* <div class="wrapper antialiased text-gray-900"> */}
             <div className="flex w-full h-full justify-center items-center antialiased text-gray-900">
-                <div>
+                <div className="w-full transition ease-in-out duration-300 hover:scale-105 hover:-translate-y-1 ">
                     {restaurant.image_url && (
-                        <img 
-                            className="w-full object-cover object-center rounded-lg shadow-md"
-                            src={restaurant.image_url}
-                            alt={`${restaurant.name}`}
-                        />
+                        <div className="w-full h-96 overflow-hidden rounded-lg shadow-md flex-grow-0 flex-shrink-0">
+                            <img 
+                                className="h-full w-full object-cover object-center rounded-lg shadow-md"
+                                src={restaurant.image_url}
+                                alt={`${restaurant.name}`}
+                            />
+                        </div>
                     )} 
                     <div class="relative px-4 -mt-16">
                         <div class="bg-white p-6 rounded-lg shadow-lg">
