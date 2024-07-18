@@ -101,14 +101,17 @@ function Game() {
 
     return (
         <>
-            <div className="base flex justify-center space-x-5">
-                {restaurantsToDisplay.map((restaurant, i) => (
-                    <button 
-                        key={i} 
-                        onClick={() => {handleRestaurantClick(restaurant)}}>
-                        <RestaurantCard restaurant={restaurant} />
-                    </button>
-                ))}
+            <div className="base flex w-full h-screen justify-center items-center space-x-5">
+                {/* <div className="flex justify-center w-3/4 h-3/4"> */}
+                    {restaurantsToDisplay.map((restaurant, i) => (
+                        <button 
+                            className="w-1/3 h-1/3"
+                            key={i} 
+                            onClick={() => {handleRestaurantClick(restaurant)}}>
+                            <RestaurantCard restaurant={restaurant} />
+                        </button>
+                    ))}
+                {/* </div> */}
             </div>
         </>
     );

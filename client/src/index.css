@@ -20,6 +20,12 @@ h1 {
   font-family: 'Varela Round';
 }
 
+.wrapper {
+  display:grid;
+  /* height:100vh; */
+  place-items:center
+}
+
 /* for /categories  */
 /* @layer base {
   div.base {
