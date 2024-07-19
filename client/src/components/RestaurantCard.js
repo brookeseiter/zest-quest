@@ -18,18 +18,18 @@ function RestaurantCard({ restaurant })  {
     return (
         <>
             <div className="flex w-full h-full justify-center items-center antialiased text-gray-900">
-                <div className="w-full transition ease-in-out duration-300 hover:scale-105 hover:-translate-y-1 ">
+                <div className="group w-full transition ease-in-out duration-300 hover:scale-110 hover:-translate-y-1">
                     {restaurant.image_url && (
-                        <div className="w-full h-96 overflow-hidden rounded-lg shadow-md flex-grow-0 flex-shrink-0">
+                        <div className="w-full h-96 overflow-hidden rounded-lg shadow-lg flex-grow-0 flex-shrink-0">
                             <img 
-                                className="h-full w-full object-cover object-center rounded-lg shadow-md"
+                                className="h-full w-full object-cover object-center transition-shadow duration-300 ease-in-out  "
                                 src={restaurant.image_url}
                                 alt={`${restaurant.name}`}
                             />
                         </div>
                     )} 
                     <div className="relative px-4 -mt-16">
-                        <div className="bg-white p-6 rounded-lg shadow-lg">
+                        <div className="bg-white p-6 rounded-lg shadow-lg transition-shadow duration-300 ease-in-out group-hover:shadow-xl">
                             <div className="flex items-baseline">
                                 <span className="bg-[#eb986f] text-white text-xs px-2 inline-block rounded-full uppercase font-semibold tracking-wide">
                                     {restaurant.price}
