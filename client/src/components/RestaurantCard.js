@@ -11,6 +11,439 @@ import {
     Button 
 } from "@material-tailwind/react";
 
+
+const generateStars = (rating) => {
+    const stars = [];
+    const fullStars = Math.floor(rating);
+    const halfStar = rating % 1 >= 0.5;
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+    // Add full stars
+    for (let i = 0; i < fullStars; i++) {
+        stars.push(
+            <svg
+                key={`full-${i}`}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-6 h-6 text-[#eb986f] cursor-pointer"
+            >
+                <path
+                    fillRule="evenodd"
+                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                    clipRule="evenodd"
+                />
+            </svg>
+        );
+    }
+
+    // Add half star
+    if (halfStar) {
+        stars.push(
+            <svg
+                key="half"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                className="w-6 h-6 cursor-pointer"
+            >
+                {/* Orange filled left half */}
+                <path
+                    fill="#eb986f"
+                    d="M12 2c.755 0 1.445.429 1.788 1.11l2.255 5.434 6.023.482c.871.07 1.228 1.157.573 1.732l-4.605 3.942 1.403 5.885c.207.868-.736 1.55-1.496 1.08L12 18.3 6.459 21.665c-.76.47-1.703-.212-1.496-1.08l1.403-5.885-4.605-3.942c-.655-.575-.298-1.662.573-1.732l6.023-.482L10.212 3.11C10.555 2.429 11.245 2 12 2z"
+                    clipRule="evenodd"
+                    mask="url(#mask)"
+                />
+                {/* Gray outlined right half */}
+                <path
+                    fill="none"
+                    stroke="#9e9e9e"
+                    strokeWidth="1.5"
+                    d="M12 2c.755 0 1.445.429 1.788 1.11l2.255 5.434 6.023.482c.871.07 1.228 1.157.573 1.732l-4.605 3.942 1.403 5.885c.207.868-.736 1.55-1.496 1.08L12 18.3 6.459 21.665c-.76.47-1.703-.212-1.496-1.08l1.403-5.885-4.605-3.942c-.655-.575-.298-1.662.573-1.732l6.023-.482L10.212 3.11C10.555 2.429 11.245 2 12 2z"
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                />
+                <defs>
+                    <mask id="mask">
+                        <rect x="0" y="0" width="12" height="24" fill="white" />
+                    </mask>
+                </defs>
+            </svg>
+        );
+    }
+
+
+    // Add empty stars
+    for (let i = 0; i < emptyStars; i++) {
+        stars.push(
+            <svg
+                key={`empty-${i}`}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6 cursor-pointer text-blue-gray-500"
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+                />
+            </svg>
+        );
+    }
+
+    return stars;
+};
+
+// const generateStars = (rating) => {
+//     const stars = [];
+//     const fullStars = Math.floor(rating);
+//     const halfStar = rating % 1 >= 0.5;
+//     const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+//     // Add full stars
+//     for (let i = 0; i < fullStars; i++) {
+//         stars.push(
+//             <svg
+//                 key={`full-${i}`}
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 viewBox="0 0 24 24"
+//                 fill="currentColor"
+//                 className="w-6 h-6 text-[#eb986f] cursor-pointer"
+//             >
+//                 <path
+//                     fillRule="evenodd"
+//                     d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+//                     clipRule="evenodd"
+//                 />
+//             </svg>
+//         );
+//     }
+
+//     // Add half star
+//     if (halfStar) {
+//         stars.push(
+//             <svg
+//                 key="half"
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 viewBox="0 0 24 24"
+//                 className="w-6 h-6 cursor-pointer"
+//             >
+//                 {/* Orange filled left half */}
+//                 <path
+//                     fill="#eb986f"
+//                     d="M12 2c.755 0 1.445.429 1.788 1.11l2.255 5.434 6.023.482c.871.07 1.228 1.157.573 1.732l-4.605 3.942 1.403 5.885c.207.868-.736 1.55-1.496 1.08L12 18.3 6.459 21.665c-.76.47-1.703-.212-1.496-1.08l1.403-5.885-4.605-3.942c-.655-.575-.298-1.662.573-1.732l6.023-.482L10.212 3.11C10.555 2.429 11.245 2 12 2z"
+//                     clipRule="evenodd"
+//                 />
+//                 {/* Gray outlined right half */}
+//                 <path
+//                     fill="none"
+//                     stroke="#9e9e9e"
+//                     strokeWidth="1.5"
+//                     d="M12 2c.755 0 1.445.429 1.788 1.11l2.255 5.434 6.023.482c.871.07 1.228 1.157.573 1.732l-4.605 3.942 1.403 5.885c.207.868-.736 1.55-1.496 1.08L12 18.3 6.459 21.665c-.76.47-1.703-.212-1.496-1.08l1.403-5.885-4.605-3.942c-.655-.575-.298-1.662.573-1.732l6.023-.482L10.212 3.11C10.555 2.429 11.245 2 12 2z"
+//                     strokeLinejoin="round"
+//                     strokeLinecap="round"
+//                     mask="url(#half-mask)"
+//                 />
+//                 <defs>
+//                     <mask id="half-mask">
+//                         <rect x="12" y="0" width="12" height="24" fill="white" />
+//                     </mask>
+//                 </defs>
+//             </svg>
+//         );
+//     }
+
+//     // Add empty stars
+//     for (let i = 0; i < emptyStars; i++) {
+//         stars.push(
+//             <svg
+//                 key={`empty-${i}`}
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 viewBox="0 0 24 24"
+//                 fill="none"
+//                 strokeWidth="1.5"
+//                 stroke="currentColor"
+//                 className="w-6 h-6 cursor-pointer text-blue-gray-500"
+//             >
+//                 <path
+//                     strokeLinecap="round"
+//                     strokeLinejoin="round"
+//                     d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+//                 />
+//             </svg>
+//         );
+//     }
+
+//     return stars;
+// };
+
+
+// const generateStars = (rating) => {
+//     const stars = [];
+//     const fullStars = Math.floor(rating);
+//     const halfStar = rating % 1 >= 0.5;
+//     const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+//     // Add full stars
+//     for (let i = 0; i < fullStars; i++) {
+//         stars.push(
+//             <svg
+//                 key={`full-${i}`}
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 viewBox="0 0 24 24"
+//                 fill="currentColor"
+//                 className="w-6 h-6 text-[#eb986f] cursor-pointer"
+//             >
+//                 <path
+//                     fillRule="evenodd"
+//                     d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+//                     clipRule="evenodd"
+//                 />
+//             </svg>
+//         );
+//     }
+
+//     // Add half star
+//     if (halfStar) {
+//         stars.push(
+//             <svg
+//                 key="half"
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 viewBox="0 0 24 24"
+//                 className="w-6 h-6 cursor-pointer"
+//             >
+//                 {/* Full star shape */}
+//                 <path
+//                     fill="#eb986f"
+//                     d="M12 2c.755 0 1.445.429 1.788 1.11l2.255 5.434 6.023.482c.871.07 1.228 1.157.573 1.732l-4.605 3.942 1.403 5.885c.207.868-.736 1.55-1.496 1.08L12 18.3 6.459 21.665c-.76.47-1.703-.212-1.496-1.08l1.403-5.885-4.605-3.942c-.655-.575-.298-1.662.573-1.732l6.023-.482L10.212 3.11C10.555 2.429 11.245 2 12 2z"
+//                 />
+//                 {/* Gray outline for the unfilled part */}
+//                 <path
+//                     fill="none"
+//                     stroke="#9e9e9e"
+//                     strokeWidth="1.5"
+//                     d="M12 2c.755 0 1.445.429 1.788 1.11l2.255 5.434 6.023.482c.871.07 1.228 1.157.573 1.732l-4.605 3.942 1.403 5.885c.207.868-.736 1.55-1.496 1.08L12 18.3 6.459 21.665c-.76.47-1.703-.212-1.496-1.08l1.403-5.885-4.605-3.942c-.655-.575-.298-1.662.573-1.732l6.023-.482L10.212 3.11C10.555 2.429 11.245 2 12 2z"
+//                     strokeLinejoin="round"
+//                 />
+//                 {/* Mask to hide the filled part on the right */}
+//                 <defs>
+//                     <mask id="half-mask">
+//                         <rect x="12" y="0" width="12" height="24" fill="white" />
+//                     </mask>
+//                 </defs>
+//                 <path
+//                     fill="none"
+//                     stroke="#eb986f"
+//                     strokeWidth="1.5"
+//                     d="M12 2c.755 0 1.445.429 1.788 1.11l2.255 5.434 6.023.482c.871.07 1.228 1.157.573 1.732l-4.605 3.942 1.403 5.885c.207.868-.736 1.55-1.496 1.08L12 18.3 6.459 21.665c-.76.47-1.703-.212-1.496-1.08l1.403-5.885-4.605-3.942c-.655-.575-.298-1.662.573-1.732l6.023-.482L10.212 3.11C10.555 2.429 11.245 2 12 2z"
+//                     mask="url(#half-mask)"
+//                 />
+//             </svg>
+//         );
+//     }
+
+//     // Add empty stars
+//     for (let i = 0; i < emptyStars; i++) {
+//         stars.push(
+//             <svg
+//                 key={`empty-${i}`}
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 viewBox="0 0 24 24"
+//                 fill="none"
+//                 strokeWidth="1.5"
+//                 stroke="currentColor"
+//                 className="w-6 h-6 cursor-pointer text-blue-gray-500"
+//             >
+//                 <path
+//                     strokeLinecap="round"
+//                     strokeLinejoin="round"
+//                     d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+//                 />
+//             </svg>
+//         );
+//     }
+
+//     return stars;
+// };
+
+
+
+// const generateStars = (rating) => {
+//     const stars = [];
+//     const fullStars = Math.floor(rating);
+//     const halfStar = rating % 1 >= 0.5;
+//     const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+//     // Add full stars
+//     for (let i = 0; i < fullStars; i++) {
+//         stars.push(
+//             <svg
+//                 key={`full-${i}`}
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 viewBox="0 0 24 24"
+//                 fill="currentColor"
+//                 className="w-6 h-6 text-[#eb986f] cursor-pointer"
+//             >
+//                 <path
+//                     fillRule="evenodd"
+//                     d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+//                     clipRule="evenodd"
+//                 />
+//             </svg>
+//         );
+//     }
+
+//     // Add half star
+//     if (halfStar) {
+//         stars.push(
+//             <svg
+//                 key="half"
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 viewBox="0 0 24 24"
+//                 className="w-6 h-6 cursor-pointer"
+//             >
+//                 <defs>
+//                     <mask id="half-mask">
+//                         <rect x="0" y="0" width="12" height="24" fill="white" />
+//                     </mask>
+//                 </defs>
+//                 {/* Filled part of the star */}
+//                 <path
+//                     fill="#eb986f"
+//                     strokeWidth="0"
+//                     d="M12 2c.755 0 1.445.429 1.788 1.11l2.255 5.434 6.023.482c.871.07 1.228 1.157.573 1.732l-4.605 3.942 1.403 5.885c.207.868-.736 1.55-1.496 1.08L12 18.3 6.459 21.665c-.76.47-1.703-.212-1.496-1.08l1.403-5.885-4.605-3.942c-.655-.575-.298-1.662.573-1.732l6.023-.482L10.212 3.11C10.555 2.429 11.245 2 12 2z"
+//                     mask="url(#half-mask)"
+//                 />
+//                 {/* Outlined part of the star */}
+//                 <path
+//                     fill="none"
+//                     stroke="#9e9e9e"
+//                     strokeWidth="1.5"
+//                     d="M12 2c.755 0 1.445.429 1.788 1.11l2.255 5.434 6.023.482c.871.07 1.228 1.157.573 1.732l-4.605 3.942 1.403 5.885c.207.868-.736 1.55-1.496 1.08L12 18.3 6.459 21.665c-.76.47-1.703-.212-1.496-1.08l1.403-5.885-4.605-3.942c-.655-.575-.298-1.662.573-1.732l6.023-.482L10.212 3.11C10.555 2.429 11.245 2 12 2z"
+//                 />
+//             </svg>
+//         );
+//     }
+
+//     // Add empty stars
+//     for (let i = 0; i < emptyStars; i++) {
+//         stars.push(
+//             <svg
+//                 key={`empty-${i}`}
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 viewBox="0 0 24 24"
+//                 fill="none"
+//                 strokeWidth="1.5"
+//                 stroke="currentColor"
+//                 className="w-6 h-6 cursor-pointer text-blue-gray-500"
+//             >
+//                 <path
+//                     strokeLinecap="round"
+//                     strokeLinejoin="round"
+//                     d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+//                 />
+//             </svg>
+//         );
+//     }
+
+//     return stars;
+// };
+
+
+// const generateStars = (rating) => {
+//     const stars = [];
+//     const fullStars = Math.floor(rating);
+//     const halfStar = rating % 1 >= 0.5;
+//     const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+//     // Add full stars
+//     for (let i = 0; i < fullStars; i++) {
+//         stars.push(
+//             <svg
+//                 key={`full-${i}`}
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 viewBox="0 0 24 24"
+//                 fill="currentColor"
+//                 className="w-6 h-6 text-[#eb986f] cursor-pointer"
+//             >
+//                 <path
+//                     fillRule="evenodd"
+//                     d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+//                     clipRule="evenodd"
+//                 />
+//             </svg>
+//         );
+//     }
+
+//     // Add half star
+//     if (halfStar) {
+//         stars.push(
+//             <svg
+//                 key="half"
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 viewBox="0 0 24 24"
+//                 fill="currentColor"
+//                 className="w-6 h-6 text-[#eb986f] cursor-pointer"
+//             >
+//                 <defs>
+//                     <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+//                         <stop offset="50%" stopColor="#eb986f" />
+//                         <stop offset="50%" stopColor="transparent" />
+//                     </linearGradient>
+//                 </defs>
+//                 {/* <path
+//                     fill="url(#grad)"
+//                     fillRule="evenodd"
+//                     d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+//                     clipRule="evenodd"
+//                 />
+//                 <path
+//                     fill="none"
+//                     stroke="currentColor"
+//                     strokeWidth="1.5"
+//                     d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+//                 /> */}
+//                 <path
+//                     fill="#eb986f"  // Color for the filled half
+//                     d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+//                 />
+//                 <path
+//                     fill="none"  // No fill for the outline
+//                     stroke="#9e9e9e"  // Color for the outline
+//                     strokeWidth="1.5"
+//                     d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+//                 />
+//             </svg>
+//         );
+//     }
+
+//     // Add empty stars
+//     for (let i = 0; i < emptyStars; i++) {
+//         stars.push(
+//             <svg
+//                 key={`empty-${i}`}
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 viewBox="0 0 24 24"
+//                 fill="none"
+//                 strokeWidth="1.5"
+//                 stroke="currentColor"
+//                 className="w-6 h-6 cursor-pointer text-blue-gray-500"
+//             >
+//                 <path
+//                     strokeLinecap="round"
+//                     strokeLinejoin="round"
+//                     d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+//                 />
+//             </svg>
+//         );
+//     }
+
+//     return stars;
+// };
+
+
 function RestaurantCard({ restaurant })  {
     const distanceMiles = restaurant.distance * 0.00062137;
     console.log(restaurant);
@@ -48,7 +481,10 @@ function RestaurantCard({ restaurant })  {
                                 </p>
                             </div>
                             <div className="mt-4">
-                                <span className="text-[#eb986f] text-md font-bold">{restaurant.rating}/5 rating </span>
+                                <div className="inline-flex items-center">
+                                    {generateStars(restaurant.rating)}
+                                </div>
+                                <span className="text-[#eb986f] text-md font-bold">{restaurant.rating}/5</span>
                                 <span class="text-sm text-gray-600">({restaurant.review_count} reviews)</span>
                             </div>  
                         </div>
