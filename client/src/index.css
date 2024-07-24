@@ -42,6 +42,40 @@ h1 {
   transform: scale(.8);
 }
 
+/* this targets choose a number  */
+.custom-select, .custom-input {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  --tw-placeholder-opacity: 1;
+  color: rgb(120 144 156 / var(--tw-placeholder-opacity))
+}
+
+label.select-none {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: rgb(75 85 99);
+}
+
+.custom-select span, .custom-input {
+  top: 70%;
+  left: 1.25rem;
+}
+
+.custom-select div.grid {
+  top: 60%;
+  /* color: rgb(75 85 99); */
+}
+
+.custom-input::placeholder, .custom-input.value {
+  position: absolute;
+  top: 70%;
+  left: 1.25rem;
+  transform: translateY(-70%); 
+  pointer-events: none; 
+}
+
 /* @layer base {
   button.button {
     @apply text-[#D9EDBF] text-base font-extrabold;

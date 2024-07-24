@@ -83,35 +83,35 @@ function Settings() {
                             <div className="flex flex-row gap-8 w-full h-full">
                                 <div className="flex flex-col h-full w-1/2 justify-around">
                                     <Select 
-                                        className="shadow-inner focus:outline-none bg-white"
+                                        className="custom-select shadow-inner h-12 focus:outline-none bg-white"
                                         variant="outlined" 
-                                        label="Number of Players:"
+                                        label="Number of Players"
                                         name="numPlayers" 
                                         value={numPlayers} 
                                         onChange={handleSelectChange}
                                         required
                                     >
                                         <Option className="" disabled={true} value="">Choose a number</Option>
-                                        <Option className="" value="1">1</Option>
+                                        <Option value="1">1</Option>
                                         <Option value="2">2</Option>
                                         <Option value="3">3</Option>
                                         <Option value="4">4</Option>
                                         <Option value="5">5</Option>
                                     </Select>
                                     <div className="relative mt-4">
-                                        <div className="relative w-full min-w-[200px] h-10">
+                                        <div className="relative w-full min-w-[200px] h-12">
                                             <input
-                                                className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-transparent border focus:border-2 border-t-transparent focus:border-blue-500 text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-t-transparent"
-                                                placeholder=" "
+                                                className="pl-5 pb-2 pt-4 custom-input peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-blue-gray-400 placeholder border focus:border-2 border-t-transparent focus:border-blue-500 text-sm rounded-[7px] border-blue-gray-200 focus:border-t-transparent"
+                                                placeholder="Enter an address"
                                                 value={location}
                                                 onChange={(e) => setLocation(e.target.value)}
                                                 id="location" 
                                                 required
                                             />
                                                 <label
-                                                    className="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate text-[11px] leading-tight text-blue-gray-400 peer-focus:text-blue-500 before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 before:border-t peer-focus:before:border-t-2 before:border-l before:border-blue-gray-200 before:rounded-tl-md before:pointer-events-none before:transition-all peer-focus:before:border-blue-500 after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 after:border-t peer-focus:after:border-t-2 after:border-r after:border-blue-gray-200 after:rounded-tr-md after:pointer-events-none after:transition-all peer-focus:after:border-blue-500 -top-1.5 peer-placeholder-shown:-top-1.5 peer-focus:-top-1.5"
+                                                    className="flex w-full h-full select-none pointer-events-none absolute left-0 font-sans font-light !overflow-visible truncate text-[16px] leading-tight text-blue-gray-400 peer-focus:text-blue-500 before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 before:border-t peer-focus:before:border-t-2 before:border-l before:border-blue-gray-200 before:rounded-tl-md before:pointer-events-none before:transition-all peer-focus:before:border-blue-500 after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 after:border-t peer-focus:after:border-t-2 after:border-r after:border-blue-gray-200 after:rounded-tr-md after:pointer-events-none after:transition-all peer-focus:after:border-blue-500 -top-1.5 peer-placeholder-shown:-top-1.5 peer-focus:-top-1.5"
                                                 >
-                                                    Address of your current location:
+                                                    Address of your current location
                                                 </label>
                                         </div>
                                     </div>
