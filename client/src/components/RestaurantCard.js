@@ -12,17 +12,17 @@ import {
 } from "@material-tailwind/react";
 
 
-function RestaurantCard({ restaurant })  {
+function RestaurantCard({ classStyles, restaurant })  {
     const distanceMiles = restaurant.distance * 0.00062137;
     console.log(restaurant);
     return (
         <>
-            <div className="flex w-full h-full justify-center items-center antialiased text-gray-900">
+            <div className={`flex w-full h-full justify-center items-center antialiased text-gray-900 ${classStyles}`}>
                 <div className="group w-full transition ease-in-out duration-300 hover:scale-110 hover:-translate-y-1">
                     {restaurant.image_url && (
                         <div className="w-full h-96 overflow-hidden rounded-lg shadow-lg flex-grow-0 flex-shrink-0">
                             <img 
-                                className="h-full w-full object-cover object-center transition-shadow duration-300 ease-in-out  "
+                                className="h-full w-full object-cover object-center transition-shadow duration-300 ease-in-out"
                                 src={restaurant.image_url}
                                 alt={`${restaurant.name}`}
                             />
@@ -38,8 +38,8 @@ function RestaurantCard({ restaurant })  {
                                     {distanceMiles.toFixed(2)} mi away
                                 </div>  
                             </div>
-                            <h4 className="mt-1 text-xl font-semibold uppercase leading-tight truncate">{restaurant.name}</h4>
-                            <div className="flex justify-center mt-1">
+                            <h4 className="flex justify-center mt-1 text-xl font-semibold uppercase leading-tight truncate">{restaurant.name}</h4>
+                            <div className="flex justify-center">
                                 <p className="flex flex-wrap text-base font-light">
                                     {restaurant.categories.map((category, i) => (
                                         <span key={i} className="inline">
@@ -48,7 +48,7 @@ function RestaurantCard({ restaurant })  {
                                     ))}
                                 </p>
                             </div>
-                            <div className="mt-4">
+                            <div className="flex justify-center mt-4">
                                 <div className="inline-flex items-center">
                                     {generateStars(restaurant.rating)}
                                     <span className="text-[#eb986f] ml-1 text-md font-bold">{restaurant.rating}/5</span>
