@@ -61,6 +61,12 @@ function Results() {
 
     const winnerRestaurant = restaurants.find(restaurant => restaurant.id === winnerYelpBusinessId);
 
+    const navigateToYelp = (url) => {
+        if (url) {
+            window.open(url, '_blank'); 
+        }
+    };
+
     console.log('restaurants:', restaurants);
     console.log('rankedRestaurants:', rankedRestaurants);
     console.log('winnerYelpBusinessId:', winnerYelpBusinessId);
@@ -78,10 +84,12 @@ function Results() {
                                 <div>
                                     <h1 className='flex justify-center font-sans font-semibold text-white text-4xl mb-4 bg-[#B7D799] shadow-lg rounded-lg'>Winner</h1>
                                 </div>
-                                <RestaurantCard 
-                                    classStyles="w-full object-cover" 
-                                    restaurant={winnerRestaurant} 
-                                />
+                                <button onClick={() => navigateToYelp(winnerRestaurant.url)}>
+                                    <RestaurantCard 
+                                        classStyles="w-full object-cover" 
+                                        restaurant={winnerRestaurant} 
+                                    />
+                                </button>
                             </div>
                         )}
                         <div class="scale-table w-3/5 relative flex flex-col min-w-0 break-words shadow-lg rounded-lg bg-[#B7D799] text-white">
