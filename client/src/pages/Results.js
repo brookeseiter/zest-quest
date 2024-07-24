@@ -8,6 +8,7 @@ import {
     CardBody, 
     Typography, 
     Card, 
+    IconButton,
     Input,
     Select, 
     Option, 
@@ -73,8 +74,10 @@ function Results() {
                 <Card className="flex flex-row rounded-full h-screen w-full justify-center items-center">
                     <div className="flex w-4/5 h-screen justify-center items-center"> 
                         {winnerRestaurant && (
-                            <div className='flex flex-col h-full w-2/5 justify-center scale-90'>
-                                <h1 className='flex justify-center text-3xl'>Winner</h1>
+                            <div className='flex flex-col w-2/5 scale-90'>
+                                <div>
+                                    <h1 className='flex justify-center font-sans font-semibold text-white text-4xl mb-4 bg-[#B7D799] shadow-lg rounded-lg'>Winner</h1>
+                                </div>
                                 <RestaurantCard 
                                     classStyles="w-full object-cover" 
                                     restaurant={winnerRestaurant} 
@@ -85,7 +88,7 @@ function Results() {
                             <div class="rounded-t mb-0 px-4 py-3 border-0">
                                 <div class="flex flex-wrap items-center">
                                     <div class="relative w-full px-4 max-w-full flex-grow flex-1 ">
-                                        <h3 class="font-semibold text-2xl text-white">Restaurant Rankings</h3>
+                                        <h3 class="font-semibold text-3xl text-white">Restaurant Rankings</h3>
                                     </div>
                                 </div>
                             </div>
@@ -147,100 +150,38 @@ function Results() {
                             </div>
                         </div> 
                     </div>
+                    <div className="flex flex-row">
+                    <IconButton
+                        variant="gradient"
+                        color="white"
+                        size="lg"
+                        // onClick={handlePrev}
+                        className="!absolute rounded-full top-2/4 left-4 -translate-y-2/4"
+                        >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                            stroke="currentColor"
+                            className="h-6 w-6"
+                        >
+                            <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                            />
+                        </svg>
+                        <p className="text-xl font-semibold text-gray-900">
+                            Play again
+                        </p>
+                    </IconButton>
+                    </div>
                 </Card>
             </div>
 
         </>
     );
-
-    // return (
-    //     <>
-    //         <div className='base'>
-    //             <Card className="flex flex-row rounded-full h-full w-full justify-center items-center">
-    //                 <div className="scale-75 flex w-full h-full justify-center items-center"> 
-    //                     {winnerRestaurant && (
-    //                         <div className='flex flex-col w-1/2 h-full justify-center scale-90'>
-    //                             <RestaurantCard 
-    //                                 classStyles="w-full h-auto max-h-full object-cover" 
-    //                                 restaurant={winnerRestaurant} 
-    //                             />
-    //                         </div>
-    //                     )}
-    //                     <div className='flex flex-col w-1/2 h-full overflow-auto rounded-2xl scale-100'>
-    //                         <table className='w-full h-full table-auto text-left max-h-full overflow-scroll'>
-    //                             <thead className='w-full rounded-2xl'>
-    //                                 <tr>
-    //                                     {TABLE_HEAD.map((head) => (
-    //                                         <th 
-    //                                             key={head}
-    //                                             className='border-b border-blue-gray-100 bg-blue-gray-50 p-4'
-    //                                         >
-    //                                             <Typography
-    //                                                 variant="small"
-    //                                                 color="blue-gray"
-    //                                                 className="font-normal leading-none opacity-70"
-    //                                             >
-    //                                                 {head}
-    //                                             </Typography>
-    //                                         </th>
-    //                                     ))}
-    //                                 </tr>
-    //                             </thead>
-    //                             <tbody>
-    //                                 {orderedRestaurants.map((restaurant, index) => {
-    //                                     const rankedRestaurant = rankedRestaurants.find(ranked => ranked.yelp_business_id === restaurant.id);
-    //                                     const isLast = index === orderedRestaurants.length - 1;
-    //                                     const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
-
-    //                                     return restaurant ? (
-    //                                         <tr key={restaurant.id}>
-    //                                             <td className={classes}>
-    //                                                 <Typography
-    //                                                     variant="small"
-    //                                                     color="blue-gray"
-    //                                                     className="font-normal"
-    //                                                 >
-    //                                                     {index + 1}
-    //                                                 </Typography>
-    //                                             </td>
-    //                                             <td className={classes}>
-    //                                                 <div className="flex items-center space-x-2">
-    //                                                     <img 
-    //                                                         className="w-20 h-20 object-cover" 
-    //                                                         // className="w-20 h-20 object-cover rounded-full" 
-    //                                                         src={restaurant.image_url} 
-    //                                                         alt={restaurant.name} 
-    //                                                     />
-    //                                                     <Typography
-    //                                                         variant="small"
-    //                                                         color="blue-gray"
-    //                                                         className="font-normal"
-    //                                                     >
-    //                                                         {restaurant.name}
-    //                                                     </Typography>
-    //                                                 </div>
-    //                                             </td>
-    //                                             <td className={classes}>
-    //                                                 <Typography
-    //                                                     variant="small"
-    //                                                     color="blue-gray"
-    //                                                     className="font-normal"
-    //                                                 >
-    //                                                     {rankedRestaurant ? rankedRestaurant.total_points : 'N/A'}
-    //                                                 </Typography>
-    //                                             </td>
-    //                                         </tr>
-    //                                     ) : null;
-    //                                 })}
-    //                             </tbody>
-    //                         </table>
-    //                     </div>
-    //                 </div> 
-    //             </Card>
-    //         </div>
-
-    //     </>
-    // );
 }
 
 export default Results;

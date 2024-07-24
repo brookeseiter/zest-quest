@@ -18,7 +18,7 @@ function RestaurantCard({ classStyles, restaurant })  {
     return (
         <>
             <div className={`flex w-full h-full justify-center items-center antialiased text-gray-900 ${classStyles}`}>
-                <div className="group w-full transition ease-in-out duration-300 hover:scale-110 hover:-translate-y-1">
+                <div className="group w-full h-full transition ease-in-out duration-300 hover:scale-105 hover:-translate-y-1">
                     {restaurant.image_url && (
                         <div className="w-full h-96 overflow-hidden rounded-lg shadow-lg flex-grow-0 flex-shrink-0">
                             <img 
