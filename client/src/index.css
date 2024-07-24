@@ -20,14 +20,6 @@ h1 {
   font-family: 'Varela Round';
 }
 
-/* for /categories  */
-/* @layer base {
-  div.base {
-    @apply bg-[#D9EDBF] content-center;
-  }
-} */
-
-/* OG  */
 @layer base {
   div.base {
     @apply bg-cover bg-[#D9EDBF] content-center;
@@ -83,6 +75,10 @@ label.select-none {
 div.radio label {
   --tw-text-opacity: 1;
   color: rgb(69 90 100 / var(--tw-text-opacity));
+}
+
+.cat-list {
+  width: 85%;
 }
 
 /* @layer base {

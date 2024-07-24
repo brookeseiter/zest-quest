@@ -106,7 +106,71 @@ function CategorySelect() {
 
     return (
         <>
-            <div className="base h-screen flex justify-center items-center">
+<div className="base h-screen flex justify-center items-center">
+  <Card className="w-2/3 h-3/4">
+    <CardHeader className="mb-4 grid place-items-center self-center overflow-visible w-4/5 h-1/5 bg-[#eb986f] text-white">
+      <Typography className="m-4 text-balance text-center text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl uppercase font-bold">
+        <span className="underline decoration-2">Step 2</span>
+        <br />
+        <span>
+          Collectively select 3 restaurant categories with all players
+        </span>
+      </Typography>
+    </CardHeader>
+    <form
+      className="categories-form overflow-x-hidden overflow-auto h-4/5"
+      onSubmit={submitSettings}
+    >
+      <CardBody className="grid place-items-center ml-16 pt-4 pb-1">
+        <List className="cat-list grid grid-cols-1 md:grid-cols-3 gap-4">
+          {categories.map((name, index) => {
+            return (
+              <ListItem key={index} className="p-0">
+                <label
+                  htmlFor={`custom-checkbox-${index}`}
+                  className="flex w-full cursor-pointer items-center px-3 py-2"
+                >
+                  <ListItemPrefix className="mr-3">
+                    <Checkbox
+                      id={`custom-checkbox-${index}`}
+                      ripple={false}
+                      className="hover:before:opacity-0"
+                      containerProps={{
+                        className: "p-0"
+                      }}
+                      name={name}
+                      value={name}
+                      checked={checkedState[index]}
+                      onChange={(e) => handleOnChange(index, e)}
+                    />
+                  </ListItemPrefix>
+                  <Typography color="blue-gray" className="font-medium">
+                    {name}
+                  </Typography>
+                </label>
+              </ListItem>
+            );
+          })}
+        </List>
+      </CardBody>
+      <CardFooter className="object-contain flex justify-center mb-8 p-1">
+        <Button
+          className="rounded-full hover:scale-[1.02] focus:scale-[1.02] active:scale-100 bg-[#eb986f]"
+          size="lg"
+          type="submit"
+          variant="filled"
+        >
+          Submit Categories
+        </Button>
+      </CardFooter>
+    </form>
+  </Card>
+</div>
+
+
+
+
+            {/* <div className="base h-screen flex justify-center items-center">
                 <Card className="w-2/3 h-3/4">
                     <CardHeader
                         className="mb-4 grid place-items-center self-center overflow-visible w-4/5 h-1/5 bg-[#eb986f] text-white"
@@ -114,7 +178,9 @@ function CategorySelect() {
                         <Typography 
                             className="m-4 text-balance text-center text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl uppercase font-bold"
                         >
-                            Step 2: Collectively select 3 restaurant <p className="break-normal"></p>categories with all players
+                            <span className="underline decoration-2">Step 2</span>
+                            <br />
+                            <span>Collectively select 3 restaurant categories with all players</span> 
                         </Typography>
                     </CardHeader>
                     <form 
@@ -167,7 +233,7 @@ function CategorySelect() {
                     </CardFooter>
                     </form>
                 </Card>
-            </div>
+            </div> */}
         </>
     );
 }
