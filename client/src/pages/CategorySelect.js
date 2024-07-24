@@ -121,7 +121,7 @@ function CategorySelect() {
                         className="categories-form overflow-x-hidden overflow-auto h-4/5"
                         onSubmit={submitSettings}
                     >
-                        <CardBody className="grid place-items-center ml-16 pt-4 pb-1">
+                        <CardBody className="grid place-items-center ml-0 xl:ml-16 pt-4 pb-1">
                             <List className="cat-list grid grid-cols-1 md:grid-cols-3 gap-4">
                             {categories.map((name, index) => {
                                 return (
