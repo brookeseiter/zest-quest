@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { GameContext } from './GameContext';
 import RestaurantCard from "../components/RestaurantCard";
 import { 
@@ -20,6 +20,7 @@ import {
 function Results() {
     const { restaurants } = useContext(GameContext);
     const location = useLocation();
+    const navigate = useNavigate();
     const { gameSettings } = location.state;
     const [winnerYelpBusinessId, setWinnerYelpBusinessId] = useState('');
     const [rankedRestaurants, setRankedRestaurants] = useState([]);
@@ -90,6 +91,34 @@ function Results() {
                                         restaurant={winnerRestaurant} 
                                     />
                                 </button>
+                                <div className='flex justify-center items-end mt-10'>
+                                    <Button
+                                        variant="gradient"
+                                        color="white"
+                                        ripple={true}
+                                        onClick={() => navigate('/')}
+                                        className="flex flex-row items-center rounded-full justify-center hover:scale-[1.02] focus:scale-[1.02] active:scale-100 shadow-lg p-2 bg-[#eb986f] text-white"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth={2}
+                                            stroke="currentColor"
+                                            className="h-6 w-6 mr-1"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                                            />
+                                        </svg>
+                                        <div className="text-left leading-none">
+                                            <span>Play</span><br />
+                                            <span>again</span>
+                                        </div>
+                                    </Button>
+                                </div>
                             </div>
                         )}
                         <div class="scale-table w-3/5 relative flex flex-col min-w-0 break-words shadow-lg rounded-lg bg-[#B7D799] text-white">
@@ -107,7 +136,7 @@ function Results() {
                                             {TABLE_HEAD.map((head) => (
                                                 <th 
                                                     key={head}
-                                                    className='border-t-0 p-4 px-9 align-middle border border-solid py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-base text-left bg-[#C4E0A7] border-[#D9EDBF]'
+                                                    className='text-[#eb986f] border-t-0 p-4 px-9 align-middle border border-solid py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-base text-left bg-[#C4E0A7] border-[#D9EDBF]'
                                                 >
                                                     {head}
                                                 </th>
@@ -132,7 +161,7 @@ function Results() {
                                                     <td className={`border-t-0 px-6 align-middle border-l-0 border-r-0 border-[#D9EDBF] whitespace-nowrap p-4 ${classes}`}>
                                                         <div className="border-t-0 px-3 align-middle border-l-0 border-r-0 whitespace-nowrap text-left flex items-center">
                                                             <img 
-                                                                className='h-16 w-16 bg-white rounded-full border'
+                                                                className='h-16 w-16 border-[#eb986f] rounded-full border-2'
                                                                 src={restaurant.image_url} 
                                                                 alt={restaurant.name} 
                                                             />
@@ -158,33 +187,32 @@ function Results() {
                             </div>
                         </div> 
                     </div>
-                    <div className="flex flex-row">
-                    <IconButton
+                    {/* <Button
                         variant="gradient"
                         color="white"
-                        size="lg"
-                        // onClick={handlePrev}
-                        className="!absolute rounded-full top-2/4 left-4 -translate-y-2/4"
-                        >
+                        ripple={true}
+                        onClick={() => navigate('/')}
+                        className="flex flex-row items-center justify-centertransition-all duration-300 ease-in-out shadow-lg -translate-y-2/4 p-2 rounded-lg bg-[#eb986f] text-white hover:bg-[#d88760]"
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
                             strokeWidth={2}
                             stroke="currentColor"
-                            className="h-6 w-6"
+                            className="h-4 w-4 mr-1"
                         >
                             <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
                             />
                         </svg>
-                        <p className="text-xl font-semibold text-gray-900">
-                            Play again
-                        </p>
-                    </IconButton>
-                    </div>
+                        <div className="text-left leading-none">
+                            <span>Play</span><br />
+                            <span>again</span>
+                        </div>
+                    </Button> */}
                 </Card>
             </div>
 
