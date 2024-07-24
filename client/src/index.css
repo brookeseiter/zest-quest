@@ -65,7 +65,11 @@ label.select-none {
 
 .custom-select div.grid {
   top: 60%;
-  /* color: rgb(75 85 99); */
+  color: rgb(75 85 99);
+}
+
+.custom-input {
+  color: rgb(75 85 99);
 }
 
 .custom-input::placeholder, .custom-input.value {
@@ -74,6 +78,11 @@ label.select-none {
   left: 1.25rem;
   transform: translateY(-70%); 
   pointer-events: none; 
+}
+
+div.radio label {
+  --tw-text-opacity: 1;
+  color: rgb(69 90 100 / var(--tw-text-opacity));
 }
 
 /* @layer base {
