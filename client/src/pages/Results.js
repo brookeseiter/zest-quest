@@ -97,7 +97,7 @@ function Results() {
                                         color="white"
                                         ripple={true}
                                         onClick={() => navigate('/')}
-                                        className="flex flex-row items-center rounded-full justify-center hover:scale-[1.02] focus:scale-[1.02] active:scale-100 shadow-lg p-2 bg-[#eb986f] text-white"
+                                        className="flex flex-row items-center rounded-full shadow-sm justify-center hover:scale-[1.03] focus:scale-[1.03] active:scale-95 p-2 bg-[#eb986f] text-white transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-[#d88760] hover:shadow-lg"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
