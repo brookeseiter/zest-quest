@@ -96,7 +96,7 @@ function Load() {
     
     // console.log('startIndex Load:', startIndex);
     // console.log('clickedRestaurants:', clickedRestaurants);
-    console.log('gameSettings:', gameSettings);
+    // console.log('gameSettings:', gameSettings);
     // console.log('numPlayers:', numPlayers);
     // console.log('loading:', loading);
     // console.log('restaurants:', restaurants);
@@ -116,36 +116,40 @@ function Load() {
                             Player {currentPlayer}, You're Up!
                         </Typography>
                     </CardHeader>
-                    <CardBody className="flex flex-col w-full h-4/5 p-6 justify-between">
-                        <div className="flex flex-row justify-center space-x-4">
-                            <h1>{gameSettings.category_1}</h1>
-                            <h1>{gameSettings.category_2}</h1>
-                            <h1>{gameSettings.category_3}</h1>
+                    <CardBody className="flex flex-row w-full h-4/5 p-6 justify-around">
+                        {/* <div className="flex flex-col justify-center items-center space-x-4"> */}
+                        <div className="flex flex-col justify-center items-center">
+                            {/* <div className="flex justify-end items-end"> */}
+                                <img 
+                                    className="w-40 h-40" 
+                                    src={`../images/${formatCategoryName(gameSettings.category_1)}.svg`} 
+                                    alt="" 
+                                />
+                            {/* </div> */}
+                                <h1 className="text-center">{gameSettings.category_1}</h1>
                         </div>
-                        <div className="flex justify-center">
+                        {/* <div className="flex flex-col justify-center items-center space-y-2"> */}
+                        <div className="flex flex-col justify-center items-center">
                             <img 
-                                className="w-36 h-36" 
-                                src={`../images/${formatCategoryName(gameSettings.category_1)}.svg`} 
-                                alt="" 
-                            />
-                            <img 
-                                className="w-36 h-36" 
+                                className="w-40 h-40" 
                                 src={`../images/${formatCategoryName(gameSettings.category_2)}.svg`} 
                                 alt="" 
                             />
-                            <img
-                                className="w-36 h-36"
-                                src={`../images/${formatCategoryName(gameSettings.category_3)}.svg`}
-                                alt={gameSettings.category_3}
+                            <h1 className="text-center">{gameSettings.category_2}</h1>
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                            <img 
+                                className="w-40 h-40" 
+                                src={`../images/${formatCategoryName(gameSettings.category_3)}.svg`} 
+                                alt="" 
                             />
-                            <Typography 
-                                className="text-center uppercase font-bold"
-                            > 
-                                Round {round}
-                            </Typography>
+                            <h1 className="text-center">{gameSettings.category_3}</h1>
                         </div>
                     </CardBody>
-                    <CardFooter className="object-contain flex justify-center">
+                    <CardFooter className="object-contain flex flex-col justify-center">
+                        <Typography className="text-center uppercase font-bold"> 
+                            Round {round}
+                        </Typography>
                         <Button 
                             className="rounded-full shadow-sm hover:scale-[1.03] focus:scale-[1.03] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-[#d88760] hover:shadow-lg bg-[#eb986f]" 
                             size="lg" 
