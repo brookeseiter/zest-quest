@@ -89,10 +89,14 @@ function Load() {
         setCurrentCategoryIndex(prev => (prev + 1) % 3);
         navigate('/game', { state: { gameSettings: gameSettings } });
     };
+
+    const formatCategoryName = (categoryName) => {
+        return categoryName.replace(/ /g, '-');
+    };
     
     // console.log('startIndex Load:', startIndex);
     // console.log('clickedRestaurants:', clickedRestaurants);
-    // console.log('gameSettings:', gameSettings);
+    console.log('gameSettings:', gameSettings);
     // console.log('numPlayers:', numPlayers);
     // console.log('loading:', loading);
     // console.log('restaurants:', restaurants);
@@ -119,6 +123,21 @@ function Load() {
                             <h1>{gameSettings.category_3}</h1>
                         </div>
                         <div className="flex justify-center">
+                            <img 
+                                className="w-36 h-36" 
+                                src={`../images/${formatCategoryName(gameSettings.category_1)}.svg`} 
+                                alt="" 
+                            />
+                            <img 
+                                className="w-36 h-36" 
+                                src={`../images/${formatCategoryName(gameSettings.category_2)}.svg`} 
+                                alt="" 
+                            />
+                            <img
+                                className="w-36 h-36"
+                                src={`../images/${formatCategoryName(gameSettings.category_3)}.svg`}
+                                alt={gameSettings.category_3}
+                            />
                             <Typography 
                                 className="text-center uppercase font-bold"
                             > 
