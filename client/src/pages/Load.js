@@ -93,6 +93,10 @@ function Load() {
     const formatCategoryName = (categoryName) => {
         return categoryName.replace(/ /g, '-');
     };
+
+    const currentCategoryBounce = (round, currentCategoryIndex) => {
+        return round === currentCategoryIndex + 1;
+    };
     
     // console.log('startIndex Load:', startIndex);
     // console.log('clickedRestaurants:', clickedRestaurants);
@@ -100,9 +104,10 @@ function Load() {
     // console.log('numPlayers:', numPlayers);
     // console.log('loading:', loading);
     // console.log('restaurants:', restaurants);
-    // console.log('categories:', categories);
+    console.log('categories:', categories);
     // console.log('currentPlayer:', currentPlayer);
-    // console.log('currentCategoryIndex:', currentCategoryIndex);
+    console.log('currentCategoryIndex:', currentCategoryIndex);
+    console.log('round:', round);
 
     return (
         <>
@@ -112,39 +117,25 @@ function Load() {
                         variant="gradient"
                         className="mb-4 grid place-items-center self-center overflow-visible w-4/5 h-1/5 bg-[#eb986f] text-white"
                     >
-                        <Typography className="text-center uppercase font-bold"> 
+                        {/* <Typography className="dynapuff-bold text-3xl text-center uppercase font-bold">  */}
+                        {/* <Typography className="sniglet text-3xl text-center uppercase">  */}
+                        <Typography className="modak text-3xl text-center uppercase"> 
                             Player {currentPlayer}, You're Up!
                         </Typography>
                     </CardHeader>
                     <CardBody className="flex flex-row w-full h-4/5 p-6 justify-around">
                         {/* <div className="flex flex-col justify-center items-center space-x-4"> */}
-                        <div className="flex flex-col justify-center items-center">
-                            {/* <div className="flex justify-end items-end"> */}
+                        {/* <div className="flex flex-col justify-center items-center space-y-2"> */}
+                        {categories.map((category, i) => (
+                            <div key={i} className="flex flex-col justify-center items-center">
                                 <img 
-                                    className="w-40 h-40" 
-                                    src={`../images/${formatCategoryName(gameSettings.category_1)}.svg`} 
+                                    className={`w-40 h-40 ${currentCategoryBounce(round, i) ? 'animate-bounce' : ''}`}
+                                    src={`../images/${formatCategoryName(category)}.svg`} 
                                     alt="" 
                                 />
-                            {/* </div> */}
-                                <h1 className="text-center">{gameSettings.category_1}</h1>
-                        </div>
-                        {/* <div className="flex flex-col justify-center items-center space-y-2"> */}
-                        <div className="flex flex-col justify-center items-center">
-                            <img 
-                                className="w-40 h-40" 
-                                src={`../images/${formatCategoryName(gameSettings.category_2)}.svg`} 
-                                alt="" 
-                            />
-                            <h1 className="text-center">{gameSettings.category_2}</h1>
-                        </div>
-                        <div className="flex flex-col justify-center items-center">
-                            <img 
-                                className="w-40 h-40" 
-                                src={`../images/${formatCategoryName(gameSettings.category_3)}.svg`} 
-                                alt="" 
-                            />
-                            <h1 className="text-center">{gameSettings.category_3}</h1>
-                        </div>
+                                <h1 className="text-center">{category}</h1>
+                            </div>
+                        ))}
                     </CardBody>
                     <CardFooter className="object-contain flex flex-col justify-center">
                         <Typography className="text-center uppercase font-bold"> 

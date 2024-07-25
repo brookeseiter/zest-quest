@@ -5,10 +5,12 @@ from model import db, Player, Restaurant, Game_Settings, Round_Results, Game_Res
 restaurant_categories_dict = {
     "American": "newamerican",
     "BBQ": "bbq",
+    "Burger": "burgers",
     "Chinese": "Chinese",
     "Indian": "indpak",
     "Italian": "italian",
     "Japanese": "japanese",
+    "Korean": "korean",
     "Mediterranean": "mediterranean",
     "Mexican": "mexican",
     "Middle Eastern": "mideastern",

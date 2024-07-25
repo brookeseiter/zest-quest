@@ -17,10 +17,12 @@ import {
 const categories = [
     "American",
     "BBQ",
+    "Burger",
     "Chinese",
     "Indian",
     "Italian",
     "Japanese",
+    "Korean",
     "Mediterranean",
     "Mexican",
     "Middle Eastern",
