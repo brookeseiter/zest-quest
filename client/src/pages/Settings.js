@@ -77,11 +77,11 @@ function Settings() {
                             <span>Enter your game preferences</span> 
                         </Typography>
                     </CardHeader>
-                    <CardBody className="flex w-full h-4/5 p-6">
-                        <form 
-                            className="settings-form flex flex-col w-full h-full justify-center items-center" 
-                            onSubmit={submitSettings}
-                        >
+                    <form 
+                        className="settings-form flex flex-col w-full h-full justify-center items-center" 
+                        onSubmit={submitSettings}
+                    >
+                        <CardBody className="flex w-full h-4/5 p-6 ml-52">
                             <div className="flex flex-row justfy-center items-center gap-8 w-full h-full">
                                 <div className="flex flex-col h-full w-1/2 justify-around">
                                     <Select 
@@ -105,7 +105,7 @@ function Settings() {
                                         <Option value="4">4</Option>
                                         <Option value="5">5</Option>
                                     </Select>
-                                    <div className="relative mt-4">
+                                    <div className="relative mt-2">
                                         <div className="relative min-w-[200px] h-12">
                                             <input
                                                 className="custom-input peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-blue-gray-400 placeholder border focus:border-2 border-t-transparent focus:border-gray-900 text-sm rounded-[7px] border-blue-gray-200 focus:border-t-transparent shadow-inner pl-5 pb-2 pt-4"
@@ -149,18 +149,18 @@ function Settings() {
                                     />
                                 </div>
                             </div>
-                            <CardFooter className="object-contain flex justify-center">
-                                <Button 
-                                    className="rounded-full shadow-sm hover:scale-[1.03] focus:scale-[1.03] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-[#d88760] hover:shadow-lg bg-[#eb986f]" 
-                                    size="lg" 
-                                    type="submit"
-                                    variant="filled"
-                                >
-                                    Submit Preferences
-                                </Button>
-                            </CardFooter>
-                        </form>
-                    </CardBody>
+                        </CardBody>
+                        <CardFooter className="object-contain flex justify-center mb-8 p-1">
+                            <Button 
+                                className="rounded-full shadow-sm hover:scale-[1.03] focus:scale-[1.03] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-[#d88760] hover:shadow-lg bg-[#eb986f]" 
+                                size="lg" 
+                                type="submit"
+                                variant="filled"
+                            >
+                                Submit Preferences
+                            </Button>
+                        </CardFooter>
+                    </form>
                 </Card>
             </div>
         </>
