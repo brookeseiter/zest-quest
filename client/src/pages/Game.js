@@ -78,7 +78,7 @@ function Game() {
         }
 
         const roundResultsData = await response.json();
-        console.log('Round results saved:', roundResultsData);
+        // console.log('Round results saved:', roundResultsData);
     };
 
     const isFourthRound = clickedRestaurants.length === 3 && fourthRoundWinner === null;

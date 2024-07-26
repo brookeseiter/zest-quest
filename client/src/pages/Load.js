@@ -95,37 +95,56 @@ function Load() {
     };
 
     const currentCategoryBounce = (round, index) => {
+        // Define a mapping for synonymous categories
+        const categoryMappings = {
+            "Mexican": ["Mexican", "Tacos", "Latin American"]
+        };
+    
         // For rounds 1, 2, 3 - apply bounce to the corresponding category
         if (round === index + 1) {
             return true;
         }
-
+    
         // For round 4, make the first two categories bounce
         if (round === 4 && index < 2) {
             return true;
         }
 
+        // if (round === 5 && fourthRoundWinner) {
+        //     const winnerTitles = fourthRoundWinner.categories.map(cat => cat.title);
+        //     console.log('winnerTitles:', winnerTitles);
+        // }
+    
         // For round 5, find the index of the fourthRoundWinner.category title
         if (round === 5 && fourthRoundWinner) {
             // Extract titles from fourthRoundWinner's categories
             const winnerTitles = fourthRoundWinner.categories.map(cat => cat.title);
-            console.log('winnerTitles:', winnerTitles);
-
-            // Find the matching index in categories
-            const fourthWinnerIndex = categories.findIndex(cat => winnerTitles.includes(cat));
-
+    
+            // Normalize categories to account for synonyms
+            const normalizedCategories = categories.map(cat => {
+                // Check if the category has synonyms in the mapping
+                if (categoryMappings[cat]) {
+                    // Return the matched category if synonyms include a winner title
+                    return categoryMappings[cat].find(mapping => winnerTitles.includes(mapping)) || cat;
+                }
+                return cat;
+            });
+    
+            // Find the matching index in normalized categories
+            const fourthWinnerIndex = normalizedCategories.findIndex(cat => winnerTitles.includes(cat));
+    
             // Apply bounce if index matches the found index or is the last category
             if (index === fourthWinnerIndex || index === 2) {
                 return true;
             }
         }
-
+    
         return false;    
     };
     
     // console.log('startIndex Load:', startIndex);
     // console.log('clickedRestaurants:', clickedRestaurants);
-    // console.log('gameSettings:', gameSettings);
+    console.log('gameSettings:', gameSettings);
     // console.log('numPlayers:', numPlayers);
     // console.log('loading:', loading);
     // console.log('restaurants:', restaurants);
