@@ -110,7 +110,7 @@ function CategorySelect() {
         <>
             <div className="base h-screen flex justify-center items-center">
                 <Card className="w-2/3 h-3/4">
-                    <CardHeader className="mb-4 grid place-items-center self-center overflow-visible w-4/5 h-1/5 bg-[#eb986f] text-white">
+                    <CardHeader className="mb-2 grid place-items-center self-center overflow-visible w-4/5 h-1/5 bg-[#eb986f] text-white">
                         <Typography className="m-4 text-balance text-center text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl uppercase font-bold">
                             <span className="underline decoration-2">Step 2</span>
                             <br />
@@ -123,7 +123,7 @@ function CategorySelect() {
                         className="categories-form overflow-x-hidden overflow-auto h-4/5"
                         onSubmit={submitSettings}
                     >
-                        <CardBody className="grid place-items-center ml-0 xl:ml-16 pt-4 pb-1">
+                        <CardBody className="grid place-items-center !mt-0 ml-0 xl:ml-16 pt-4 pb-1">
                             <List className="cat-list grid grid-cols-1 md:grid-cols-3 gap-4">
                             {categories.map((name, index) => {
                                 return (
@@ -158,7 +158,7 @@ function CategorySelect() {
                             })}
                             </List>
                         </CardBody>
-                        <CardFooter className="object-contain flex justify-center mb-8 p-1">
+                        <CardFooter className="object-contain flex justify-center mb-8 mt-5 p-1">
                             <Button
                                 className="rounded-full shadow-sm hover:scale-[1.03] focus:scale-[1.03] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-[#d88760] hover:shadow-lg bg-[#eb986f]" 
                                 size="lg"

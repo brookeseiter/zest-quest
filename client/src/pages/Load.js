@@ -169,8 +169,7 @@ function Load() {
                             Player {currentPlayer}, You're Up!
                         </Typography>
                     </CardHeader>
-                    <CardBody className="flex flex-row w-full h-4/5 p-6 justify-around">
-                        {/* <div className="flex flex-col justify-center items-center space-x-4"> */}
+                    <CardBody className="flex flex-row w-full h-4/5 !pt-4 !pb-2 justify-around">
                         {/* <div className="flex flex-col justify-center items-center space-y-2"> */}
                         {categories.map((category, i) => (
                             <div key={i} className="flex flex-col justify-center items-center">
@@ -179,16 +178,16 @@ function Load() {
                                     src={`../images/${formatCategoryName(category)}.svg`} 
                                     alt="" 
                                 />
-                                <h1 className="text-center">{category}</h1>
+                                <h1 className="modak text-blue-gray-700 text-2xl text-center">{category}</h1>
                             </div>
                         ))}
                     </CardBody>
-                    <CardFooter className="object-contain flex flex-col justify-center">
-                        <Typography className="text-center uppercase font-bold"> 
-                            Round {round}
-                        </Typography>
+                    <div className="flex text-blue-gray-700 roboto justify-center items-center w-full p-0 h-1/8 text-center text-xl uppercase font-extrabold shadow-3d bg-[#D9EDBF]">
+                        Round {round}
+                    </div>
+                    <CardFooter className="object-contain flex flex-col justify-center items-center mb-8 mt-5 p-1">
                         <Button 
-                            className="rounded-full shadow-sm hover:scale-[1.03] focus:scale-[1.03] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-[#d88760] hover:shadow-lg bg-[#eb986f]" 
+                            className="w-22 rounded-full shadow-sm hover:scale-[1.03] focus:scale-[1.03] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-[#d88760] hover:shadow-lg bg-[#eb986f]" 
                             size="lg" 
                             type="submit"
                             variant="filled"

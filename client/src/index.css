@@ -102,6 +102,34 @@ div.radio label {
   width: 85%;
 }
 
+.h-1\/8 {
+  /* height: 14.28%; */
+  height: 12.5%;
+}
+
+.text-4xl {
+  font-size: 2.25rem; /* 36px */
+  line-height: 2.5rem; /* 40px */
+}
+
+.shadow-3d {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2), /* Main shadow */
+              -2px -2px 5px rgba(255, 255, 255, 0.3); /* Highlight */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Thin border for definition */
+  border-bottom-left-radius: 8px; /* Optional: add some rounding */
+  border-bottom-right-radius: 8px; /* Optional: add some rounding */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.roboto {
+  font-family: Roboto, sans-serif;
+}
+
+.w-22 {
+  width: 22%;
+}
+
+
 /* @layer base {
   button.button {
     @apply text-[#D9EDBF] text-base font-extrabold;
