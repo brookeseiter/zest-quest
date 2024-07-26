@@ -150,9 +150,9 @@ function Settings() {
                                 </div>
                             </div>
                         </CardBody>
-                        <CardFooter className="object-contain flex justify-center mb-8 p-1">
+                        <CardFooter className="flex justify-center items-center mb-8 p-1">
                             <Button 
-                                className="rounded-full shadow-sm hover:scale-[1.03] focus:scale-[1.03] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-[#d88760] hover:shadow-lg bg-[#eb986f]" 
+                                className="submit-button rounded-full shadow-sm hover:scale-[1.03] focus:scale-[1.03] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-[#d88760] hover:shadow-lg bg-[#eb986f]" 
                                 size="lg" 
                                 type="submit"
                                 variant="filled"

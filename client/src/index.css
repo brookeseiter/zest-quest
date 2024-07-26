@@ -125,10 +125,10 @@ div.radio label {
   font-family: Roboto, sans-serif;
 }
 
-.w-22 {
-  width: 22%;
+.submit-button {
+  width: 219px;
+  height: 48px;
 }
-
 
 /* @layer base {
   button.button {

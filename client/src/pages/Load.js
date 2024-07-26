@@ -182,12 +182,12 @@ function Load() {
                             </div>
                         ))}
                     </CardBody>
-                    <div className="flex text-blue-gray-700 roboto justify-center items-center w-full p-0 h-1/8 text-center text-xl uppercase font-extrabold shadow-3d bg-[#D9EDBF]">
+                    <div className="flex text-blue-gray-700 roboto justify-center items-center w-full p-0 h-1/8 mb-2 text-center text-xl uppercase font-extrabold shadow-3d bg-[#D9EDBF]">
                         Round {round}
                     </div>
-                    <CardFooter className="object-contain flex flex-col justify-center items-center mb-8 mt-5 p-1">
+                    <CardFooter className="flex flex-col justify-center items-center mb-8 mt-5 p-1">
                         <Button 
-                            className="w-22 rounded-full shadow-sm hover:scale-[1.03] focus:scale-[1.03] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-[#d88760] hover:shadow-lg bg-[#eb986f]" 
+                            className="submit-button rounded-full shadow-sm hover:scale-[1.03] focus:scale-[1.03] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-[#d88760] hover:shadow-lg bg-[#eb986f]" 
                             size="lg" 
                             type="submit"
                             variant="filled"
