@@ -96,28 +96,12 @@ function Game() {
     
     // console.log('isFourthRound:', isFourthRound);
     // console.log('isFifthRound:', isFifthRound);
-    console.log('startIndex:', startIndex);
+    // console.log('startIndex:', startIndex);
     // console.log('clickedRestaurants:', clickedRestaurants);
+    console.log('fourthRoundWinner game.js:', fourthRoundWinner);
 
     return (
         <>
-            {/* <div className="base flex h-screen justify-center items-center space-x-6">
-            {/* <div className="base flex h-screen justify-evenly items-center space-x-6">
-                {restaurantsToDisplay.map((restaurant, i) => (
-                    <Fragment key={i}>
-                        <button 
-                            className="w-1/3 max-w-md sm:w-1/2 sm:max-w-sm"
-                            key={i} 
-                            onClick={() => {handleRestaurantClick(restaurant)}}
-                        >
-                            <RestaurantCard restaurant={restaurant} />
-                        </button>
-                        {i % 2 === 0 && i !== restaurantsToDisplay.length - 1 ? (
-                            <p className="text-center text-[#eb986f] text-4xl font-extrabold items-center">VS</p>
-                        ) : null}
-                    </Fragment>
-                ))}
-            </div> */}
             <div className="base flex justify-center h-screen">
                 <div className="flex justify-evenly items-center w-11/12">
                     {restaurantsToDisplay.map((restaurant, i) => (

@@ -94,8 +94,33 @@ function Load() {
         return categoryName.replace(/ /g, '-');
     };
 
-    const currentCategoryBounce = (round, currentCategoryIndex) => {
-        return round === currentCategoryIndex + 1;
+    const currentCategoryBounce = (round, index) => {
+        // For rounds 1, 2, 3 - apply bounce to the corresponding category
+        if (round === index + 1) {
+            return true;
+        }
+
+        // For round 4, make the first two categories bounce
+        if (round === 4 && index < 2) {
+            return true;
+        }
+
+        // For round 5, find the index of the fourthRoundWinner.category title
+        if (round === 5 && fourthRoundWinner) {
+            // Extract titles from fourthRoundWinner's categories
+            const winnerTitles = fourthRoundWinner.categories.map(cat => cat.title);
+            console.log('winnerTitles:', winnerTitles);
+
+            // Find the matching index in categories
+            const fourthWinnerIndex = categories.findIndex(cat => winnerTitles.includes(cat));
+
+            // Apply bounce if index matches the found index or is the last category
+            if (index === fourthWinnerIndex || index === 2) {
+                return true;
+            }
+        }
+
+        return false;    
     };
     
     // console.log('startIndex Load:', startIndex);
@@ -104,10 +129,11 @@ function Load() {
     // console.log('numPlayers:', numPlayers);
     // console.log('loading:', loading);
     // console.log('restaurants:', restaurants);
-    console.log('categories:', categories);
+    // console.log('categories:', categories);
     // console.log('currentPlayer:', currentPlayer);
-    console.log('currentCategoryIndex:', currentCategoryIndex);
-    console.log('round:', round);
+    // console.log('currentCategoryIndex:', currentCategoryIndex);
+    // console.log('round:', round);
+    console.log('fourthRoundWinner load.js:', fourthRoundWinner);
 
     return (
         <>
@@ -129,7 +155,7 @@ function Load() {
                         {categories.map((category, i) => (
                             <div key={i} className="flex flex-col justify-center items-center">
                                 <img 
-                                    className={`w-40 h-40 ${currentCategoryBounce(round, i) ? 'animate-bounce' : ''}`}
+                                    className={`w-40 h-40 ${currentCategoryBounce(round, i, category) ? 'animate-bounce' : ''}`}
                                     src={`../images/${formatCategoryName(category)}.svg`} 
                                     alt="" 
                                 />

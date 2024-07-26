@@ -3,8 +3,8 @@
 from model import db, Player, Restaurant, Game_Settings, Round_Results, Game_Restaurant, connect_to_db
 
 restaurant_categories_dict = {
-    "American": "newamerican",
-    "BBQ": "bbq",
+    "New American": "newamerican",
+    "Barbeque": "bbq",
     "Burger": "burgers",
     "Chinese": "Chinese",
     "Indian": "indpak",

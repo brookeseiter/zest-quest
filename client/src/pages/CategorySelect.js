@@ -15,8 +15,8 @@ import {
 
 
 const categories = [
-    "American",
-    "BBQ",
+    "New American",
+    "Barbeque",
     "Burger",
     "Chinese",
     "Indian",
