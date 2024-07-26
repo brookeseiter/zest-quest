@@ -25,7 +25,8 @@ function Results() {
     const [winnerYelpBusinessId, setWinnerYelpBusinessId] = useState('');
     const [rankedRestaurants, setRankedRestaurants] = useState([]);
     const [orderedRestaurants, setOrderedRestaurants] = useState([]);
-    const TABLE_HEAD = ["Rank", "Name", "Points"]
+    const TABLE_HEAD = ["Rank", "Name", "Points"];
+    const { resetGame } = useContext(GameContext); 
 
     const getResults = async () => {    
         const requestOptions = {
@@ -68,6 +69,11 @@ function Results() {
         }
     };
 
+    const handlePlayAgain = () => {
+        resetGame();
+        navigate('/');
+    };
+
     console.log('restaurants:', restaurants);
     console.log('rankedRestaurants:', rankedRestaurants);
     console.log('winnerYelpBusinessId:', winnerYelpBusinessId);
@@ -96,7 +102,7 @@ function Results() {
                                         variant="gradient"
                                         color="white"
                                         ripple={true}
-                                        onClick={() => navigate('/')}
+                                        onClick={handlePlayAgain}
                                         className="flex flex-row items-center rounded-full shadow-sm justify-center hover:scale-[1.03] focus:scale-[1.03] active:scale-95 p-2 bg-[#eb986f] text-white transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-[#d88760] hover:shadow-lg"
                                     >
                                         <svg

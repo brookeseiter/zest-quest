@@ -2,15 +2,34 @@ import { createContext, useState } from 'react';
 
 export const GameContext = createContext();
 
-export const GameProvider = ({ children }) => {
-  const [currentPlayer, setCurrentPlayer] = useState(1);
-  const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
-  const [restaurants, setRestaurants] = useState([]);
-  const [startIndex, setStartIndex] = useState(0);
-  const [clickedRestaurants, setClickedRestaurants] = useState([]);
-  const [fourthRoundWinner, setFourthRoundWinner] = useState(null);
-  const [round, setRound] = useState(1);
+const initialState = {
+  currentPlayer: 1,
+  currentCategoryIndex: 0,
+  restaurants: [],
+  startIndex: 0,
+  clickedRestaurants: [],
+  fourthRoundWinner: null,
+  round: 1,
+};
 
+export const GameProvider = ({ children }) => {
+  const [currentPlayer, setCurrentPlayer] = useState(initialState.currentPlayer);
+  const [currentCategoryIndex, setCurrentCategoryIndex] = useState(initialState.currentCategoryIndex);
+  const [restaurants, setRestaurants] = useState(initialState.restaurants);
+  const [startIndex, setStartIndex] = useState(initialState.startIndex);
+  const [clickedRestaurants, setClickedRestaurants] = useState(initialState.clickedRestaurants);
+  const [fourthRoundWinner, setFourthRoundWinner] = useState(initialState.fourthRoundWinner);
+  const [round, setRound] = useState(initialState.round);
+
+  const resetGame = () => {
+    setCurrentPlayer(initialState.currentPlayer);
+    setCurrentCategoryIndex(initialState.currentCategoryIndex);
+    setRestaurants(initialState.restaurants);
+    setStartIndex(initialState.startIndex);
+    setClickedRestaurants(initialState.clickedRestaurants);
+    setFourthRoundWinner(initialState.fourthRoundWinner);
+    setRound(initialState.round);
+  };
 
   return (
     <GameContext.Provider value={{
@@ -27,7 +46,8 @@ export const GameProvider = ({ children }) => {
       fourthRoundWinner,
       setFourthRoundWinner,
       round,
-      setRound
+      setRound,
+      resetGame 
     }}>
       {children}
     </GameContext.Provider>

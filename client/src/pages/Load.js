@@ -97,7 +97,8 @@ function Load() {
     const currentCategoryBounce = (round, index) => {
         // Define a mapping for synonymous categories
         const categoryMappings = {
-            "Mexican": ["Mexican", "Tacos", "Latin American"]
+            "Mexican": ["Mexican", "Tacos", "Latin American"],
+            "Japanese": ["Japanese", "Ramen", "Izakaya"]
         };
     
         // For rounds 1, 2, 3 - apply bounce to the corresponding category
