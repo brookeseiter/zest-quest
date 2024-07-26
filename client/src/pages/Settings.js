@@ -69,19 +69,17 @@ function Settings() {
                         variant="gradient"
                         className="mb-4 grid place-items-center self-center overflow-visible w-4/5 h-1/5 bg-[#eb986f] text-white"
                     >
-                        <Typography 
-                            className="text-center uppercase font-bold"
-                        > 
-                            <span className="underline decoration-2">Step 1</span>
+                        <Typography className="m-4 text-balance text-center text-centerfont-bold"> 
+                            <span className="modak text-3xl uppercase underline decoration-2">Step 1</span>
                             <br />
-                            <span>Enter your game preferences</span> 
+                            <span className="modak text-2xl">Enter your game preferences</span> 
                         </Typography>
                     </CardHeader>
                     <form 
                         className="settings-form flex flex-col w-full h-full justify-center items-center" 
                         onSubmit={submitSettings}
                     >
-                        <CardBody className="flex w-full h-4/5 p-6 ml-52">
+                        <CardBody className="flex w-full h-4/5 ml-0 xl:ml-52 pt-4 pb-1">
                             <div className="flex flex-row justfy-center items-center gap-8 w-full h-full">
                                 <div className="flex flex-col h-full w-1/2 justify-around">
                                     <Select 
@@ -150,7 +148,7 @@ function Settings() {
                                 </div>
                             </div>
                         </CardBody>
-                        <CardFooter className="flex justify-center items-center mb-8 p-1">
+                        <CardFooter className="flex justify-center items-center mb-11 p-1">
                             <Button 
                                 className="submit-button rounded-full shadow-sm hover:scale-[1.03] focus:scale-[1.03] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-[#d88760] hover:shadow-lg bg-[#eb986f]" 
                                 size="lg" 
