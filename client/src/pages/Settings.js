@@ -54,12 +54,12 @@ function Settings() {
         })
         .catch((error) => {
             console.log('error: ', error);
-        }, []); 
+        }); 
     };
 
-    console.log('numPlayers:', numPlayers);
-    console.log('location:', location);
-    console.log('maxDist:', maxDist);
+    // console.log('numPlayers:', numPlayers);
+    // console.log('location:', location);
+    // console.log('maxDist:', maxDist);
 
     return (
         <>
@@ -129,7 +129,7 @@ function Settings() {
                                         onChange={(e) => setMaxDist(e.target.value)}
                                         name="type"
                                         label="5 miles" 
-                                        defaultChecked 
+                                        // defaultChecked 
                                     />
                                     <Radio 
                                         value="10" 

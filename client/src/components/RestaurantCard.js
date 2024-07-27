@@ -42,7 +42,10 @@ function RestaurantCard({ classStyles, restaurant })  {
                             <div className="flex justify-center">
                                 <p className="flex flex-wrap text-base font-light">
                                     {restaurant.categories.map((category, i) => (
-                                        <span key={i} className="inline">
+                                        <span 
+                                            key={i} 
+                                            className="inline"
+                                        >
                                             {category.title}{i !== restaurant.categories.length - 1 && ' •\u00A0'}
                                         </span>
                                     ))}
@@ -52,7 +55,7 @@ function RestaurantCard({ classStyles, restaurant })  {
                                 <div className="inline-flex items-center">
                                     {generateStars(restaurant.rating)}
                                     <span className="text-[#eb986f] ml-1 text-md font-bold">{restaurant.rating}/5</span>
-                                    <span class="text-sm ml-1 text-gray-600">({restaurant.review_count} reviews)</span>
+                                    <span className="text-sm ml-1 text-gray-600">({restaurant.review_count} reviews)</span>
                                 </div>
                             </div>  
                         </div>

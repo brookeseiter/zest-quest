@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "@material-tailwind/react";
 
 function Home() {
     const navigate = useNavigate();

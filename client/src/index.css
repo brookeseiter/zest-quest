@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* // <uniquifier>: Use a unique and descriptive class name
-// <weight>: Use a value from 400 to 700 */
+
 .dynapuff-bold {
   font-family: "DynaPuff", system-ui;
   font-optical-sizing: auto;
@@ -12,11 +11,7 @@
   font-variation-settings:
     "wdth" 100;
 }
-.sniglet {
-  font-family: "Sniglet", system-ui;
-  font-weight: 800;
-  font-style: normal;
-}
+
 .modak {
   font-family: "Modak", system-ui;
   font-weight: 400;
