@@ -88,9 +88,7 @@ function Results() {
                     <div className="flex w-4/5 h-screen justify-center items-center"> 
                         {winnerRestaurant && (
                             <div className='flex flex-col w-2/5 scale-90'>
-                                <div>
-                                    <h1 className='flex justify-center font-sans font-semibold text-white text-4xl mb-4 bg-[#B7D799] shadow-lg rounded-lg'>Winner</h1>
-                                </div>
+                                <h1 className='modak text-white text-center text-4xl mb-4 bg-[#B7D799] shadow-lg rounded-lg'>Winner</h1>
                                 <button onClick={() => navigateToYelp(winnerRestaurant.url)}>
                                     <RestaurantCard 
                                         classStyles="w-full object-cover" 
@@ -103,7 +101,7 @@ function Results() {
                                         color="white"
                                         ripple={true}
                                         onClick={handlePlayAgain}
-                                        className="flex flex-row items-center rounded-full shadow-sm justify-center hover:scale-[1.03] focus:scale-[1.03] active:scale-95 p-2 bg-[#eb986f] text-white transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-[#d88760] hover:shadow-lg"
+                                        className="submit-button flex flex-row items-center rounded-full shadow-sm justify-center hover:scale-[1.03] focus:scale-[1.03] active:scale-95 p-2 bg-[#eb986f] text-white transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-[#d88760] hover:shadow-lg"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -119,10 +117,7 @@ function Results() {
                                                 d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
                                             />
                                         </svg>
-                                        <div className="text-left leading-none">
-                                            <span>Play</span><br />
-                                            <span>again</span>
-                                        </div>
+                                        Play Again 
                                     </Button>
                                 </div>
                             </div>
@@ -131,7 +126,7 @@ function Results() {
                             <div class="rounded-t mb-0 px-4 py-3 border-0">
                                 <div class="flex flex-wrap items-center">
                                     <div class="relative w-full px-4 max-w-full flex-grow flex-1 ">
-                                        <h3 class="font-semibold text-3xl text-white">Restaurant Rankings</h3>
+                                        <h3 class="modak text-4xl text-white">Restaurant Rankings</h3>
                                     </div>
                                 </div>
                             </div>
@@ -142,7 +137,7 @@ function Results() {
                                             {TABLE_HEAD.map((head) => (
                                                 <th 
                                                     key={head}
-                                                    className='text-[#eb986f] border-t-0 p-4 px-9 align-middle border border-solid py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-base text-left bg-[#C4E0A7] border-[#D9EDBF]'
+                                                    className='text-[#eb986f] modak border-t-0 p-4 px-9 align-middle border border-solid py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-xl text-left bg-[#C4E0A7] border-[#D9EDBF]'
                                                 >
                                                     {head}
                                                 </th>
@@ -156,10 +151,10 @@ function Results() {
                                             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
                                             return restaurant ? (
-                                                <tr key={restaurant.id}>
+                                                <tr className="custom-table-border" key={restaurant.id}>
                                                     <td className={`border-t-0 px-6 align-middle border-l-0 border-r-0 border-[#D9EDBF] whitespace-nowrap p-4 ${classes}`}>
                                                         <span
-                                                            className="font-bold text-white border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap"
+                                                            className="font-extrabold text-white border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl whitespace-nowrap"
                                                         >
                                                             {index + 1}
                                                         </span>
@@ -167,12 +162,12 @@ function Results() {
                                                     <td className={`border-t-0 px-6 align-middle border-l-0 border-r-0 border-[#D9EDBF] whitespace-nowrap p-4 ${classes}`}>
                                                         <div className="border-t-0 px-3 align-middle border-l-0 border-r-0 whitespace-nowrap text-left flex items-center">
                                                             <img 
-                                                                className='h-16 w-16 border-[#eb986f] rounded-full border-2'
+                                                                className='object-cover h-16 w-16 border-[#eb986f] rounded-full border-2'
                                                                 src={restaurant.image_url} 
                                                                 alt={restaurant.name} 
                                                             />
                                                             <span
-                                                                className="ml-3 text-lg font-bold text-white"
+                                                                className="roboto ml-3 text-lg font-extrabold text-white"
                                                             >
                                                                 {restaurant.name}
                                                             </span>
@@ -180,7 +175,7 @@ function Results() {
                                                     </td>
                                                     <td className={`border-t-0 px-6 align-middle border-l-0 border-r-0 border-[#D9EDBF] whitespace-nowrap p-4 ${classes}`}>
                                                         <span
-                                                            className="font-bold text-white border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+                                                            className="font-extrabold text-white border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl whitespace-nowrap p-4"
                                                         >
                                                             {rankedRestaurant ? rankedRestaurant.total_points : 'N/A'}
                                                         </span>
@@ -193,35 +188,8 @@ function Results() {
                             </div>
                         </div> 
                     </div>
-                    {/* <Button
-                        variant="gradient"
-                        color="white"
-                        ripple={true}
-                        onClick={() => navigate('/')}
-                        className="flex flex-row items-center justify-centertransition-all duration-300 ease-in-out shadow-lg -translate-y-2/4 p-2 rounded-lg bg-[#eb986f] text-white hover:bg-[#d88760]"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={2}
-                            stroke="currentColor"
-                            className="h-4 w-4 mr-1"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-                            />
-                        </svg>
-                        <div className="text-left leading-none">
-                            <span>Play</span><br />
-                            <span>again</span>
-                        </div>
-                    </Button> */}
                 </Card>
             </div>
-
         </>
     );
 }

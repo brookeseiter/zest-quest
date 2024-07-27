@@ -103,7 +103,6 @@ div.radio label {
 }
 
 .h-1\/8 {
-  /* height: 14.28%; */
   height: 12.5%;
 }
 
@@ -126,12 +125,15 @@ div.radio label {
 }
 
 .submit-button {
-  width: 219px;
+  width: 219px; 
   height: 48px;
 }
 
-/* @layer base {
-  button.button {
-    @apply text-[#D9EDBF] text-base font-extrabold;
-  }
-} */
+tr.custom-table-border td {
+  --tw-border-opacity: 1;
+  border-color: rgb(217 237 191 / var(--tw-border-opacity));
+}
+
+
+
+
