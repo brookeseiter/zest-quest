@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext, Fragment } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
-import RestaurantCard from "../components/RestaurantCard";
 import { GameContext } from './GameContext';
+import RestaurantCard from "../components/RestaurantCard";
 import { 
     CardHeader, 
     CardFooter, 
@@ -32,9 +32,24 @@ function Game() {
         round,
         setRound
     } = useContext(GameContext);
+
     const location = useLocation();
     const navigate = useNavigate();
-    const { gameSettings, finalRound } = location.state;
+    const { gameSettings } = location.state;
+
+    const isFourthRound = clickedRestaurants.length === 3 && fourthRoundWinner === null;
+    const isFifthRound = clickedRestaurants.length === 4 && fourthRoundWinner !== null;
+
+    let restaurantsToDisplay = [];
+    console.log('restaurantsToDisplay pre:', restaurantsToDisplay);
+    if (isFifthRound) {
+        const remainingRestaurant = clickedRestaurants[2];
+        restaurantsToDisplay = [fourthRoundWinner, remainingRestaurant];
+    } else if (isFourthRound) {
+        restaurantsToDisplay = clickedRestaurants.slice(0, 2);
+    } else {
+        restaurantsToDisplay = restaurants.slice(startIndex, startIndex + 2);
+    }
 
     const handleRestaurantClick = async (restaurant) => {
         try {
@@ -80,25 +95,13 @@ function Game() {
         const roundResultsData = await response.json();
         // console.log('Round results saved:', roundResultsData);
     };
-
-    const isFourthRound = clickedRestaurants.length === 3 && fourthRoundWinner === null;
-    const isFifthRound = clickedRestaurants.length === 4 && fourthRoundWinner !== null;
-
-    let restaurantsToDisplay = [];
-    if (isFifthRound) {
-        const remainingRestaurant = clickedRestaurants[2];
-        restaurantsToDisplay = [fourthRoundWinner, remainingRestaurant];
-    } else if (isFourthRound) {
-        restaurantsToDisplay = clickedRestaurants.slice(0, 2);
-    } else {
-        restaurantsToDisplay = restaurants.slice(startIndex, startIndex + 2);
-    }
     
     // console.log('isFourthRound:', isFourthRound);
     // console.log('isFifthRound:', isFifthRound);
     // console.log('startIndex:', startIndex);
     // console.log('clickedRestaurants:', clickedRestaurants);
-    console.log('fourthRoundWinner game.js:', fourthRoundWinner);
+    // console.log('fourthRoundWinner game.js:', fourthRoundWinner);
+
 
     return (
         <>
