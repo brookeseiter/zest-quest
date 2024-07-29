@@ -1,45 +1,30 @@
 import { useNavigate } from "react-router-dom";
-// import { GameContext } from './GameContext';
 import { useEffect, useContext } from "react";
 import Loading from "../components/Loading";
 
+
 function Home() {
-    // const {loading, setLoading} = useContext(GameContext);
     const navigate = useNavigate();
-
-    // useEffect(() => {
-    //     setLoading(true);
-
-    //     if (loading === true) {
-    //         <Loading/>
-    //     }
-
-    //     setLoading(false);
-    // }, []);
-
-    // useEffect(() => {
-    //     setLoading(true);
-    // }, loading);
-    
-    // if (loading) {
-    // return <Loading />;
-    // }
 
     return (
         <>
             <div className="base h-screen flex items-center justify-center">
                 <div className="flex flex-row items-center font-extrabold">
-                    <img className="w-36 h-36" src="../images/retry.svg" alt="" />
-                    <div className="mt-4 ml-2 flex flex-col items-center">
-                        <h1 className="homepage-title text-7xl font-extrabold text-[#eb986f]">
+                    <img 
+                        className="w-36 h-36 animate-bounce" 
+                        src="../images/ZQ-logo.svg" 
+                        alt="" 
+                    />
+                    <div className="flex flex-col items-center mt-4 ml-2">
+                        <h1 className="modak text-between-7-8xl text-[#eb986f]">
                             Zest Quest
                         </h1>
                         <button
-                            className="mt-4 w-4/6 h-full py-2 rounded-full shadow-sm transition-transform duration-300 hover:scale-[1.04] focus:scale-[1.04] focus:outline-none focus:ring-4 focus:ring-[#d88760] active:scale-95 hover:shadow-lg bg-[#eb986f]"
+                            className="mt-2 w-4/6 h-full py-2 rounded-full shadow-sm transition-transform duration-300 hover:scale-[1.04] focus:scale-[1.04] focus:outline-none focus:ring-4 focus:ring-[#d88760] active:scale-95 hover:shadow-lg bg-[#eb986f]"
                             onClick={() => navigate('/settings')}
                         >
                             <span className="text-lg uppercase font-extrabold text-white">
-                                Play
+                                Start
                             </span>
                         </button>
                     </div>
