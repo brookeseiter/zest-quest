@@ -38,9 +38,9 @@ function CategorySelect() {
     const [category2, setCategory2] = useState("");
     const [category3, setCategory3] = useState("");
 
-    console.log('c1:', category1);
-    console.log('c2:', category2);
-    console.log('c3:', category3);
+    // console.log('c1:', category1);
+    // console.log('c2:', category2);
+    // console.log('c3:', category3);
 
     const [checkedState, setCheckedState] = useState(
         new Array(categories.length).fill(false)

@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { GameContext } from './GameContext';
+import Loading from "../components/Loading";
 import { 
     CardHeader, 
     CardFooter, 
@@ -15,6 +17,7 @@ import {
 
 
 function Settings() {
+    const {loading, setLoading} = useContext(GameContext);
     const navigate = useNavigate();
     const [numPlayers, setNumPlayers] = useState("");
     const [location, setLocation] = useState("");
@@ -129,7 +132,6 @@ function Settings() {
                                         onChange={(e) => setMaxDist(e.target.value)}
                                         name="type"
                                         label="5 miles" 
-                                        // defaultChecked 
                                     />
                                     <Radio 
                                         value="10" 

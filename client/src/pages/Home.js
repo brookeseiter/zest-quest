@@ -1,7 +1,29 @@
 import { useNavigate } from "react-router-dom";
+// import { GameContext } from './GameContext';
+import { useEffect, useContext } from "react";
+import Loading from "../components/Loading";
 
 function Home() {
+    // const {loading, setLoading} = useContext(GameContext);
     const navigate = useNavigate();
+
+    // useEffect(() => {
+    //     setLoading(true);
+
+    //     if (loading === true) {
+    //         <Loading/>
+    //     }
+
+    //     setLoading(false);
+    // }, []);
+
+    // useEffect(() => {
+    //     setLoading(true);
+    // }, loading);
+    
+    // if (loading) {
+    // return <Loading />;
+    // }
 
     return (
         <>

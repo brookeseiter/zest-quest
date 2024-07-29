@@ -1,4 +1,5 @@
 import { Route, Routes, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
 import { GameProvider } from './pages/GameContext';
 import Home from './pages/Home';
 import Game from './pages/Game';
@@ -7,6 +8,8 @@ import CategorySelect from './pages/CategorySelect';
 import Load from './pages/Load';
 import Results from './pages/Results';
 import NotFound from './components/NotFound';
+import Loading from "./components/Loading";
+
 
 function App() {
   return (
@@ -25,3 +28,5 @@ function App() {
 }
 
 export default App;
+
+

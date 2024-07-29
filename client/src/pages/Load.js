@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GameContext } from './GameContext';
+import Loading from "../components/Loading";
 import { 
     CardHeader, 
     CardFooter, 
@@ -11,7 +12,7 @@ import {
     Select, 
     Option, 
     Radio,
-    Button 
+    Button
 } from "@material-tailwind/react";
 
 function Load() {
@@ -29,14 +30,16 @@ function Load() {
         fourthRoundWinner,
         setFourthRoundWinner,
         round,
-        setRound
+        setRound,
+        loading,
+        setLoading
     } = useContext(GameContext);
+    
     const location = useLocation();
     const navigate = useNavigate();
     const { gameSettings } = location.state;
     const numPlayers = gameSettings.num_players;
     const categories = [gameSettings.category_1, gameSettings.category_2, gameSettings.category_3];
-    const [loading, setLoading] = useState(false);
 
     const fetchRestaurantData = async (currCategory) => {
         setLoading(true);
@@ -48,7 +51,6 @@ function Load() {
             }
     
             const yelpData = await response.json();
-            // console.log('yelpData:', yelpData);
             if (!restaurants) {
                 setRestaurants(yelpData.businesses);
             }
@@ -95,18 +97,16 @@ function Load() {
     };
 
     const currentCategoryBounce = (round, index) => {
-        // Define a mapping for synonymous categories
         const categoryMappings = {
             "Mexican": ["Mexican", "Tacos", "Latin American"],
-            "Japanese": ["Japanese", "Ramen", "Izakaya"]
+            "Japanese": ["Japanese", "Ramen", "Izakaya"],
+            "Chinese": ["Chinese", "Cantonese"]
         };
     
-        // For rounds 1, 2, 3 - apply bounce to the corresponding category
         if (round === index + 1) {
             return true;
         }
     
-        // For round 4, make the first two categories bounce
         if (round === 4 && index < 2) {
             return true;
         }
@@ -145,7 +145,7 @@ function Load() {
     
     // console.log('startIndex Load:', startIndex);
     // console.log('clickedRestaurants:', clickedRestaurants);
-    console.log('gameSettings:', gameSettings);
+    // console.log('gameSettings:', gameSettings);
     // console.log('numPlayers:', numPlayers);
     // console.log('loading:', loading);
     // console.log('restaurants:', restaurants);
@@ -155,49 +155,51 @@ function Load() {
     // console.log('round:', round);
     console.log('fourthRoundWinner load.js:', fourthRoundWinner);
 
+
     return (
         <>
-            <div className="base h-screen flex items-center justify-center">
-                <Card className="w-2/3 h-3/4">
-                    <CardHeader
-                        variant="gradient"
-                        className="mb-4 grid place-items-center self-center overflow-visible w-4/5 h-1/5 bg-[#eb986f] text-white"
-                    >
-                        {/* <Typography className="dynapuff-bold text-3xl text-center uppercase font-bold">  */}
-                        {/* <Typography className="sniglet text-3xl text-center uppercase">  */}
-                        <Typography className="modak text-3xl text-center uppercase"> 
-                            Player {currentPlayer}, You're Up!
-                        </Typography>
-                    </CardHeader>
-                    <CardBody className="flex flex-row w-full h-4/5 !pt-4 !pb-2 justify-around">
-                        {/* <div className="flex flex-col justify-center items-center space-y-2"> */}
-                        {categories.map((category, i) => (
-                            <div key={i} className="flex flex-col justify-center items-center">
-                                <img 
-                                    className={`w-40 h-40 ${currentCategoryBounce(round, i, category) ? 'animate-bounce' : ''}`}
-                                    src={`../images/${formatCategoryName(category)}.svg`} 
-                                    alt="" 
-                                />
-                                <h1 className="modak text-blue-gray-700 text-2xl text-center">{category}</h1>
-                            </div>
-                        ))}
-                    </CardBody>
-                    <div className="flex text-blue-gray-700 roboto justify-center items-center w-full p-0 h-1/8 mb-2 text-center text-xl uppercase font-extrabold shadow-3d bg-[#D9EDBF]">
-                        Round {round}
-                    </div>
-                    <CardFooter className="flex flex-col justify-center items-center mb-8 mt-5 p-1">
-                        <Button 
-                            className="submit-button rounded-full shadow-sm hover:scale-[1.03] focus:scale-[1.03] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-[#d88760] hover:shadow-lg bg-[#eb986f]" 
-                            size="lg" 
-                            type="submit"
-                            variant="filled"
-                            onClick={handlePlayGame}
+            {loading ? (
+                <Loading />
+            ) : (
+                <div className="base h-screen flex items-center justify-center">
+                    <Card className="w-2/3 h-3/4">
+                        <CardHeader
+                            variant="gradient"
+                            className="mb-4 grid place-items-center self-center overflow-visible w-4/5 h-1/5 bg-[#eb986f] text-white"
                         >
-                            Play 
-                        </Button>
-                    </CardFooter>                    
-                </Card>
-            </div>
+                            <Typography className="modak text-3xl text-center uppercase">
+                                Player {currentPlayer}, You're Up!
+                            </Typography>
+                        </CardHeader>
+                        <CardBody className="flex flex-row w-full h-4/5 !pt-4 !pb-2 justify-around">
+                            {categories.map((category, i) => (
+                                <div key={i} className="flex flex-col justify-center items-center">
+                                    <img
+                                        className={`w-40 h-40 ${currentCategoryBounce(round, i, category) ? 'animate-bounce' : ''}`}
+                                        src={`../images/${formatCategoryName(category)}.svg`}
+                                        alt=""
+                                    />
+                                    <h1 className="modak text-blue-gray-700 text-2xl text-center">{category}</h1>
+                                </div>
+                            ))}
+                        </CardBody>
+                        <div className="flex text-blue-gray-700 roboto justify-center items-center w-full p-0 h-1/8 mb-2 text-center text-xl uppercase font-extrabold shadow-3d bg-[#D9EDBF]">
+                            Round {round}
+                        </div>
+                        <CardFooter className="flex flex-col justify-center items-center mb-8 mt-5 p-1">
+                            <Button
+                                className="submit-button rounded-full shadow-sm hover:scale-[1.03] focus:scale-[1.03] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-[#d88760] hover:shadow-lg bg-[#eb986f]"
+                                size="lg"
+                                type="submit"
+                                variant="filled"
+                                onClick={handlePlayGame}
+                            >
+                                Play
+                            </Button>
+                        </CardFooter>
+                    </Card>
+                </div>
+            )}
         </>
     );
 }

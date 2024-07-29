@@ -24,7 +24,7 @@ function NotFound() {
                 Return Home
             </Button>
         </div>
-     );
+    );
 }
  
 export default NotFound;

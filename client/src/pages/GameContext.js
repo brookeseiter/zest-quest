@@ -10,6 +10,7 @@ const initialState = {
   clickedRestaurants: [],
   fourthRoundWinner: null,
   round: 1,
+  loading: false
 };
 
 export const GameProvider = ({ children }) => {
@@ -20,6 +21,7 @@ export const GameProvider = ({ children }) => {
   const [clickedRestaurants, setClickedRestaurants] = useState(initialState.clickedRestaurants);
   const [fourthRoundWinner, setFourthRoundWinner] = useState(initialState.fourthRoundWinner);
   const [round, setRound] = useState(initialState.round);
+  const [loading, setLoading] = useState(false);
 
   const resetGame = () => {
     setCurrentPlayer(initialState.currentPlayer);
@@ -29,6 +31,7 @@ export const GameProvider = ({ children }) => {
     setClickedRestaurants(initialState.clickedRestaurants);
     setFourthRoundWinner(initialState.fourthRoundWinner);
     setRound(initialState.round);
+    setLoading(initialState.loading);
   };
 
   return (
@@ -47,7 +50,9 @@ export const GameProvider = ({ children }) => {
       setFourthRoundWinner,
       round,
       setRound,
-      resetGame 
+      loading,
+      setLoading,
+      resetGame,
     }}>
       {children}
     </GameContext.Provider>
